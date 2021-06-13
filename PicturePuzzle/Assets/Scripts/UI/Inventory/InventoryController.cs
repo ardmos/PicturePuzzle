@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 /// <summary>
 /// ***인벤토리 컨트롤러***
@@ -20,7 +21,7 @@ public class InventoryController : MonoBehaviour
 		inventoryObj.SetActive(false);
     }
 
-    //아이템 만들 차례! 아이템 만들고, 여기 버튼들 기능 연결
+    //아이템 만들 차례! 아이템 만들고, 여기 버튼들 기능 연ㅔ
 
     public void OpenInventory()
 	{
@@ -31,6 +32,13 @@ public class InventoryController : MonoBehaviour
 		inventoryObj.SetActive(false);
 	}
 
-
+    public void PressedTest()
+	{
+		Debug.Log("PressedTest");
+	}
+    public void DragTest(PointerEventData data)
+	{
+		Debug.Log(data + "Dragged!" + gameObject.transform.position);
+	}
  
 }
