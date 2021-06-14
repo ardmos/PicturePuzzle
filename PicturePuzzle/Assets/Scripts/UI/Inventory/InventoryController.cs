@@ -32,10 +32,40 @@ public class InventoryController : MonoBehaviour
 		inventoryObj.SetActive(false);
 	}
 
-    public void PressedTest()
+
+
+
+
+
+    public void PointerDown()
 	{
-		Debug.Log("PressedTest");
+		Debug.Log("PointerDown");
 	}
+	public void PointerUp()
+    {
+
+    }
+	public void PointerClick()
+    {
+
+    }
+	public void PointerEnter()
+    {
+
+    }
+	public void PointerExit()
+    {
+
+    }
+	public void BeginDrag()
+    {
+
+    }
+    public void OnMouseDrag()
+    {
+        Debug.Log("00");
+    }
+
     public void DragTest(PointerEventData data)
 	{
 		Debug.Log(data + "Dragged!" + gameObject.transform.position);
