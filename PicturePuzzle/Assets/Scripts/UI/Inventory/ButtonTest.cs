@@ -12,22 +12,23 @@ public class ButtonTest : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     [SerializeField]
     Vector2 endPoint;
 
-    [SerializeField]
-    bool drag = false;  //사용안됨?
+    //[SerializeField]
+    //bool drag = false;  //사용안됨?
 
     void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
     {
         startPoint = eventData.pressPosition;
 
         //드래그 시작.  그리드레이아웃에서 벗어난다. 
-        gameObject.transform.SetParent(GameObject.Find("=====Inventory=====").transform);
-        //gameObject.transform.SetParent(GameObject.Find("=====ObjectAreas=====").transform);
-
+        gameObject.transform.SetParent(GameObject.Find("=====TMP=====").transform);
+        //EBoxController에 드래그 시작됐다고 보고한다. 
+        FindObjectOfType<EBoxController>().SetDragItem(gameObject);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        drag = true;
+
+        //drag = true;
         endPoint = eventData.position;
 
         //마우스 따라다님
@@ -38,9 +39,11 @@ public class ButtonTest : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        drag = false;
+        //drag = false;
 
-        //끝난 자리에 멈춤.        
+        //끝난 자리에 멈춤.    
+        //EBoxController에 드래그 끝났다고 알려줘야함
+        FindObjectOfType<EBoxController>().ReleaseDragItem(gameObject);
     }
 
 }

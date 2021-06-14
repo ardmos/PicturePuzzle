@@ -8,12 +8,9 @@ public class EBoxController : MonoBehaviour
     GameObject dragItem = null;
     //드래그중인지
     bool isdragging = false;
+    //EBox 1 2 3
+    public GameObject[] Ebox;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -27,6 +24,7 @@ public class EBoxController : MonoBehaviour
 
     public void SetDragItem(GameObject dragObject)
     {
+        //드래그 시작시 호출
         dragItem = dragObject;
         isdragging = true;
 
@@ -46,6 +44,25 @@ public class EBoxController : MonoBehaviour
         {
             //드래그중일때만 추적. EBox와 가까워지면 해당 EBox 하이라이트.
 
+            foreach (var item in Ebox)
+            {
+                float x = Mathf.Abs(dragItem.transform.position.x - Camera.main.WorldToScreenPoint(item.transform.position).x);
+                float y = Mathf.Abs(dragItem.transform.position.y - Camera.main.WorldToScreenPoint(item.transform.position).y);
+                if(x<=200 & y <= 200)
+                {
+                    //가까운 것. 하이라이트 온.
+                    item.transform.GetChild(0).gameObject.SetActive(false);
+                    item.transform.GetChild(1).gameObject.SetActive(true);
+                }
+                else
+                {
+                    //먼 것. 노말 온.
+                    item.transform.GetChild(0).gameObject.SetActive(true);
+                    item.transform.GetChild(1).gameObject.SetActive(false);
+                }
+            }
+
+            
 
         }
     }
