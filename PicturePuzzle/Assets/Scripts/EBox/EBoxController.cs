@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 1. EBox 초기화
+/// 2. 아이템의 DragMaker로부터 보고받는 부분. (드래그 시작, 드래그 끝)
+/// 3. 아이템 위치 추적
+/// 4. EBox에 아이템 배치 처리
+/// </summary>
+
 public class EBoxController : MonoBehaviour
 {
     //드래그중인 오브젝트. 평소엔 null.
@@ -17,7 +24,6 @@ public class EBoxController : MonoBehaviour
         //Ebox들 초기화. 
         InitializeEBox();
     }
-
 
     // Update is called once per frame
     void Update()
@@ -40,7 +46,7 @@ public class EBoxController : MonoBehaviour
     }
     #endregion
 
-    #region Item으로부터 호출되는 메서드
+    #region Item의 DragMaker로부터 호출되는 메서드
     public void SetDragItem(GameObject dragObject)
     {
         //드래그 시작시 호출
@@ -98,7 +104,7 @@ public class EBoxController : MonoBehaviour
     }
     #endregion
 
-    #region 배치 아이템
+    #region 아이템 배치
     void SetItemOnWorld(GameObject dragObject)
     {
         //드래그아이템 삭제

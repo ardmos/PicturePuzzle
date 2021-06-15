@@ -3,6 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// 드래그 메이커. 
+/// 이걸 붙이면 드래그가 가능해짐.
+/// Item용.
+///
+/// -드래그 시작
+///   1. 부모 전환
+///   2. EboxController에 드래그 시작된것을 알림
+///   3. 인벤토리 닫기
+/// -드래그 중
+///   1. 마우스의 위치로 오브젝트 위치 이동
+/// -드래그 끝
+///   1. EboxController에 드래그 끝난것을 알림
+/// </summary>
+
 public class DragMaker : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [SerializeField]
@@ -20,7 +35,7 @@ public class DragMaker : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
         //드래그 시작.  그리드레이아웃에서 벗어난다. 
         gameObject.transform.SetParent(GameObject.Find("=====TMP=====").transform);
-        //EBoxController에 드래그 시작됐다고 보고한다. 
+        //EBoxController에 드래그 시작된걸 알림. 
         FindObjectOfType<EBoxController>().SetDragItem(gameObject);
         //Inventory를 닫아준다.
         GameObject.Find("=====Inventory=====").SetActive(false);
@@ -35,7 +50,7 @@ public class DragMaker : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
         //마우스 따라다님
         gameObject.transform.position = endPoint;
-        GameObject EBox2 = GameObject.Find("EBox2");
+        //GameObject EBox2 = GameObject.Find("EBox2");
         //Debug.Log("localposition:" + gameObject.transform.localPosition + "\nposition:" + gameObject.transform.position + "\nEBox2 worldpos:" + EBox2.transform.position + "\nEBOx2 screenpos:" + Camera.main.WorldToScreenPoint(EBox2.transform.position));
     }
 
