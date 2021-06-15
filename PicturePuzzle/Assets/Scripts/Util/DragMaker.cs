@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ButtonTest : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class DragMaker : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-
     [SerializeField]
     Vector2 startPoint;
 
@@ -23,6 +22,9 @@ public class ButtonTest : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         gameObject.transform.SetParent(GameObject.Find("=====TMP=====").transform);
         //EBoxController에 드래그 시작됐다고 보고한다. 
         FindObjectOfType<EBoxController>().SetDragItem(gameObject);
+        //Inventory를 닫아준다.
+        GameObject.Find("=====Inventory=====").SetActive(false);
+
     }
 
     public void OnDrag(PointerEventData eventData)
