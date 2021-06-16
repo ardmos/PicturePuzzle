@@ -137,7 +137,7 @@ public class EBoxController : MonoBehaviour
                 //부모 설정
                 newObject.transform.SetParent(hlEbox.transform);
                 //위치 설정
-                newObject.transform.position = hlEbox.transform.position;
+                newObject.transform.position = hlEbox.transform.position;                                
                 //Item 정보 유지를 위한 전달. 
                 newObject.AddComponent<Item>();
                 newObject.GetComponent<Item>().SetItem(dragObject.GetComponent<Item>());

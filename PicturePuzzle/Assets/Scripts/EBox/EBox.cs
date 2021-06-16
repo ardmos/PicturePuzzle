@@ -53,6 +53,8 @@ public class EBox : MonoBehaviour
             //이미지 배치된 상태
             transform.GetChild(0).gameObject.SetActive(false);
             transform.GetChild(1).gameObject.SetActive(false);
+            //핀도 뽑아준다.
+            transform.GetChild(2).gameObject.SetActive(false);
         }   
         else if (eBoxState == EBoxState.Normal)
         {

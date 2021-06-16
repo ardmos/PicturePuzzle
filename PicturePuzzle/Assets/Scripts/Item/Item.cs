@@ -49,12 +49,14 @@ public class Item : MonoBehaviour
         }
         else
         {
-            //그 외의 경우. 인벤토리에서 나와있을 때.
+            //그 외의 경우. 인벤토리에서 나와있을 때. EBox에 배치된 경우.
+            //SpriteRenderer 레이어 설정
             try
             {                
                 if (gameObject.GetComponent<SpriteRenderer>() == null) gameObject.AddComponent<SpriteRenderer>();
                 gameObject.GetComponent<SpriteRenderer>().sprite = objectIMG;
-                gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "EBox"; 
+                gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "BackGround";
+                gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
             }
             catch (System.Exception ex)
             {
