@@ -15,7 +15,7 @@ using UnityEngine.EventSystems;
 /// -드래그 중
 ///   1. 마우스의 위치로 오브젝트 위치 이동
 /// -드래그 끝
-///   1. EboxController에 드래그 끝난것을 알림
+///   1. EboxController에 드래그 끝난것을 알
 /// </summary>
 
 public class DragMaker : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
@@ -38,7 +38,7 @@ public class DragMaker : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         //EBoxController에 드래그 시작된걸 알림. 
         FindObjectOfType<EBoxController>().SetDragItem(gameObject);
         //Inventory를 닫아준다.
-        GameObject.Find("=====Inventory=====").SetActive(false);
+        FindObjectOfType<InventoryController>().CloseInventory();
 
     }
 

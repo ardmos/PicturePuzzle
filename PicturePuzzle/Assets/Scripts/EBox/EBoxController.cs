@@ -38,11 +38,18 @@ public class EBoxController : MonoBehaviour
     #region EBox 초기화
     void InitializeEBox()
     {
-        foreach (var item in Ebox)
+        try
         {
-            item.transform.GetChild(0).gameObject.SetActive(true);
-            item.transform.GetChild(1).gameObject.SetActive(false);
+            foreach (var item in Ebox)
+            {
+                item.transform.GetChild(0).gameObject.SetActive(true);
+                item.transform.GetChild(1).gameObject.SetActive(false);
+            }
         }
+        catch (System.Exception ex)
+        {
+            Debug.Log(ex.Message);
+        }        
     }
     #endregion
 
@@ -80,26 +87,33 @@ public class EBoxController : MonoBehaviour
     #region 아이템 위치 추적
     void StartTrace()
     {
-        if (isdragging)
+        try
         {
-            //드래그중일때만 추적. EBox와 가까워지면 해당 EBox 하이라이트.
-            hlEbox = null;
-            foreach (var item in Ebox)
+            if (isdragging)
             {
-                float x = Mathf.Abs(dragItem.transform.position.x - Camera.main.WorldToScreenPoint(item.transform.position).x);
-                float y = Mathf.Abs(dragItem.transform.position.y - Camera.main.WorldToScreenPoint(item.transform.position).y);
-                if (x <= 200 & y <= 200)
+                //드래그중일때만 추적. EBox와 가까워지면 해당 EBox 하이라이트.
+                hlEbox = null;
+                foreach (var item in Ebox)
                 {
-                    //가까운 것. 하이라이트 온.
-                    item.GetComponent<EBox>().SetEBoxState(EBox.EBoxState.HighLighted);
-                    hlEbox = item;
-                }
-                else
-                {
-                    //먼 것. 노말 온.
-                    item.GetComponent<EBox>().SetEBoxState(EBox.EBoxState.Normal);
+                    float x = Mathf.Abs(dragItem.transform.position.x - Camera.main.WorldToScreenPoint(item.transform.position).x);
+                    float y = Mathf.Abs(dragItem.transform.position.y - Camera.main.WorldToScreenPoint(item.transform.position).y);
+                    if (x <= 200 & y <= 200)
+                    {
+                        //가까운 것. 하이라이트 온.
+                        item.GetComponent<EBox>().SetEBoxState(EBox.EBoxState.HighLighted);
+                        hlEbox = item;
+                    }
+                    else
+                    {
+                        //먼 것. 노말 온.
+                        item.GetComponent<EBox>().SetEBoxState(EBox.EBoxState.Normal);
+                    }
                 }
             }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.Log(ex.Message);
         }
     }
     #endregion
@@ -107,20 +121,27 @@ public class EBoxController : MonoBehaviour
     #region 아이템 배치
     void SetItemOnWorld(GameObject dragObject)
     {
-        //드래그아이템 삭제
-        Destroy(dragItem);
-        //새로운 오브젝트 생성
-        GameObject newObject = new GameObject();
-        //부모 설정
-        newObject.transform.SetParent(hlEbox.transform);
-        //위치 설정
-        newObject.transform.position = hlEbox.transform.position;
-        //Item 정보 유지를 위한 전달. 
-        newObject.AddComponent<Item>();
-        newObject.GetComponent<Item>().SetItem(dragObject.GetComponent<Item>());
-        //배치 성공 후 하이라이트, 노말 표시 모두 끔            
-        hlEbox.transform.GetChild(0).gameObject.SetActive(false);
-        hlEbox.transform.GetChild(1).gameObject.SetActive(false);
+        try
+        {
+            //드래그아이템 삭제
+            Destroy(dragItem);
+            //새로운 오브젝트 생성
+            GameObject newObject = new GameObject();
+            //부모 설정
+            newObject.transform.SetParent(hlEbox.transform);
+            //위치 설정
+            newObject.transform.position = hlEbox.transform.position;
+            //Item 정보 유지를 위한 전달. 
+            newObject.AddComponent<Item>();
+            newObject.GetComponent<Item>().SetItem(dragObject.GetComponent<Item>());
+            //배치 성공 후 하이라이트, 노말 표시 모두 끔            
+            hlEbox.transform.GetChild(0).gameObject.SetActive(false);
+            hlEbox.transform.GetChild(1).gameObject.SetActive(false);
+        }
+        catch (System.Exception ex)
+        {
+            Debug.Log(ex.Message);
+        }
     }
     #endregion
 
