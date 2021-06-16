@@ -16,7 +16,7 @@ public class Item : MonoBehaviour
     //이름
     public string itemName;
     //폴라로이드용IMG, 오브젝트용IMG
-    public Sprite polaroidIMG, objectIMG;  
+    public Sprite polaroidIMG, objectIMG;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +34,7 @@ public class Item : MonoBehaviour
     void InitIMG()
     { 
         //부모 인식 이미지 자동 변환
-        if(transform.parent.gameObject.name == "=====Inventory=====")
+        if(transform.parent.gameObject.transform == FindObjectOfType<InventoryController>().inventoryObj.transform.GetChild(1))
         {
             //인벤토리에 들어있을 때
             try
@@ -51,9 +51,10 @@ public class Item : MonoBehaviour
         {
             //그 외의 경우. 인벤토리에서 나와있을 때.
             try
-            {
+            {                
                 if (gameObject.GetComponent<SpriteRenderer>() == null) gameObject.AddComponent<SpriteRenderer>();
                 gameObject.GetComponent<SpriteRenderer>().sprite = objectIMG;
+                gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "EBox"; 
             }
             catch (System.Exception ex)
             {

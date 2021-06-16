@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BackGround
+    uniqueID: 1116265155
+    locked: 0
+  - name: Object
+    uniqueID: 2511254385
+    locked: 0
+  - name: EBox
+    uniqueID: 3221268175
+    locked: 0

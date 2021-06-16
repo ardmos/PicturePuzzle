@@ -9,7 +9,10 @@ using UnityEngine.EventSystems;
 /// 2. 화면 전환시 오디오 리스너도 전환.
 /// 3. 화면 전환시 UI세트도 전환.
 /// 4. 메인카메라일 시 화면 터치되는 위치로 폴라로이드카메라 영역 이동. ispolaroidCamera를 이용해 판단. 
-/// 
+///
+///
+///
+/// 카메라 촬영 기능 만들 차례임.  잠깐 이미지 넣고 옴!
 /// </summary>
 
 public class CameraController : MonoBehaviour
@@ -63,6 +66,7 @@ public class CameraController : MonoBehaviour
         ispolaroidCamera = true;
         mainUI.SetActive(false);
         polaroidUI.SetActive(true);
+        polaroidAimObj.SetActive(false);
     }
     public void MainCameraON()
     {
@@ -73,6 +77,7 @@ public class CameraController : MonoBehaviour
         ispolaroidCamera = false;
         mainUI.SetActive(true);
         polaroidUI.SetActive(false);
+        polaroidAimObj.SetActive(true);
     }
 
     public void MovePolaroidAim()
@@ -82,7 +87,7 @@ public class CameraController : MonoBehaviour
 
             if (EventSystem.current.IsPointerOverGameObject())
             {
-                Debug.Log("UI를 만났어요!~");
+                Debug.Log("UI를 만났어요!~ 폴라로이드 에임은 이동하지 않아요");
             }
             else
             {                
