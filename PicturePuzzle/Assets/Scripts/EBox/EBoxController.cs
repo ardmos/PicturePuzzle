@@ -68,14 +68,12 @@ public class EBoxController : MonoBehaviour
         if (hlEbox == null)
         {
             //하이라이트되어있지않은 상태. 다시 인벤토리로.
-            dragItem.transform.SetParent(FindObjectOfType<InventoryController>().inventoryObj.transform.GetChild(1));
+            dragObject.transform.SetParent(FindObjectOfType<InventoryController>().inventoryObj.transform.GetChild(1));
         }
         else
         {
             //하이라이트된 상태. 해당 Ebox위치에 이미지 배치.
-            SetItemOnWorld(dragObject);
-            //해당 EBox 배치 완료 표시
-            hlEbox.GetComponent<EBox>().SetFull();
+            SetItemOnWorld(dragObject);            
         }
 
         dragItem = null;
@@ -123,20 +121,33 @@ public class EBoxController : MonoBehaviour
     {
         try
         {
-            //드래그아이템 삭제
-            Destroy(dragItem);
-            //새로운 오브젝트 생성
-            GameObject newObject = new GameObject();
-            //부모 설정
-            newObject.transform.SetParent(hlEbox.transform);
-            //위치 설정
-            newObject.transform.position = hlEbox.transform.position;
-            //Item 정보 유지를 위한 전달. 
-            newObject.AddComponent<Item>();
-            newObject.GetComponent<Item>().SetItem(dragObject.GetComponent<Item>());
-            //배치 성공 후 하이라이트, 노말 표시 모두 끔            
-            hlEbox.transform.GetChild(0).gameObject.SetActive(false);
-            hlEbox.transform.GetChild(1).gameObject.SetActive(false);
+            //옳은 아이템인가?
+            if (hlEbox.GetComponent<EBox>().itemName != dragObject.GetComponent<Item>().itemName)
+            {
+                //옳은 아이템이 아닌 경우 다시 인벤토리로
+                dragObject.transform.SetParent(FindObjectOfType<InventoryController>().inventoryObj.transform.GetChild(1));
+                hlEbox.GetComponent<EBox>().SetEBoxState(EBox.EBoxState.Normal);
+            }
+            else
+            {
+                //정답인 경우 배치 진
+
+                //새로운 오브젝트 생성
+                GameObject newObject = new GameObject();
+                //부모 설정
+                newObject.transform.SetParent(hlEbox.transform);
+                //위치 설정
+                newObject.transform.position = hlEbox.transform.position;
+                //Item 정보 유지를 위한 전달. 
+                newObject.AddComponent<Item>();
+                newObject.GetComponent<Item>().SetItem(dragObject.GetComponent<Item>());
+                //해당 EBox 배치 완료 표시
+                hlEbox.GetComponent<EBox>().SetFull();                
+                //드래그아이템 삭제
+                Destroy(dragObject);
+            }
+            
+
         }
         catch (System.Exception ex)
         {

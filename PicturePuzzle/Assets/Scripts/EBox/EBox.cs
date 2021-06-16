@@ -10,7 +10,7 @@ using UnityEngine;
 ///
 ///
 /// ***** 옳은 아이템이 배치됐는지 확인하는 절차가 필요함 *****
-/// 
+/// 그것을 위한.  아이템 네임을 EBox가 미리 갖고 있다가.  오려는 아이템의 이름을 확인 후 배치 허용한다.
 /// </summary>
 
 public class EBox : MonoBehaviour
@@ -24,6 +24,8 @@ public class EBox : MonoBehaviour
     }
     [SerializeField]
     EBoxState eBoxState = EBoxState.Normal;
+    //옳은 아이템인가 확인을 위한 이름값
+    public string itemName;
 
     public void SetFull()
     {

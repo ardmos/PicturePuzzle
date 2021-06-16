@@ -416,6 +416,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isfull: 0
   eBoxState: 0
+  itemName: Turtle
 --- !u!1 &270051046
 GameObject:
   m_ObjectHideFlags: 0
@@ -779,6 +780,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isfull: 0
   eBoxState: 0
+  itemName: Turtle
 --- !u!1 &452311753
 GameObject:
   m_ObjectHideFlags: 0
@@ -2522,6 +2524,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isfull: 0
   eBoxState: 0
+  itemName: Stone
 --- !u!1 &1888560285
 GameObject:
   m_ObjectHideFlags: 0
