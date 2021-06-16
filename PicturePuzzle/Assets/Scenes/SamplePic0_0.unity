@@ -287,7 +287,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -1010.3529, y: 535.6842}
-  m_SizeDelta: {x: 250, y: 250}
+  m_SizeDelta: {x: 120, y: 108}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &207432664
 MonoBehaviour:
@@ -351,8 +351,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 009f2a4bf811844c1bf5e10e08d487fc, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -469,7 +469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Turtle
-  polaroidIMG: {fileID: 21300000, guid: 4fe8794eccd9e47d5a95fe5cc3fb6cac, type: 3}
+  polaroidIMG: {fileID: 21300000, guid: 0504b28af687b4d6d969175bb91d0056, type: 3}
   objectIMG: {fileID: 21300000, guid: 49eb1df0b90ae45619d5515984511f5c, type: 3}
 --- !u!114 &270051049
 MonoBehaviour:
@@ -490,7 +490,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 0504b28af687b4d6d969175bb91d0056, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -715,8 +715,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 8fefbcfb64ad2460bbb8d5daa77ca8ed, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -780,7 +780,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isfull: 0
   eBoxState: 0
-  itemName: Turtle
+  itemName: Wood
 --- !u!1 &452311753
 GameObject:
   m_ObjectHideFlags: 0
@@ -1749,7 +1749,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 200, y: 200}
+  m_CellSize: {x: 300, y: 300}
   m_Spacing: {x: 30, y: 30}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -2048,7 +2048,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Stone
-  polaroidIMG: {fileID: 21300000, guid: 6e8b28224167d475ba9134dc77c98717, type: 3}
+  polaroidIMG: {fileID: 21300000, guid: 5e69552883ac54bd6bd08a300802b9f3, type: 3}
   objectIMG: {fileID: 21300000, guid: 6e8b28224167d475ba9134dc77c98717, type: 3}
 --- !u!114 &1476451894
 MonoBehaviour:
@@ -2083,7 +2083,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 5e69552883ac54bd6bd08a300802b9f3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3016,7 +3016,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Wood
-  polaroidIMG: {fileID: 21300000, guid: 80d7d9584e7c44c3aa42c3a1b5730295, type: 3}
+  polaroidIMG: {fileID: 21300000, guid: 7cac1600cc85c47c5bf7155e087648bc, type: 3}
   objectIMG: {fileID: 21300000, guid: 80d7d9584e7c44c3aa42c3a1b5730295, type: 3}
 --- !u!114 &2080418298
 MonoBehaviour:
@@ -3051,7 +3051,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 7cac1600cc85c47c5bf7155e087648bc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
