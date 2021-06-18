@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 /// 2. 재시도버튼 클릭시 재시도 발동
 /// </summary>
 
-public class SamplePic0_0Manager : MonoBehaviour
+public class Pic0_0Manager : MonoBehaviour
 {
     public float lastTouchTime, currentTouchTime;
     float touchInterval = 0.3f;

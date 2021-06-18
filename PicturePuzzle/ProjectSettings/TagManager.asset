@@ -50,3 +50,6 @@ TagManager:
   - name: EBox
     uniqueID: 3221268175
     locked: 0
+  - name: PolaroidAim
+    uniqueID: 2531286305
+    locked: 0

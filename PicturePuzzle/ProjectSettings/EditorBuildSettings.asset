@@ -6,6 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Pic0_0.unity
+    path: Assets/Scenes/Stage0/Gallery0_0.unity
+    guid: 1e94884b119eb43eca6828de3140da18
+  - enabled: 1
+    path: Assets/Scenes/Stage0/Pic0_0_Squirrel.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Stage0/Pic0_1_Turtle.unity
+    guid: 5c587be3c231a4dc390b836fcd1d4e78
+  - enabled: 1
+    path: Assets/Scenes/Stage0/Pic0_2_Stone.unity
+    guid: ca22e7ed8c1a2c743a1a6dbabe497c44
+  - enabled: 1
+    path: Assets/Scenes/Stage0/Pic0_3_Wood.unity
+    guid: a3740fa878d69cb4da0f1f9b37ecdcec
   m_configObjects: {}

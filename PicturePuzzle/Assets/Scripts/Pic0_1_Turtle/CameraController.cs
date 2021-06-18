@@ -87,7 +87,7 @@ public class CameraController : MonoBehaviour
 
             if (EventSystem.current.IsPointerOverGameObject())
             {
-                Debug.Log("UI를 만났어요!~ 폴라로이드 에임은 이동하지 않아요");
+                //Debug.Log("UI를 만났어요!~ 폴라로이드 에임은 이동하지 않아요");
             }
             else
             {                
