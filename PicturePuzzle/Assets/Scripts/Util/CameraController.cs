@@ -84,16 +84,31 @@ public class CameraController : MonoBehaviour
     {                
         if (Input.GetMouseButtonDown(0))
         {
-
-            if (EventSystem.current.IsPointerOverGameObject())
+            //안드로이드인 경우에는 EventSystem.curren.IsPointerOverGameObject 이것의 처리를 다르게 해주자!
+            if(Application.platform == RuntimePlatform.Android)
             {
-                //Debug.Log("UI를 만났어요!~ 폴라로이드 에임은 이동하지 않아요");
+                if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+                {
+                    //Debug.Log("UI를 만났어요!~ 폴라로이드 에임은 이동하지 않아요");
+                }
+                else
+                {
+                    Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    polaroidAimObj.transform.position = new Vector3(worldMousePos.x, worldMousePos.y);
+                }
             }
             else
-            {                
-                Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                polaroidAimObj.transform.position = new Vector3(worldMousePos.x, worldMousePos.y);
-            }            
+            {
+                if (EventSystem.current.IsPointerOverGameObject())
+                {
+                    //Debug.Log("UI를 만났어요!~ 폴라로이드 에임은 이동하지 않아요");
+                }
+                else
+                {
+                    Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    polaroidAimObj.transform.position = new Vector3(worldMousePos.x, worldMousePos.y);
+                }
+            }           
         }        
     }
 }
