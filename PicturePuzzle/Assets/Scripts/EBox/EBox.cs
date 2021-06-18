@@ -24,9 +24,11 @@ public class EBox : MonoBehaviour
     }
     [SerializeField]
     EBoxState eBoxState = EBoxState.Normal;
-    //옳은 아이템인가 확인을 위한 이름값
-    public string itemName;
+    //옳은 아이템인가 확인을 위한 이름값. 다른곳에서 호출해서 씀.
+    [SerializeField]
+    string itemName;
 
+    #region Get-Set
     public void SetFull()
     {
         isfull = true;
@@ -35,6 +37,7 @@ public class EBox : MonoBehaviour
     {
         return isfull;
     }
+
     public void SetEBoxState(EBoxState state)
     {
         eBoxState = state;
@@ -42,8 +45,15 @@ public class EBox : MonoBehaviour
     public EBoxState GetEBoxState()
     {
         return eBoxState;
-    }       
-    
+    }
+
+    public string GetItemName()
+    {
+        return itemName;
+    }
+    #endregion
+
+
     // Update is called once per frame
     void Update()
     {

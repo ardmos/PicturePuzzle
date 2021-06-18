@@ -1529,6 +1529,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abdf394e88659498a88dc2c61503e219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastTouchTime: 0
+  currentTouchTime: 0
+  time: 0
+  curSquirrelPos: 0
 --- !u!4 &831527933
 Transform:
   m_ObjectHideFlags: 0
@@ -2142,7 +2146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc3835e6a19baa47b2a3dbbd35db323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ebox:
+  Eboxes:
   - {fileID: 1854638018}
   - {fileID: 244428726}
   - {fileID: 391832387}
@@ -2723,6 +2727,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abdf394e88659498a88dc2c61503e219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastTouchTime: 0
+  currentTouchTime: 0
+  time: 0
+  curSquirrelPos: 0
 --- !u!4 &1891940085
 Transform:
   m_ObjectHideFlags: 0

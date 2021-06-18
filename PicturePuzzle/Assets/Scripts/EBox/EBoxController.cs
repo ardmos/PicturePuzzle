@@ -16,7 +16,7 @@ public class EBoxController : MonoBehaviour
     //드래그중인지
     bool isdragging;
     //EBox 1 2 3
-    public GameObject[] Ebox;
+    public GameObject[] Eboxes;
     //어떤 EBox가 하이라이트된건지 확인해주는 변수.    
     public GameObject hlEbox;
 
@@ -40,7 +40,7 @@ public class EBoxController : MonoBehaviour
     {
         try
         {
-            foreach (var item in Ebox)
+            foreach (var item in Eboxes)
             {
                 item.transform.GetChild(0).gameObject.SetActive(true);
                 item.transform.GetChild(1).gameObject.SetActive(false);
@@ -91,7 +91,7 @@ public class EBoxController : MonoBehaviour
             {
                 //드래그중일때만 추적. EBox와 가까워지면 해당 EBox 하이라이트.
                 hlEbox = null;
-                foreach (var item in Ebox)
+                foreach (var item in Eboxes)
                 {
                     float x = Mathf.Abs(dragItem.transform.position.x - Camera.main.WorldToScreenPoint(item.transform.position).x);
                     float y = Mathf.Abs(dragItem.transform.position.y - Camera.main.WorldToScreenPoint(item.transform.position).y);
@@ -122,7 +122,7 @@ public class EBoxController : MonoBehaviour
         try
         {
             //옳은 아이템인가?
-            if (hlEbox.GetComponent<EBox>().itemName != dragObject.GetComponent<Item>().itemName)
+            if (hlEbox.GetComponent<EBox>().GetItemName() != dragObject.GetComponent<Item>().itemName)
             {
                 //옳은 아이템이 아닌 경우 다시 인벤토리로
                 dragObject.transform.SetParent(FindObjectOfType<InventoryController>().inventoryObj.transform.GetChild(1));
