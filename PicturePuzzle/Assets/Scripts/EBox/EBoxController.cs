@@ -119,42 +119,61 @@ public class EBoxController : MonoBehaviour
     void SetItemOnWorld(GameObject dragObject)
     {
         try
-        {
-            //옳은 아이템인가?
-            if (EBoxes[hlEBoxIndx].GetComponent<EBox>().GetItemName() != dragObject.GetComponent<Item>().itemName)
+        {            
+            if (EBoxes[hlEBoxIndx].GetComponent<EBox>().GetFull())
             {
-                //옳은 아이템이 아닌 경우 다시 인벤토리로
+                //혹시 이미 배치가 끝난 EBox인가? 
+                //드래그중인 오브젝트만 다시 인벤토리로 보내고 끝. 
                 dragObject.transform.SetParent(FindObjectOfType<InventoryController>().inventoryObj.transform.GetChild(1));
                 EBoxes[hlEBoxIndx].GetComponent<EBox>().SetEBoxState(EBox.EBoxState.Normal);
-
-                //오답용 퐁당Anim 진행. 
-                //EBox에 맞는 해당 위치용 애니메이션 실행. hlEBoxIndx 를 기준으로 파악. 
-
-
+                
             }
             else
             {
-                //정답인 경우 배치 진행
+                //이미 배치가 끝난 EBox가 아니라면
+                //배치되려는것이 옳은 아이템인가?
 
-                //새로운 오브젝트 생성
-                GameObject newObject = new GameObject();
-                //부모 설정
-                newObject.transform.SetParent(EBoxes[hlEBoxIndx].transform);
-                //위치 설정
-                newObject.transform.position = EBoxes[hlEBoxIndx].transform.position;                                
-                //Item 정보 유지를 위한 전달. 
-                newObject.AddComponent<Item>();
-                newObject.GetComponent<Item>().SetItem(dragObject.GetComponent<Item>());
-                //해당 EBox 배치 완료 표시
-                EBoxes[hlEBoxIndx].GetComponent<EBox>().SetFull(true);             
-                //드래그아이템 삭제
-                Destroy(dragObject);
-            }            
+                if (EBoxes[hlEBoxIndx].GetComponent<EBox>().GetItemName() != dragObject.GetComponent<Item>().itemName)
+                {
+                    //옳은 아이템이 아닌 경우 다시 인벤토리로
+                    dragObject.transform.SetParent(FindObjectOfType<InventoryController>().inventoryObj.transform.GetChild(1));
+                    EBoxes[hlEBoxIndx].GetComponent<EBox>().SetEBoxState(EBox.EBoxState.Normal);
+
+                    //오답용 퐁당Anim 진행. 
+                    //
+                    //일단 배치 후 
+                    SettingItem(dragObject);
+                    //해당 EBox에 있는 배치 실패 애니메이션 실행
+                    EBoxes[hlEBoxIndx].GetComponent<EBox>().StartSetFailAnim();
+                }
+                else
+                {
+                    //정답인 경우 배치 진행
+                    SettingItem(dragObject);
+                    //해당 EBox 배치 완료 표시
+                    EBoxes[hlEBoxIndx].GetComponent<EBox>().SetFull(true);
+                    //드래그아이템 삭제
+                    Destroy(dragObject);
+                }
+            }                      
         }
         catch (System.Exception ex)
         {
             Debug.Log(ex.Message);
         }
+    }
+
+    void SettingItem(GameObject mobject)
+    {
+        //새로운 오브젝트 생성
+        GameObject newObject = new GameObject();
+        //부모 설정
+        newObject.transform.SetParent(EBoxes[hlEBoxIndx].transform);
+        //위치 설정
+        newObject.transform.position = EBoxes[hlEBoxIndx].transform.position;
+        //Item 정보 유지를 위한 전달. 
+        newObject.AddComponent<Item>();
+        newObject.GetComponent<Item>().SetItem(mobject.GetComponent<Item>());        
     }
     #endregion
 

@@ -39,7 +39,7 @@ public class EBox : MonoBehaviour
             isfull = true;
             if (itemName == "Stone")
             {
-                //Stone일 경우 가라앉기 시작
+                //Stone EBox일 경우 Stone 가라앉기 시작
                 StoneCheckTime();
             }
         }
@@ -100,6 +100,17 @@ public class EBox : MonoBehaviour
     }
 
 
+    #region 배치 실패 애니메이션. 오브젝트는 그냥 슝~ 내려가고 물 튀는 애니메이션 실행.
+    public void StartSetFailAnim()
+    {
+        //슝 ~ 내려가고
+        StartCoroutine(MoveToBottom(1f, 0.01f, 0.03f));
+        //물 튀는 애니메이션 실행
+
+    }
+    #endregion
+
+
     ///
     ///Stone인 경우 호출되는 부분.  시간 지나면 가라앉아요! 
     ///1. 시간 체크. 
@@ -111,33 +122,49 @@ public class EBox : MonoBehaviour
     public void StoneCheckTime()
     {
         //시간 체크 후 시간이 되면 가라앉기Anim 실행
-        StartCoroutine(StartStoneCheckTime());
+        StartCoroutine(StartStoneCheckTimeAndAnim());
     }    
-    IEnumerator StartStoneCheckTime()
+    IEnumerator StartStoneCheckTimeAndAnim()
     {
         //3초 후 가라앉아요~!
         Debug.Log("3초 후 가라앉아요~!");
         yield return new WaitForSeconds(3f);
         //가라앉기Anim 실행
         Debug.Log("가라앉기Anim 실행");
-        float totalAnimTime = 2f;
+        StartCoroutine(MoveToBottom(2f, 0.1f, 0.1f));
+        SetFull(false);
+        //EBox 효과 소등.
+        eBoxState = EBoxState.LightsOut;
+    }
+    #endregion
+
+    #region 물체 아래로 내려가는 애니메이션
+    IEnumerator MoveToBottom(float totalTime, float timeinterval, float step)
+    {
+        float totalAnimTime = totalTime;
         while (totalAnimTime >= 0)
         {
-            yield return new WaitForSeconds(0.1f);
-            totalAnimTime -= 0.1f;
+            yield return new WaitForSeconds(timeinterval);
+            totalAnimTime -= timeinterval;
             try
             {
                 //돌 오브젝트 하강
-                gameObject.transform.GetChild(3).position = new Vector2(gameObject.transform.GetChild(3).position.x, gameObject.transform.GetChild(3).position.y - 0.1f);
+                gameObject.transform.GetChild(3).position = new Vector2(gameObject.transform.GetChild(3).position.x, gameObject.transform.GetChild(3).position.y - step);
             }
             catch (System.Exception ex)
             {
                 Debug.Log(ex.Message);
             }
         }
-        SetFull(false);
-        //EBox 효과 소등.
-        eBoxState = EBoxState.LightsOut;
+        //가라앉기 끝나면 오브젝트 삭제
+        try
+        {
+            Destroy(gameObject.transform.GetChild(3).gameObject);
+        }
+        catch (System.Exception ex)
+        {
+            Debug.Log(ex.Message);
+        }
     }
     #endregion
 
