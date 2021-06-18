@@ -16,9 +16,10 @@ public class EBoxController : MonoBehaviour
     //드래그중인지
     bool isdragging;
     //EBox 1 2 3
-    public GameObject[] Eboxes;
-    //어떤 EBox가 하이라이트된건지 확인해주는 변수.    
-    public GameObject hlEbox;
+    public GameObject[] EBoxes;
+    //어떤 EBox가 하이라이트된건지 확인해주는 변수.   설정안된 기본값 -1 
+    [SerializeField]
+    int hlEBoxIndx = -1;
 
     void Start(){
         //Ebox들 초기화. 
@@ -40,7 +41,7 @@ public class EBoxController : MonoBehaviour
     {
         try
         {
-            foreach (var item in Eboxes)
+            foreach (var item in EBoxes)
             {
                 item.transform.GetChild(0).gameObject.SetActive(true);
                 item.transform.GetChild(1).gameObject.SetActive(false);
@@ -59,13 +60,12 @@ public class EBoxController : MonoBehaviour
         //드래그 시작시 호출
         dragItem = dragObject;
         isdragging = true;
-
     }
     public void ReleaseDragItem(GameObject dragObject)
     {        
         //어디서 놓았는지 확인 후 가까운 EBox가 있다면 배치 처리. 가까운 EBox가 없으면 다시 인벤토리로 되돌리기.
         //일단 hlEbox 찾아감.  -> 진짜 하이라이트 되어있는지에 따른 처리.
-        if (hlEbox == null)
+        if (hlEBoxIndx == -1)
         {
             //하이라이트되어있지않은 상태. 다시 인벤토리로.
             dragObject.transform.SetParent(FindObjectOfType<InventoryController>().inventoryObj.transform.GetChild(1));
@@ -77,8 +77,7 @@ public class EBoxController : MonoBehaviour
         }
 
         dragItem = null;
-        isdragging = false;
-        
+        isdragging = false;        
     }
     #endregion
 
@@ -90,21 +89,21 @@ public class EBoxController : MonoBehaviour
             if (isdragging)
             {
                 //드래그중일때만 추적. EBox와 가까워지면 해당 EBox 하이라이트.
-                hlEbox = null;
-                foreach (var item in Eboxes)
+                hlEBoxIndx = -1;
+                for(int i = 0; i<EBoxes.Length; i++)
                 {
-                    float x = Mathf.Abs(dragItem.transform.position.x - Camera.main.WorldToScreenPoint(item.transform.position).x);
-                    float y = Mathf.Abs(dragItem.transform.position.y - Camera.main.WorldToScreenPoint(item.transform.position).y);
+                    float x = Mathf.Abs(dragItem.transform.position.x - Camera.main.WorldToScreenPoint(EBoxes[i].transform.position).x);
+                    float y = Mathf.Abs(dragItem.transform.position.y - Camera.main.WorldToScreenPoint(EBoxes[i].transform.position).y);
                     if (x <= 200 & y <= 200)
                     {
                         //가까운 것. 하이라이트 온.
-                        item.GetComponent<EBox>().SetEBoxState(EBox.EBoxState.HighLighted);
-                        hlEbox = item;
+                        EBoxes[i].GetComponent<EBox>().SetEBoxState(EBox.EBoxState.HighLighted);
+                        hlEBoxIndx = i;                        
                     }
                     else
                     {
                         //먼 것. 노말 온.
-                        item.GetComponent<EBox>().SetEBoxState(EBox.EBoxState.Normal);
+                        EBoxes[i].GetComponent<EBox>().SetEBoxState(EBox.EBoxState.Normal);
                     }
                 }
             }
@@ -122,32 +121,35 @@ public class EBoxController : MonoBehaviour
         try
         {
             //옳은 아이템인가?
-            if (hlEbox.GetComponent<EBox>().GetItemName() != dragObject.GetComponent<Item>().itemName)
+            if (EBoxes[hlEBoxIndx].GetComponent<EBox>().GetItemName() != dragObject.GetComponent<Item>().itemName)
             {
                 //옳은 아이템이 아닌 경우 다시 인벤토리로
                 dragObject.transform.SetParent(FindObjectOfType<InventoryController>().inventoryObj.transform.GetChild(1));
-                hlEbox.GetComponent<EBox>().SetEBoxState(EBox.EBoxState.Normal);
+                EBoxes[hlEBoxIndx].GetComponent<EBox>().SetEBoxState(EBox.EBoxState.Normal);
+
+                //오답용 퐁당Anim 진행. 
+                //EBox에 맞는 해당 위치용 애니메이션 실행. hlEBoxIndx 를 기준으로 파악. 
+
+
             }
             else
             {
-                //정답인 경우 배치 진
+                //정답인 경우 배치 진행
 
                 //새로운 오브젝트 생성
                 GameObject newObject = new GameObject();
                 //부모 설정
-                newObject.transform.SetParent(hlEbox.transform);
+                newObject.transform.SetParent(EBoxes[hlEBoxIndx].transform);
                 //위치 설정
-                newObject.transform.position = hlEbox.transform.position;                                
+                newObject.transform.position = EBoxes[hlEBoxIndx].transform.position;                                
                 //Item 정보 유지를 위한 전달. 
                 newObject.AddComponent<Item>();
                 newObject.GetComponent<Item>().SetItem(dragObject.GetComponent<Item>());
                 //해당 EBox 배치 완료 표시
-                hlEbox.GetComponent<EBox>().SetFull();                
+                EBoxes[hlEBoxIndx].GetComponent<EBox>().SetFull(true);             
                 //드래그아이템 삭제
                 Destroy(dragObject);
-            }
-            
-
+            }            
         }
         catch (System.Exception ex)
         {

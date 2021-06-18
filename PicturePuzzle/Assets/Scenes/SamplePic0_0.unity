@@ -379,7 +379,7 @@ GameObject:
   - component: {fileID: 244428727}
   - component: {fileID: 244428728}
   m_Layer: 0
-  m_Name: EBox2
+  m_Name: EBox2_Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2146,11 +2146,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc3835e6a19baa47b2a3dbbd35db323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Eboxes:
+  EBoxes:
   - {fileID: 1854638018}
   - {fileID: 244428726}
   - {fileID: 391832387}
-  hlEbox: {fileID: 0}
+  hlEBoxIndx: -1
 --- !u!4 &1405995278
 Transform:
   m_ObjectHideFlags: 0

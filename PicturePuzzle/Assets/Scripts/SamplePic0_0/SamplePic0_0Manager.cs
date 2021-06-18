@@ -39,7 +39,7 @@ public class SamplePic0_0Manager : MonoBehaviour
         {
             if (EventSystem.current.IsPointerOverGameObject())
             {
-                Debug.Log("UI를 만났어요!~ 더블클릭이 발동되지 않아요");
+                //Debug.Log("UI를 만났어요!~ 더블클릭이 발동되지 않아요");
             }
             else
             {
@@ -78,7 +78,7 @@ public class SamplePic0_0Manager : MonoBehaviour
         /// 4. 마지막 EBox까지 모두 true였으면 clear 애니메이션 실행. 
         /// </summary> 
 
-        GameObject[] EBoxes = FindObjectOfType<EBoxController>().Eboxes;
+        GameObject[] EBoxes = FindObjectOfType<EBoxController>().EBoxes;
         switch (curSquirrelPos)
         {
             //다람쥐 위치값에 따른 처리. isFull이면 성공Anim, 아니면 실패Anim
