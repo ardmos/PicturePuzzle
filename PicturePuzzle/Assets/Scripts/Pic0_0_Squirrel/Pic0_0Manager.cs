@@ -37,24 +37,51 @@ public class Pic0_0Manager : MonoBehaviour
         
         if (Input.GetMouseButtonDown(0))
         {
-            if (EventSystem.current.IsPointerOverGameObject())
+            //안드로이드에서의 EventSystem.curren.IsPointerOverGameObject 처리
+            if (Application.platform == RuntimePlatform.Android)
             {
-                //Debug.Log("UI를 만났어요!~ 더블클릭이 발동되지 않아요");
+                if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+                {
+                    //Debug.Log("UI를 만났어요!~ 더블클릭이 발동되지 않아요");
+                }
+                else
+                {
+                    currentTouchTime = Time.time;
+                    //더블터치가 맞는지 체크! 이전 터치와의 시간 간격으로 확인한다. 
+                    if ((currentTouchTime - lastTouchTime) <= touchInterval)
+                    {
+                        //시도 기능 발동
+                        //Debug.Log("시도 발동!! currentTouchTime:" + currentTouchTime + ", lastTouchTime:" + lastTouchTime + ", Interver:" + (currentTouchTime - lastTouchTime) + ", touchInterval:" + touchInterval);
+                        Try();
+                    }
+                    //else Debug.Log("더블터치가 아닙니다!! currentTouchTime:" + currentTouchTime + ", lastTouchTime:" + lastTouchTime + ", Interver:" + (currentTouchTime - lastTouchTime) + ", touchInterval:" + touchInterval);
+
+                    lastTouchTime = currentTouchTime;
+                }
             }
             else
             {
-                currentTouchTime = Time.time;
-                //더블터치가 맞는지 체크! 이전 터치와의 시간 간격으로 확인한다. 
-                if ((currentTouchTime-lastTouchTime) <= touchInterval)
+                if (EventSystem.current.IsPointerOverGameObject())
                 {
-                    //시도 기능 발동
-                    //Debug.Log("시도 발동!! currentTouchTime:" + currentTouchTime + ", lastTouchTime:" + lastTouchTime + ", Interver:" + (currentTouchTime - lastTouchTime) + ", touchInterval:" + touchInterval);
-                    Try();
+                    //Debug.Log("UI를 만났어요!~ 더블클릭이 발동되지 않아요");
                 }
-                //else Debug.Log("더블터치가 아닙니다!! currentTouchTime:" + currentTouchTime + ", lastTouchTime:" + lastTouchTime + ", Interver:" + (currentTouchTime - lastTouchTime) + ", touchInterval:" + touchInterval);
+                else
+                {
+                    currentTouchTime = Time.time;
+                    //더블터치가 맞는지 체크! 이전 터치와의 시간 간격으로 확인한다. 
+                    if ((currentTouchTime - lastTouchTime) <= touchInterval)
+                    {
+                        //시도 기능 발동
+                        //Debug.Log("시도 발동!! currentTouchTime:" + currentTouchTime + ", lastTouchTime:" + lastTouchTime + ", Interver:" + (currentTouchTime - lastTouchTime) + ", touchInterval:" + touchInterval);
+                        Try();
+                    }
+                    //else Debug.Log("더블터치가 아닙니다!! currentTouchTime:" + currentTouchTime + ", lastTouchTime:" + lastTouchTime + ", Interver:" + (currentTouchTime - lastTouchTime) + ", touchInterval:" + touchInterval);
 
-                lastTouchTime = currentTouchTime;
+                    lastTouchTime = currentTouchTime;
+                }
             }
+
+
         }
     }
     #endregion
