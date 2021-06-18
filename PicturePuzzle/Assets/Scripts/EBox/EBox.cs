@@ -104,9 +104,9 @@ public class EBox : MonoBehaviour
     public void StartSetFailAnim()
     {
         //슝 ~ 내려가고
-        StartCoroutine(MoveToBottom(1f, 0.01f, 0.03f));
+        StartCoroutine(MoveToBottom(1f, 0.01f, 0.05f));
         //물 튀는 애니메이션 실행
-
+        StartCoroutine(WaterPop());
     }
     #endregion
 
@@ -117,7 +117,6 @@ public class EBox : MonoBehaviour
     ///2. 시간이 지나면, 가라앉기Anim 재생.  
     ///3. 가라앉기Anim 끝나는 부분에 애니메이션이벤트로 isFull을 False로 만듦.     
     ///
-
     #region 돌 시간 지나면 가라앉아요~!
     public void StoneCheckTime()
     {
@@ -138,9 +137,10 @@ public class EBox : MonoBehaviour
     }
     #endregion
 
-    #region 물체 아래로 내려가는 애니메이션
+    #region 애니메이션 모음
     IEnumerator MoveToBottom(float totalTime, float timeinterval, float step)
     {
+        //물체 아래로 내려가는 애니메이션
         float totalAnimTime = totalTime;
         while (totalAnimTime >= 0)
         {
@@ -149,7 +149,11 @@ public class EBox : MonoBehaviour
             try
             {
                 //돌 오브젝트 하강
-                gameObject.transform.GetChild(3).position = new Vector2(gameObject.transform.GetChild(3).position.x, gameObject.transform.GetChild(3).position.y - step);
+                //오브젝트는 항상 EBox오브젝트의 마지막 자식일것이기 때문에 아래처럼 진행
+                int objidx = gameObject.transform.childCount - 1;
+                //Debug.Log(gameObject.transform.childCount);
+                Vector2 objPos = gameObject.transform.GetChild(objidx).position;
+                gameObject.transform.GetChild(objidx).position = new Vector2(objPos.x, objPos.y - step);
             }
             catch (System.Exception ex)
             {
@@ -159,7 +163,43 @@ public class EBox : MonoBehaviour
         //가라앉기 끝나면 오브젝트 삭제
         try
         {
-            Destroy(gameObject.transform.GetChild(3).gameObject);
+            int objidx = gameObject.transform.childCount - 1;
+            Destroy(gameObject.transform.GetChild(objidx).gameObject);
+        }
+        catch (System.Exception ex)
+        {
+            Debug.Log(ex.Message);
+        }
+    }
+    IEnumerator WaterPop()
+    {
+        //물 튀는 애니메이션
+        //물 오브젝트 활성화. 물방울은 항상 4번째 오브젝트
+        //
+        int objidx = 3;
+        gameObject.transform.GetChild(objidx).gameObject.SetActive(true);
+        float totalAnimTime = 0.3f;
+        while (totalAnimTime >= 0)
+        {
+            yield return new WaitForSeconds(0.01f);
+            totalAnimTime -= 0.01f;
+            try
+            {
+                //돌 오브젝트 상승                
+                Vector2 objPos = gameObject.transform.GetChild(objidx).position;
+                gameObject.transform.GetChild(objidx).position = new Vector2(objPos.x, objPos.y + 0.05f);
+            }
+            catch (System.Exception ex)
+            {
+                Debug.Log(ex.Message);
+            }
+        }
+        //물이 최고높이에 도달하면 0.3초 후에 비활성화, 원위치됨.
+        yield return new WaitForSeconds(0.3f);
+        try
+        {            
+            gameObject.transform.GetChild(objidx).localPosition = Vector3.zero;
+            gameObject.transform.GetChild(objidx).gameObject.SetActive(false);
         }
         catch (System.Exception ex)
         {
@@ -167,5 +207,6 @@ public class EBox : MonoBehaviour
         }
     }
     #endregion
+
 
 }

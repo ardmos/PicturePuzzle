@@ -43,8 +43,12 @@ public class EBoxController : MonoBehaviour
         {
             foreach (var item in EBoxes)
             {
+                //노말
                 item.transform.GetChild(0).gameObject.SetActive(true);
+                //하이라이트
                 item.transform.GetChild(1).gameObject.SetActive(false);
+                //물방울
+                item.transform.GetChild(3).gameObject.SetActive(false);
             }
         }
         catch (System.Exception ex)
