@@ -128,6 +128,7 @@ public class CameraController : MonoBehaviour
     public void MoveBigPolaroidAim()
     {
         //Before-Current 만큼 이동시키기 
+        //작은폴라로이드에임도 실시간으로 변하는 위치 반영시켜주기
 
         if (Input.GetMouseButton(0))
         {
@@ -144,7 +145,10 @@ public class CameraController : MonoBehaviour
                         currentPos = polaroidCamera.ScreenToWorldPoint(Input.mousePosition);
                         Vector3 polaroidCamPos = polaroidCamera.transform.position;
                         Vector3 movedis = (beforePos - currentPos);
+                        //큰 화면 이동
                         polaroidCamera.transform.position = new Vector3(polaroidCamPos.x + movedis.x, polaroidCamPos.y + movedis.y, -10f);
+                        //조그만 에임도 변하는 위치 반영
+                        polaroidAimObj.transform.position = new Vector2(polaroidCamera.transform.position.x, polaroidCamera.transform.position.y);
                         //Debug.Log("beforePos:" + beforePos + ", currentPos:" + currentPos + ", movedis:" + movedis);
                     }
                     beforePos = polaroidCamera.ScreenToWorldPoint(Input.mousePosition);
@@ -164,6 +168,7 @@ public class CameraController : MonoBehaviour
                         Vector3 polaroidCamPos = polaroidCamera.transform.position;
                         Vector3 movedis = (beforePos - currentPos);
                         polaroidCamera.transform.position = new Vector3(polaroidCamPos.x + movedis.x, polaroidCamPos.y + movedis.y, -10f);
+                        polaroidAimObj.transform.position = new Vector2(polaroidCamera.transform.position.x, polaroidCamera.transform.position.y);
                         //Debug.Log("beforePos:" + beforePos + ", currentPos:" + currentPos + ", movedis:" + movedis);
                     }
                     beforePos = polaroidCamera.ScreenToWorldPoint(Input.mousePosition);
