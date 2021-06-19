@@ -131,15 +131,44 @@ public class CameraController : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            if (beforePos != Vector3.zero)
+            if (Application.platform == RuntimePlatform.Android)
             {
-                currentPos = polaroidCamera.ScreenToWorldPoint(Input.mousePosition);
-                Vector3 polaroidCamPos = polaroidCamera.transform.position;
-                Vector3 movedis = (beforePos - currentPos);
-                polaroidCamera.transform.position = new Vector3(polaroidCamPos.x + movedis.x, polaroidCamPos.y + movedis.y, -10f);
-                //Debug.Log("beforePos:" + beforePos + ", currentPos:" + currentPos + ", movedis:" + movedis);
+                if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+                {
+                    //Debug.Log("UI를 만났어요!~ 폴라로이드 에임은 이동하지 않아요");
+                }
+                else
+                {
+                    if (beforePos != Vector3.zero)
+                    {
+                        currentPos = polaroidCamera.ScreenToWorldPoint(Input.mousePosition);
+                        Vector3 polaroidCamPos = polaroidCamera.transform.position;
+                        Vector3 movedis = (beforePos - currentPos);
+                        polaroidCamera.transform.position = new Vector3(polaroidCamPos.x + movedis.x, polaroidCamPos.y + movedis.y, -10f);
+                        //Debug.Log("beforePos:" + beforePos + ", currentPos:" + currentPos + ", movedis:" + movedis);
+                    }
+                    beforePos = polaroidCamera.ScreenToWorldPoint(Input.mousePosition);
+                }
             }
-            beforePos = polaroidCamera.ScreenToWorldPoint(Input.mousePosition);            
+            else
+            {
+                if (EventSystem.current.IsPointerOverGameObject())
+                {
+                    //Debug.Log("UI를 만났어요!~ 폴라로이드 에임은 이동하지 않아요");
+                }
+                else
+                {
+                    if (beforePos != Vector3.zero)
+                    {
+                        currentPos = polaroidCamera.ScreenToWorldPoint(Input.mousePosition);
+                        Vector3 polaroidCamPos = polaroidCamera.transform.position;
+                        Vector3 movedis = (beforePos - currentPos);
+                        polaroidCamera.transform.position = new Vector3(polaroidCamPos.x + movedis.x, polaroidCamPos.y + movedis.y, -10f);
+                        //Debug.Log("beforePos:" + beforePos + ", currentPos:" + currentPos + ", movedis:" + movedis);
+                    }
+                    beforePos = polaroidCamera.ScreenToWorldPoint(Input.mousePosition);
+                }
+            }                       
         }
 
         if (Input.GetMouseButtonUp(0))
