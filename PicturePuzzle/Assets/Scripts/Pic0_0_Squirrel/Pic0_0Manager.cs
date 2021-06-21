@@ -5,8 +5,9 @@ using UnityEngine.EventSystems;
 
 /// <summary>
 /// 시도, 재시도 관련 처리.
-/// 1. 화면 더블클릭시 시도 발동
-/// 2. 재시도버튼 클릭시 재시도 발동
+/// 1. 화면 더블클릭 인식
+/// 2. 시도, 재시도
+/// 3. 유저데이터 읽어와서 인벤토리 아이템 채우기. 
 /// </summary>
 
 public class Pic0_0Manager : MonoBehaviour
@@ -195,10 +196,18 @@ public class Pic0_0Manager : MonoBehaviour
         FindObjectOfType<EBoxController>().ResetEBoxes();
 
         //인벤토리 초기화. (현재 씬 열릴 때 갖고있었던대로.)
-        //여기 할 차례!!~
+        
 
 
 
     }
+    #endregion
+
+
+    #region 인벤토리 채우기 
+    // InventroyController.cs ,  playerData 로 진행. 
+    //  플레이어데이타(정보 갖고있음), 리스트 형태로.  이름들.  
+    // 이름들 바탕으로 인벤토리컨트롤러에서 아이템 생성. 
+    // 어차피 이 게임에 겹치는 이름은 없음. 
     #endregion
 }

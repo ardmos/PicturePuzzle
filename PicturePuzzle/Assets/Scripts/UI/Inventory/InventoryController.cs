@@ -21,7 +21,6 @@ public class InventoryController : MonoBehaviour
     }
 
     //아이템 만들 차례! 아이템 만들고, 여기 버튼들 기능 연ㅔ
-
     public void OpenInventory()
 	{
 		inventoryObj.SetActive(true);
