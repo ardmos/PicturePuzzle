@@ -10,47 +10,103 @@ public class Squirrel : MonoBehaviour
     ///
     ///
     ///
-    /// 포물선 최대 높이 처리 필요.
+    /// 포물선 최대 높이 처리 필요. <-- 애니메이션으로 해결했음.
     /// </summary>
+    /// 
+
+    [SerializeField]
+    Animator animator, sFamilyAnimator;
 
 
-    /*
-// Start is called before the first frame update
-void Start()
-{
-
-}
-
-// Update is called once per frame
-void Update()
-{
-    //EBox0으로 이동 성공하는 경우.
-    //transform.position = Vector3.Slerp(transform.position,FindObjectOfType<EBoxController>().EBoxes[0].transform.position, 0.1f);
-    Vector2 startPos = transform.position;
-    Vector2 endPos = FindObjectOfType<EBoxController>().EBoxes[0].transform.position;
-    Vector2 centerPos = (startPos + endPos) / 2;
-    transform.position = Vector2.Lerp(Vector2.Lerp(startPos, centerPos, 0.1f), Vector2.Lerp(centerPos, endPos, 0.1f), 0.1f);
-}
-*/
-
-
-        //Unity doc 예시...  높이 관련??
-    public Transform sunrise;
-    public Transform sunset;
-    public float journeyTime = 1.0F;
-    private float startTime;
-    void Start()
+    public void SquirrelTry()
     {
-        startTime = Time.time;
+        //다람쥐 시도!   성공 애니메이션에서 애니메이션 이벤트로 호출됨
+        FindObjectOfType<Pic0_0Manager>().Try();
     }
-    void Update()
+
+
+
+    #region 성공 실패 애니메이션 실행 
+    public void SquirrelToEBox0()
     {
-        Vector3 center = (sunrise.position + sunset.position) * 0.5F;
-        center -= new Vector3(0, 1, 0);
-        Vector3 riseRelCenter = sunrise.position - center;
-        Vector3 setRelCenter = sunset.position - center;
-        float fracComplete = (Time.time - startTime) / journeyTime;
-        transform.position = Vector3.Slerp(riseRelCenter, setRelCenter, fracComplete);
-        transform.position += center;
+        animator.SetBool("SToEBox0", true);
     }
+    public void SquirrelToEBox0F()
+    {
+        animator.SetBool("SToEBox0F", true);
+    }
+    public void SquirrelToEBox1()
+    {
+        animator.SetBool("SToEBox1", true);
+    }
+    public void SquirrelToEBox1F()
+    {
+        animator.SetBool("SToEBox1F", true);
+    }
+    public void SquirrelToEBox2()
+    {
+        animator.SetBool("SToEBox2", true);
+    }
+    public void SquirrelToEBox2F()
+    {
+        animator.SetBool("SToEBox2F", true);
+    }
+    public void SquirrelToClear()
+    {
+        animator.SetBool("SToClear", true);
+    }
+    public void SquirrelFamilyCheer()
+    {
+        //다람쥐와 다람쥐 가족 환호 애니메이션 실행
+        animator.SetBool("SCheer", true);
+        sFamilyAnimator.SetBool("SCheer", true);
+    }
+
+    public void SquirrelFail()
+    {
+        //실패 애니메이션
+        StartCoroutine(MoveToBottom(1f, 0.01f, 0.05f));
+    }
+    #endregion
+
+
+    #region 실패시 아래로 내려가는 애니메이션
+    IEnumerator MoveToBottom(float totalTime, float timeinterval, float step)
+    {
+        //일단 애니메이터 비활성화
+        animator.enabled = false;
+
+        //내려가기 전에 스프라이트 레이어 변환시켜줘야함. 물 속으로 들어가게 하기 위해서! 백그라운드 2로 바꿔주기.
+        gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "BackGround";
+        gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
+
+        //물체 아래로 내려가는 애니메이션
+        float totalAnimTime = totalTime;
+        while (totalAnimTime >= 0)
+        {
+            yield return new WaitForSeconds(timeinterval);
+            totalAnimTime -= timeinterval;
+            try
+            {                 
+                Vector2 objPos = gameObject.transform.position;
+                gameObject.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - step);
+                //Debug.Log(gameObject.transform.position.y + ", step:" + step + ", totalAnimTime:" + totalAnimTime);
+            }
+            catch (System.Exception ex)
+            {
+                Debug.Log(ex.Message);
+            }
+        }
+        //가라앉기 끝나면 오브젝트 삭제
+        try
+        {            
+            Destroy(gameObject);
+        }
+        catch (System.Exception ex)
+        {
+            Debug.Log(ex.Message);
+        }
+    }
+    #endregion
+
 }

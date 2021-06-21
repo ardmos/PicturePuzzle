@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Stage0/Gallery0_0.unity
+    path: Assets/Scenes/Stage0/Gallery0_1.unity
     guid: 1e94884b119eb43eca6828de3140da18
   - enabled: 1
     path: Assets/Scenes/Stage0/Pic0_0_Squirrel.unity

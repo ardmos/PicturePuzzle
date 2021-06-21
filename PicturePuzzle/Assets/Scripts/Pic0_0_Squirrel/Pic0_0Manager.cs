@@ -105,50 +105,67 @@ public class Pic0_0Manager : MonoBehaviour
         /// 4. 마지막 EBox까지 모두 true였으면 clear 애니메이션 실행. 
         /// </summary> 
 
-        GameObject[] EBoxes = FindObjectOfType<EBoxController>().EBoxes;
+        GameObject[] EBoxes = FindObjectOfType<EBoxController>().EBoxes; 
+
         switch (curSquirrelPos)
         {
             //다람쥐 위치값에 따른 처리. isFull이면 성공Anim, 아니면 실패Anim
-            case 0:
+            case 0:             
                 //시작 섬. 첫 번째 EBox의 isFull을 체크.
                 if (EBoxes[curSquirrelPos].GetComponent<EBox>().GetFull())
                 {
                     curSquirrelPos++;
-                    Debug.Log("다음 목표인 " + curSquirrelPos + "번째 EBox는 Full 입니다. " + curSquirrelPos + "번째 성공 애니메이션을 실행합니다.");                    
+                    Debug.Log("다음 목표인 " + curSquirrelPos + "번째 EBox는 Full 입니다. " + curSquirrelPos + "번째 성공 애니메이션을 실행합니다.");
+                    //성공
+                    FindObjectOfType<Squirrel>().SquirrelToEBox0();
                 }
                 else
                 {
                     Debug.Log(curSquirrelPos + "번째 실패 애니메이션을 실행합니다. ");
+                    //실패 애니메이션 재생
+                    FindObjectOfType<Squirrel>().SquirrelToEBox0F();
                 }
                 break;
-            case 1:
+            case 1:               
                 //첫 번째 EBox. 두 번째 EBox의 isFull을 체크.
                 if (EBoxes[curSquirrelPos].GetComponent<EBox>().GetFull())
                 {
                     curSquirrelPos++;
                     Debug.Log("다음 목표인 " + curSquirrelPos + "번째 EBox는 Full 입니다. " + curSquirrelPos + "번째 성공 애니메이션을 실행합니다.");
+                    //성공
+                    FindObjectOfType<Squirrel>().SquirrelToEBox1();
                 }
                 else
                 {
                     Debug.Log(curSquirrelPos + "번째 실패 애니메이션을 실행합니다. ");
+                    //실패 애니메이션 재생
+                    FindObjectOfType<Squirrel>().SquirrelToEBox1F();
                 }
                 break;
-            case 2:
+            case 2: 
                 //두 번째 EBox. 세 번째 EBox의 isFull을 체크.
                 if (EBoxes[curSquirrelPos].GetComponent<EBox>().GetFull())
                 {
                     curSquirrelPos++;
                     Debug.Log("다음 목표인 " + curSquirrelPos + "번째 EBox는 Full 입니다. " + curSquirrelPos + "번째 성공 애니메이션을 실행합니다.");
+                    //성공
+                    FindObjectOfType<Squirrel>().SquirrelToEBox2();
                 }
                 else
                 {
                     Debug.Log(curSquirrelPos + "번째 실패 애니메이션을 실행합니다. ");
+                    //실패 애니메이션 재생
+                    FindObjectOfType<Squirrel>().SquirrelToEBox2F();
                 }
                 break;
             case 3:
+                //다람쥐 위치가 3이라는건 이미 다 클리어했다는것.
+                //클리어는 확인할필요 없음 그냥 이동. 
                 //세 번째 EBox. Clear 애니메이션을 실행.
                 Debug.Log("클리어 애니메이션을 실행합니다.");
-
+                FindObjectOfType<Squirrel>().SquirrelToClear();
+                
+                
                 break;
             default:
                 break;
@@ -159,6 +176,10 @@ public class Pic0_0Manager : MonoBehaviour
     #region 재시도
     public void ReTry()
     {
+        //curSquirrelPos 초기화.
+        //다람쥐오브젝트 초기화.
+        //EBox들 isFull 초기화.
+        //EBox들 오브젝트 초기화. 
 
     }
     #endregion

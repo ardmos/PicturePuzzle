@@ -126,8 +126,8 @@ public class EBox : MonoBehaviour
     IEnumerator StartStoneCheckTimeAndAnim()
     {
         //3초 후 가라앉아요~!
-        Debug.Log("3초 후 가라앉아요~!");
-        yield return new WaitForSeconds(3f);
+        Debug.Log("6초 후 가라앉아요~!");
+        yield return new WaitForSeconds(6f);
         //가라앉기Anim 실행
         Debug.Log("가라앉기Anim 실행");
         StartCoroutine(MoveToBottom(2f, 0.1f, 0.1f));
