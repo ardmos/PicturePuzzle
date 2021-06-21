@@ -82,12 +82,16 @@ public class EBox : MonoBehaviour
             //노말
             transform.GetChild(0).gameObject.SetActive(true);
             transform.GetChild(1).gameObject.SetActive(false);
+            //핀 설치 
+            transform.GetChild(2).gameObject.SetActive(true);
         }
         else if (eBoxState == EBoxState.HighLighted)
         {
             //하이라이트
             transform.GetChild(0).gameObject.SetActive(false);
             transform.GetChild(1).gameObject.SetActive(true);
+            //핀 설치 
+            transform.GetChild(2).gameObject.SetActive(true);
         }
         else
         {
@@ -99,6 +103,23 @@ public class EBox : MonoBehaviour
         }
     }
 
+    #region 모든 코루틴 종료
+    public void StopsAllAnimationCoroutines()
+    {
+
+        try
+        {
+            //물방울 원위치
+            gameObject.transform.GetChild(3).localPosition = Vector3.zero;
+            gameObject.transform.GetChild(3).gameObject.SetActive(false);
+        }
+        catch (System.Exception ex)
+        {
+            Debug.Log(ex.Message);
+        }
+        StopAllCoroutines();
+    }
+    #endregion
 
     #region 배치 실패 애니메이션. 오브젝트는 그냥 슝~ 내려가고 물 튀는 애니메이션 실행.
     public void StartSetFailAnim()

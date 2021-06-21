@@ -17,12 +17,8 @@ public class Pic0_0Manager : MonoBehaviour
     //현재 다람쥐 위치 저장할 변수
     [SerializeField]
     int curSquirrelPos = 0;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    //다람쥐 프리팹
+    public GameObject squirrelPref;
 
     // Update is called once per frame
     void Update()
@@ -163,9 +159,7 @@ public class Pic0_0Manager : MonoBehaviour
                 //클리어는 확인할필요 없음 그냥 이동. 
                 //세 번째 EBox. Clear 애니메이션을 실행.
                 Debug.Log("클리어 애니메이션을 실행합니다.");
-                FindObjectOfType<Squirrel>().SquirrelToClear();
-                
-                
+                FindObjectOfType<Squirrel>().SquirrelToClear();                               
                 break;
             default:
                 break;
@@ -176,10 +170,34 @@ public class Pic0_0Manager : MonoBehaviour
     #region 재시도
     public void ReTry()
     {
+        //클리어시에는 재시도 버튼 비활성화.
+        if (curSquirrelPos == 3)
+        {
+            //비활성화.
+            return;
+        }
+
         //curSquirrelPos 초기화.
-        //다람쥐오브젝트 초기화.
+        curSquirrelPos = 0;
+        //다람쥐오브젝트 존재하지 않을경우 생성. 
+        //존재할경우 파괴 후 생성.
+        GameObject sqrl = GameObject.FindGameObjectWithTag("Squirrel");
+        if (sqrl != null) //찾을 수 없으면 null이 반환됩니다. 
+        {
+            Destroy(sqrl);
+        }
+        //다람쥐 생성
+        GameObject newSquirrel = Instantiate(squirrelPref) as GameObject;
+        newSquirrel.transform.SetParent(GameObject.Find("=====GameObjects=====").transform);
+
         //EBox들 isFull 초기화.
         //EBox들 오브젝트 초기화. 
+        FindObjectOfType<EBoxController>().ResetEBoxes();
+
+        //인벤토리 초기화. (현재 씬 열릴 때 갖고있었던대로.)
+        //여기 할 차례!!~
+
+
 
     }
     #endregion

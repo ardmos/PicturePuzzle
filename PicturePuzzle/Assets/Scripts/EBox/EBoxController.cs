@@ -23,7 +23,7 @@ public class EBoxController : MonoBehaviour
 
     void Start(){
         //Ebox들 초기화. 
-        InitializeEBox();
+        InitializeEBoxes();
     }
 
     // Update is called once per frame
@@ -37,16 +37,17 @@ public class EBoxController : MonoBehaviour
     }
 
     #region EBox 초기화
-    void InitializeEBox()
+    void InitializeEBoxes()
     {
         try
         {
             foreach (var item in EBoxes)
             {
+                //각각 EBox에서 실시간 처리해주도록 했습니다. 여기선 물방울만!
                 //노말
-                item.transform.GetChild(0).gameObject.SetActive(true);
+                //item.transform.GetChild(0).gameObject.SetActive(true);
                 //하이라이트
-                item.transform.GetChild(1).gameObject.SetActive(false);
+                //item.transform.GetChild(1).gameObject.SetActive(false);
                 //물방울
                 item.transform.GetChild(3).gameObject.SetActive(false);
             }
@@ -55,6 +56,36 @@ public class EBoxController : MonoBehaviour
         {
             Debug.Log(ex.Message);
         }        
+    }
+    #endregion
+
+    #region EBox들 리셋(리트라이 버튼을 위한)
+    public void ResetEBoxes()
+    {
+        //EBox들 isFull 초기화.
+        try
+        {
+            foreach (var item in EBoxes)
+            {
+                //일단, 진행중인 코루틴(애니메이션들 종료)
+                item.GetComponent<EBox>().StopsAllAnimationCoroutines();
+
+                if (item.transform.childCount == 5)
+                {
+                    //배치된 아이템이 있다면, 해당 아이템 파괴 
+                    Destroy(item.transform.GetChild(item.transform.childCount-1).gameObject);
+                    Debug.Log("아이템이 존재합니다. 리셋을 위해 파괴!");
+                }
+                item.GetComponent<EBox>().SetFull(false);
+
+                //EBox 스테이트 노말로 초기화.
+                item.GetComponent<EBox>().SetEBoxState(EBox.EBoxState.Normal);
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.Log(ex.Message);
+        }
     }
     #endregion
 
