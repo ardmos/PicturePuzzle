@@ -16,7 +16,20 @@ public class AndroidEscapeBtnController : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.Escape))
             {
+                string curSceneName = SceneManager.GetActiveScene().name;
                 //현재 씬에 따라 처리. 
+                if (curSceneName.Contains("Gallery"))
+                {
+                    //갤러리인 경우
+                    Application.Quit();
+                }
+                else if (curSceneName.Contains("Pic"))
+                {
+                    //사진인경우
+                    SceneManager.LoadScene(0); //임시로 0번 씬으로 가게 해뒀음.  각각 맞는 갤러리로 이동해야함. 다람쥐는 0번갤러리. 다른애들은 1번갤러리.
+                }
+
+                /*
                 switch (SceneManager.GetActiveScene().buildIndex)
                 {
                     case 0:
@@ -37,6 +50,7 @@ public class AndroidEscapeBtnController : MonoBehaviour
                     default:
                         break;
                 }
+                */
             }
         }
     }
