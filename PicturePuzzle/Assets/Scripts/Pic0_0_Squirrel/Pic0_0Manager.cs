@@ -202,12 +202,4 @@ public class Pic0_0Manager : MonoBehaviour
 
     }
     #endregion
-
-
-    #region 인벤토리 채우기 
-    // InventroyController.cs ,  playerData 로 진행. 
-    //  플레이어데이타(정보 갖고있음), 리스트 형태로.  이름들.  
-    // 이름들 바탕으로 인벤토리컨트롤러에서 아이템 생성. 
-    // 어차피 이 게임에 겹치는 이름은 없음. 
-    #endregion
 }

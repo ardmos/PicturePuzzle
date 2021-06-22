@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 /// ***인벤토리 컨트롤러***
 ///   1. 인벤토리 버튼 클릭시 등장. (기본적으론 숨겨져있음)
 ///   2. 아이템 드래그 or 바깥버튼 클릭시 퇴장.
+///   3. 인벤토리 채우기
 /// </summary>
 
 public class InventoryController : MonoBehaviour
@@ -19,8 +20,7 @@ public class InventoryController : MonoBehaviour
 		//기본적으로 숨겨두기.
 		inventoryObj.SetActive(false);
     }
-
-    //아이템 만들 차례! 아이템 만들고, 여기 버튼들 기능 연ㅔ
+ 
     public void OpenInventory()
 	{
 		inventoryObj.SetActive(true);
@@ -29,4 +29,16 @@ public class InventoryController : MonoBehaviour
 	{
 		inventoryObj.SetActive(false);
 	}
+
+    #region 인벤토리 채우기 
+    // InventroyController.cs ,  playerData 로 진행. 
+    //  플레이어데이타(정보 갖고있음), 리스트 형태로.  이름들.  
+    // 이름들 바탕으로 아이템 생성. 
+    // 어차피 이 게임에 겹치는 이름은 없음. 
+    // 씬 시작될 때마다 호출.
+    public void MakeInventoryItems()
+    {
+
+    }
+    #endregion
 }
