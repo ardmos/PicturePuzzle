@@ -168,7 +168,7 @@ public class EBoxController : MonoBehaviour
                 //이미 배치가 끝난 EBox가 아니라면
                 //배치되려는것이 옳은 아이템인가?
 
-                if (EBoxes[hlEBoxIndx].GetComponent<EBox>().GetItemName() != dragObject.GetComponent<Item>().itemName)
+                if (EBoxes[hlEBoxIndx].GetComponent<EBox>().GetItemName() != dragObject.GetComponent<ItemObj>().itemName)
                 {
                     //옳은 아이템이 아닌 경우 다시 인벤토리로
                     dragObject.transform.SetParent(FindObjectOfType<InventoryController>().inventoryObj.transform.GetChild(1));
@@ -207,8 +207,8 @@ public class EBoxController : MonoBehaviour
         //위치 설정
         newObject.transform.position = EBoxes[hlEBoxIndx].transform.position;
         //Item 정보 유지를 위한 전달. 
-        newObject.AddComponent<Item>();
-        newObject.GetComponent<Item>().SetItem(mobject.GetComponent<Item>());        
+        newObject.AddComponent<ItemObj>();
+        newObject.GetComponent<ItemObj>().SetItem(mobject.GetComponent<ItemObj>().GetItemObjInfo());        
     }
     #endregion
 

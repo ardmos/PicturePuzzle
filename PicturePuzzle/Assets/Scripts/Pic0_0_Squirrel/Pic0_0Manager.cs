@@ -100,9 +100,14 @@ public class Pic0_0Manager : MonoBehaviour
         /// 2. 클리어 상태에 따라 다른 애니메이션 실행
         /// 3. 클리어상태 false일 경우 다음 진행 X.  true일 시 계속 실행. 
         /// 4. 마지막 EBox까지 모두 true였으면 clear 애니메이션 실행. 
+        /// 
+        /// 5. 실행하면 EBox 점선, 핀들 모두 비활성화. 상태 LightsOut
         /// </summary> 
 
-        GameObject[] EBoxes = FindObjectOfType<EBoxController>().EBoxes; 
+        GameObject[] EBoxes = FindObjectOfType<EBoxController>().EBoxes;
+
+        //모든 EBox 상태 LightsOut. 
+        foreach (var item in EBoxes)  item.GetComponent<EBox>().SetEBoxState(EBox.EBoxState.LightsOut);
 
         switch (curSquirrelPos)
         {
@@ -196,10 +201,7 @@ public class Pic0_0Manager : MonoBehaviour
         FindObjectOfType<EBoxController>().ResetEBoxes();
 
         //인벤토리 초기화. (현재 씬 열릴 때 갖고있었던대로.)
-        
-
-
-
+        FindObjectOfType<InventoryController>().ResetInventory();
     }
     #endregion
 }

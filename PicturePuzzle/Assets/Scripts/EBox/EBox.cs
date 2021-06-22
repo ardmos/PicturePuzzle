@@ -69,12 +69,11 @@ public class EBox : MonoBehaviour
     void Update()
     {
         //상태에 따른 EBox 이미지 효과 처리
-        if (isfull)
+        if (isfull || eBoxState == EBoxState.LightsOut)
         {
-            //이미지 배치된 상태
+            //노말 하이라이트 둘 다 아닌 경우. 다 끄기 LightsOut
             transform.GetChild(0).gameObject.SetActive(false);
             transform.GetChild(1).gameObject.SetActive(false);
-            //핀도 뽑아준다.
             transform.GetChild(2).gameObject.SetActive(false);
         }   
         else if (eBoxState == EBoxState.Normal)
@@ -93,20 +92,11 @@ public class EBox : MonoBehaviour
             //핀 설치 
             transform.GetChild(2).gameObject.SetActive(true);
         }
-        else
-        {
-            //노말 하이라이트 둘 다 아닌 경우. 다 끄기 LightsOut
-            transform.GetChild(0).gameObject.SetActive(false);
-            transform.GetChild(1).gameObject.SetActive(false);
-            transform.GetChild(2).gameObject.SetActive(false);
-
-        }
     }
 
     #region 모든 코루틴 종료
     public void StopsAllAnimationCoroutines()
     {
-
         try
         {
             //물방울 원위치

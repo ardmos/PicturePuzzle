@@ -11,7 +11,8 @@ using UnityEngine.UI;
 /// 부모 인식 이미지 자동변환 기능
 /// </summary>
 
-public class Item : MonoBehaviour
+[System.Serializable]
+public class ItemObj : MonoBehaviour
 {
     //이름
     public string itemName;
@@ -31,6 +32,13 @@ public class Item : MonoBehaviour
         polaroidIMG = item.polaroidIMG;
         objectIMG = item.objectIMG;
     }
+
+    public Item GetItemObjInfo()
+    {
+        //현 아이템오브젝트의 정보를 Item클래스 형태로 얻고싶을 때 호출. 
+        return new Item(itemName, polaroidIMG, objectIMG);
+    }
+
     void InitIMG()
     { 
         //부모 인식 이미지 자동 변환
