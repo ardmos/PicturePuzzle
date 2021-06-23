@@ -573,7 +573,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1783712911
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 49eb1df0b90ae45619d5515984511f5c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
@@ -860,6 +860,7 @@ GameObject:
   - component: {fileID: 424541618}
   - component: {fileID: 424541617}
   - component: {fileID: 424541616}
+  - component: {fileID: 424541619}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -932,6 +933,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &424541619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424541615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c28c925196a43bf4da7b909cc565277d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &499262798
 GameObject:
   m_ObjectHideFlags: 0
@@ -1419,6 +1432,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryObj: {fileID: 1581101415}
+  inventoryGridLayoutObj: {fileID: 0}
+  playerData: {fileID: 0}
+  stage0_ItemData: {fileID: 0}
 --- !u!4 &958255189
 Transform:
   m_ObjectHideFlags: 0
@@ -2251,6 +2267,7 @@ GameObject:
   - component: {fileID: 1890908913}
   - component: {fileID: 1890908912}
   - component: {fileID: 1890908911}
+  - component: {fileID: 1890908914}
   m_Layer: 0
   m_Name: Polaroid Camera
   m_TagString: Untagged
@@ -2323,6 +2340,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1890908914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890908910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c28c925196a43bf4da7b909cc565277d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1894744818
 GameObject:
   m_ObjectHideFlags: 0
@@ -2754,7 +2783,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1783712911
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d9cfb73e74c770546980383db0528289, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

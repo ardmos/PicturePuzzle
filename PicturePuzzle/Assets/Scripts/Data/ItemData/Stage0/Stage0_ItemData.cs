@@ -14,7 +14,7 @@ using UnityEngine;
 /// 
 /// </summary>
 
-public class Stage0_ItemData : MonoBehaviour
+public class Stage0_ItemData : DontDestroy<Stage0_ItemData>
 {
     [SerializeField]
     List<Item> itemData;

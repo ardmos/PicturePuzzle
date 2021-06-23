@@ -256,6 +256,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryObj: {fileID: 941817999}
+  inventoryGridLayoutObj: {fileID: 0}
+  playerData: {fileID: 0}
+  stage0_ItemData: {fileID: 0}
 --- !u!4 &70275257
 Transform:
   m_ObjectHideFlags: 0
@@ -537,7 +540,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1783712911
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 476895c841ba8e347bbe359aa8d127db, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1820,7 +1823,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1783712911
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 80d7d9584e7c44c3aa42c3a1b5730295, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2205,6 +2208,7 @@ GameObject:
   - component: {fileID: 1474663193}
   - component: {fileID: 1474663192}
   - component: {fileID: 1474663191}
+  - component: {fileID: 1474663194}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2277,6 +2281,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1474663194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474663190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c28c925196a43bf4da7b909cc565277d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1582669003
 GameObject:
   m_ObjectHideFlags: 0
@@ -2783,7 +2799,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1783712911
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: cc22217a1892c8a4a9fd1abb0c3dbf32, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
@@ -2888,6 +2904,7 @@ GameObject:
   - component: {fileID: 2132997046}
   - component: {fileID: 2132997045}
   - component: {fileID: 2132997044}
+  - component: {fileID: 2132997047}
   m_Layer: 0
   m_Name: Polaroid Camera
   m_TagString: Untagged
@@ -2960,3 +2977,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2132997047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132997043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c28c925196a43bf4da7b909cc565277d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
