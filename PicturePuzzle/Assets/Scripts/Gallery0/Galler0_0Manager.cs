@@ -17,22 +17,22 @@ public class Galler0_0Manager : MonoBehaviour
     public void Button_Squirrel()
     {
         //"Pic0_0_Squirrel"
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
     }
     public void Button_Turtle()
     {
         //"Pic0_1_Turtle"
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(4);
     }
     public void Button_Stone()
     {
         //"Pic0_2_Stone"
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(5);
     }
     public void Button_Wood()
     {
         //"Pic0_3_Wood"
-        SceneManager.LoadScene(5);
+        SceneManager.LoadScene(6);
     }
     #endregion
 
@@ -50,7 +50,5 @@ public class Galler0_0Manager : MonoBehaviour
         //0_1에서 0_0으로 이동
         SceneManager.LoadScene("Gallery0_0");
     }
-    #endregion
-
-    
+    #endregion    
 }

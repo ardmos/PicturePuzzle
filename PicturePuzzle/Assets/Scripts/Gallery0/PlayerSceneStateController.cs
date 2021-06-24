@@ -58,6 +58,5 @@ public class PlayerSceneStateController : DontDestroy<PlayerSceneStateController
     {
         playerSceneState = value;
     }
-
     #endregion
 }
