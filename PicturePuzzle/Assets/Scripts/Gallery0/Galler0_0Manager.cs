@@ -40,13 +40,13 @@ public class Galler0_0Manager : MonoBehaviour
     public void To1From0()
     {
         //이동 애니메이션은 Player_Gallery0_0.cs에 있음. 
-        //0_0에서 0_1로 이동
+        //0_0에서 0_1로 이동. First 상태로 만들어주고 넘어감. 
+        FindObjectOfType<PlayerSceneStateController>().SetPlayerSceneState(PlayerSceneStateController.PlayerSceneState.First);
         SceneManager.LoadScene("Gallery0_1");
     }
     public void To0From1()
     {
-        //이동 전에 캐릭터 애니메이션. 
-
+        //이동 애니메이션은 Player_Gallery0_1.cs에 있음. 
         //0_1에서 0_0으로 이동
         SceneManager.LoadScene("Gallery0_0");
     }

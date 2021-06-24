@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 /// <summary>
 /// 플레이어데이타(정보 갖고있음), 리스트 형태로.  이름들.
+/// 
 /// </summary>
 
 public class PlayerData : DontDestroy<PlayerData> 
 {
     //플레이어가 보유한 아이템 리스트!
     [SerializeField]
-    List<string> itemlist;
+    List<string> itemlist;    
 
     override protected void OnStart()
     {
@@ -37,6 +39,7 @@ public class PlayerData : DontDestroy<PlayerData>
         return itemlist;
     }
     #endregion
+
 
 
 

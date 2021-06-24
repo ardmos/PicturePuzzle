@@ -12,21 +12,33 @@ public class AndroidEscapeBtnController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Application.platform == RuntimePlatform.Android)
-        {
+        //if (Application.platform == RuntimePlatform.Android)
+        //{
             if (Input.GetKey(KeyCode.Escape))
             {
                 string curSceneName = SceneManager.GetActiveScene().name;
                 //현재 씬에 따라 처리. 
-                if (curSceneName.Contains("Gallery"))
+                if (curSceneName.Contains("Title"))
+                {
+                    //타이틀인 경우
+                    Application.Quit();
+                }
+                else if (curSceneName.Contains("Gallery"))
                 {
                     //갤러리인 경우
-                    Application.Quit();
+                    SceneManager.LoadScene("Title");
                 }
                 else if (curSceneName.Contains("Pic"))
                 {
-                    //사진인경우
-                    SceneManager.LoadScene(0); //임시로 0번 씬으로 가게 해뒀음.  각각 맞는 갤러리로 이동해야함. 다람쥐는 0번갤러리. 다른애들은 1번갤러리.
+                    //사진인경우 각각 맞는 갤러리로 이동해야함. 다람쥐는 0번갤러리. 다른애들은 1번갤러리.
+                    if(curSceneName == "Pic0_0_Squirrel")
+                    {
+                        SceneManager.LoadScene("Gallery0_0");
+                    }
+                    else
+                    {
+                        SceneManager.LoadScene("Gallery0_1");
+                    }                    
                 }
 
                 /*
@@ -52,6 +64,6 @@ public class AndroidEscapeBtnController : MonoBehaviour
                 }
                 */
             }
-        }
+        //}
     }
 }
