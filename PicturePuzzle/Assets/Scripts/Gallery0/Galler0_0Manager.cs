@@ -51,4 +51,10 @@ public class Galler0_0Manager : MonoBehaviour
         SceneManager.LoadScene("Gallery0_0");
     }
     #endregion    
+
+    public void ToTitleFrom0()
+    {
+        //0_0에서 타이틀로 이동. 
+        SceneManager.LoadScene("Title");
+    }
 }
