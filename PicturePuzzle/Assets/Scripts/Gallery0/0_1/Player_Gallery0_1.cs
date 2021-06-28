@@ -130,11 +130,14 @@ public class Player_Gallery0_1 : MonoBehaviour
     ///       
 
 
-    //그림 클릭시 해당 그림 앞으로 이동 처리하는 부분. UGUI 버튼으로 처리함. 
+    //그림 클릭시 해당 그림 앞으로 이동 처리하는 부분. UGUI 버튼으로 처리함.  실제 이동은 Update에서 돌려줘야한다.
     public void MoveToPic1()
     {
         //실제 이동
-        //트랜스레이트로?
+        //트랜스레이트로? -> V3.MoveTowards로.(현pos, 타겟pos, step 최대이동거리 즉 이동할 거리(Time.delta 곱하기 speed. 요거때문에 업데이트에서 해줘야함. 프레임당 이동.))
+        //Calculate a position between the points specified by current and target, moving no farther than the distance specified by maxDistanceDelta.
+        //Update
+
         //현재 위치를 기록
         playerPosState = PlayerPosState.Pic1;
     }
