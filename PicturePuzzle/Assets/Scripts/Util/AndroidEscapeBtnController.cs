@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// 안드로이드 플랫폼일 경우 Escape 버튼 처리
+/// 안드로이드 플랫폼일 경우 Escape 버튼 처리용도이지만, 원활한 테스트를 위해 데스크탑에서도 처리해줌. 
 /// </summary>
 
 public class AndroidEscapeBtnController : MonoBehaviour
@@ -12,7 +12,7 @@ public class AndroidEscapeBtnController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Application.platform == RuntimePlatform.Android)
+        //if (Application.platform == RuntimePlatform.Android) 데스크탑에서도 해주기 위한 주석.
         //{
             if (Input.GetKey(KeyCode.Escape))
             {
@@ -40,29 +40,6 @@ public class AndroidEscapeBtnController : MonoBehaviour
                         SceneManager.LoadScene("Gallery0_1");
                     }                    
                 }
-
-                /*
-                switch (SceneManager.GetActiveScene().buildIndex)
-                {
-                    case 0:
-                        //타이틀. 이어야하지만 지금은 갤러리.  타이틀 없는 상황. 아래도 마찬가지로 테스트 현재 상황 반영
-                        Application.Quit();                        
-                        break;
-                    case 1:
-                        //다람쥐                    
-                    case 2:
-                        //거북이
-                    case 3:
-                        //돌
-                    case 4:
-                        //나무
-                        //모두 갤러리씬으로.
-                        SceneManager.LoadScene(0);
-                        break;
-                    default:
-                        break;
-                }
-                */
             }
         //}
     }

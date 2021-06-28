@@ -15,17 +15,37 @@ using UnityEngine.SceneManagement;
 
 public class PlayerSceneStateController : DontDestroy<PlayerSceneStateController>
 {
+    #region Gallery0_0 부분. 
     //플레이어 스테이트 관리
     public enum PlayerSceneState
     {
         First,
         NotFirst,
-        Stand,        
+        Stand,
     }
-
-    //첫 재생 관리    
+    //첫 재생 관리   Gallery0_0. 
     [SerializeField]
     PlayerSceneState playerSceneState;
+    #endregion
+
+
+    #region Gallery0_1 부분.
+    //플레이어 위치 상태 Enum
+    public enum PlayerPosState
+    {
+        Entry,
+        Stand,
+        Exit,
+        Pic1,
+        Pic2,
+        Pic3,
+        PicToExit
+    }
+    public PlayerPosState playerPosState;
+    #endregion
+
+
+
 
     #region 첫 재생 관리
     void OnEnable()
@@ -38,11 +58,16 @@ public class PlayerSceneStateController : DontDestroy<PlayerSceneStateController
         //Debug.Log("OnSceneLoaded: " + scene.name);
         //Debug.Log(mode);
 
-        //첫 재생 관리. 
+        //첫 재생 관리. Gallery0_0
         //1. 타이틀씬이라면 스테이트 First
         //false 만드는거라면 다른곳에서 함. 신경 안써도 된다. 현재 씬이 타이틀인지 확인해서 true만 만들기
         if (scene.name.Equals("Title")) playerSceneState = PlayerSceneState.First;
         else if(scene.name.Contains("Pic")) playerSceneState = PlayerSceneState.Stand;
+
+        //Gallery0_1 
+        //그림 앞으로 이동 중, esc를 통한 씬 전환시, 위치 설정이 그림 앞으로 되어있는 문제 해결을 위한 부분. 
+        if (scene.name.Equals("Title")) playerPosState = PlayerPosState.Entry;
+        else if (scene.name.Equals("Gallery0_0")) playerPosState = PlayerPosState.Entry;
     }
     // called when the game is terminated
     void OnDisable()

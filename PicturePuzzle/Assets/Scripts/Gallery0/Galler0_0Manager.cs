@@ -13,6 +13,9 @@ using UnityEngine.SceneManagement;
 
 public class Galler0_0Manager : MonoBehaviour
 {
+    public Player_Gallery0_1 player_Gallery0_1;
+
+
     #region 그림들 여는 버튼
     public void Button_Squirrel()
     {
@@ -22,17 +25,20 @@ public class Galler0_0Manager : MonoBehaviour
     public void Button_Turtle()
     {
         //"Pic0_1_Turtle"
-        SceneManager.LoadScene(4);
+        //SeneManager.LoadScene(4); player 애니메이션이 추가됐음.
+        player_Gallery0_1.MoveToPic1();
     }
     public void Button_Stone()
     {
         //"Pic0_2_Stone"
-        SceneManager.LoadScene(5);
+        //SceneManager.LoadScene(5);
+        player_Gallery0_1.MoveToPic2();
     }
     public void Button_Wood()
     {
         //"Pic0_3_Wood"
-        SceneManager.LoadScene(6);
+        //SceneManager.LoadScene(6);
+        player_Gallery0_1.MoveToPic3();
     }
     #endregion
 
