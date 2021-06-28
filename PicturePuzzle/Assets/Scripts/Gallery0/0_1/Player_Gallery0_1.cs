@@ -34,6 +34,8 @@ using UnityEngine;
 ///         5. Pic2     : 코드를 통한 Pic2로의 이동시
 ///         6. Pic3     : 코드를 통한 Pic3로의 이동시
 ///         7. PicToExit: 코드를 통한 Pic에서의 퇴장시.
+///     5. Vector3.MoveTowards를 Update에서 사용하기 위한 string 변수. string whereTo.  값이 Wait면 현 위치 대기.
+///       1. 이동거리 계산을 위한 float speed값, step값. 
 ///     
 /// </summary>
 
@@ -59,7 +61,10 @@ public class Player_Gallery0_1 : MonoBehaviour
     //플레이어 캐릭터 앞모습 이미지
     [SerializeField]
     Sprite playerFrontImg;
-
+    //MoveTowards를 위한
+    string whereTo;
+    //이동시에 이동 거리 계산을 위한 speed, step.
+    float speed=0.5f, step;
 
     public void Start()
     {
@@ -82,6 +87,39 @@ public class Player_Gallery0_1 : MonoBehaviour
         catch (System.Exception ex)
         {
             Debug.Log(ex.Message);
+        }
+    }
+    public void Update()
+    {
+        step = speed * Time.deltaTime;
+        switch (whereTo)
+        {
+            case "Pic1":
+                //목적지에 도착했는가? //도착했으니 Wait로.                
+                if (Vector3.Distance(transform.position, pic1) < 0.001f) whereTo = "Wait";                
+                transform.position = Vector3.MoveTowards(transform.position, pic1, step);
+                break;
+            case "Pic2":
+                //목적지에 도착했는가? //도착했으니 Wait로.                
+                if (Vector3.Distance(transform.position, pic2) < 0.001f) whereTo = "Wait";                
+                transform.position = Vector3.MoveTowards(transform.position, pic2, step);
+                break;
+            case "Pic3":
+                //목적지에 도착했는가? //도착했으니 Wait로.                
+                if (Vector3.Distance(transform.position, pic3) < 0.001f) whereTo = "Wait";                
+                transform.position = Vector3.MoveTowards(transform.position, pic3, step);
+                break;
+            case "PicToExit":
+                //목적지에 도착했는가? //도착했으니 Wait로.                
+                if (Vector3.Distance(transform.position, picToExit) < 0.001f) whereTo = "Wait";                
+                transform.position = Vector3.MoveTowards(transform.position, picToExit, step);
+                break;
+            case "Wait":
+                //현 위치 대기
+                break;
+            default:
+                Debug.Log("whereTo의 값이 " + whereTo + " 입니다. 확인이 필요합니다.");
+                break;
         }
     }
 
@@ -137,21 +175,22 @@ public class Player_Gallery0_1 : MonoBehaviour
         //트랜스레이트로? -> V3.MoveTowards로.(현pos, 타겟pos, step 최대이동거리 즉 이동할 거리(Time.delta 곱하기 speed. 요거때문에 업데이트에서 해줘야함. 프레임당 이동.))
         //Calculate a position between the points specified by current and target, moving no farther than the distance specified by maxDistanceDelta.
         //Update
-
+        //whereTo 사용.
+        whereTo = "Pic1";
         //현재 위치를 기록
         playerPosState = PlayerPosState.Pic1;
     }
     public void MoveToPic2()
     {
         //실제 이동
-
+        whereTo = "Pic2";
         //현재 위치를 기록
         playerPosState = PlayerPosState.Pic2;
     }
     public void MoveToPic3()
     {
         //실제 이동
-
+        whereTo = "Pic3";
         //현재 위치를 기록
         playerPosState = PlayerPosState.Pic3;
     }
@@ -161,7 +200,7 @@ public class Player_Gallery0_1 : MonoBehaviour
     public void MoveToPicToExit()
     {
         //실제 이동 
-
+        whereTo = "PicToExit";
         //현재 위치를 기록
         playerPosState = PlayerPosState.PicToExit;
     }
