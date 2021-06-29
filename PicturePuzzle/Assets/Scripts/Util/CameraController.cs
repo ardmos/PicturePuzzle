@@ -13,6 +13,9 @@ using UnityEngine.EventSystems;
 ///
 ///
 /// 카메라 촬영 기능 만들 차례임.  잠깐 이미지 넣고 옴!
+/// 6. 촬영 기능
+///   1. 촬영 가능 오브젝트들은 중앙에 NoticePhotoAble 이미지를 띄운다.
+///   2. 
 /// </summary>
 
 public class CameraController : MonoBehaviour
