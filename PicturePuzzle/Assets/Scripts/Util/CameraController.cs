@@ -294,7 +294,7 @@ public class CameraController : MonoBehaviour
                 {
                     //Stone
 
-                    //스톤씬은 추가적으로 눈사람의 상태를 체크해주는 과정이 필요함. 
+                    //스톤씬은 추가적으로 눈사람의 상태를 체크해주는 과정이 필요함.  눈사람 상태 체크는 StoneSceneManager에서 해줌. 거기다 물어보기.
                     if(FindObjectOfType<StoneSceneManager>().idxcount >=4)
                     {
                         //현재 눈사람이 다 부숴지고 돌이 드러난 상태. 
