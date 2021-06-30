@@ -201,7 +201,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 52014065}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 711832909}
+        m_MethodName: OnButton_TakePictureClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &52014065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,7 +279,7 @@ Transform:
   m_Children:
   - {fileID: 1925071591}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &119266781
 GameObject:
@@ -437,7 +448,7 @@ GameObject:
   - component: {fileID: 133898497}
   - component: {fileID: 133898498}
   m_Layer: 0
-  m_Name: "Turtle_\uC784\uC2DC\uD22C\uBA85"
+  m_Name: Turtle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -519,7 +530,7 @@ GameObject:
   - component: {fileID: 250239252}
   - component: {fileID: 250239253}
   m_Layer: 0
-  m_Name: NoticePhotoAble
+  m_Name: NoticePhotoAble_Turtle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -863,7 +874,7 @@ GameObject:
   - component: {fileID: 423695164}
   - component: {fileID: 423695165}
   m_Layer: 0
-  m_Name: NoticePhotoAble
+  m_Name: NoticePhotoAble_Tennis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1340,6 +1351,13 @@ MonoBehaviour:
   mainUI: {fileID: 1073756500}
   polaroidUI: {fileID: 73230035}
   polaroidAimObj: {fileID: 1827201634}
+  npa_Turtle:
+  - {fileID: 423695163}
+  - {fileID: 250239251}
+  npa_Stone: []
+  npa_Wood: []
+  backGroundImage: {fileID: 367650658}
+  nonTurtleImg: {fileID: 21300000, guid: c721e8b234ba03a4e8ff84b553ebee77, type: 3}
 --- !u!4 &711832910
 Transform:
   m_ObjectHideFlags: 0
@@ -1352,7 +1370,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &805515098
 GameObject:
@@ -1528,7 +1546,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1073756500
 GameObject:
@@ -1559,7 +1577,7 @@ Transform:
   m_Children:
   - {fileID: 635032604}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1091531821
 GameObject:
@@ -1979,7 +1997,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1494676987
 GameObject:
@@ -2010,7 +2028,7 @@ Transform:
   m_Children:
   - {fileID: 1827201635}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1581101415
 GameObject:
@@ -2097,6 +2115,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1698161881}
+  - component: {fileID: 1698161882}
   m_Layer: 5
   m_Name: PolaroidFilmCount
   m_TagString: Untagged
@@ -2125,6 +2144,20 @@ RectTransform:
   m_AnchoredPosition: {x: -659.4, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 0.5}
+--- !u!114 &1698161882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1698161880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 592f0eb077efc9e43b87f30f208d8eb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
+  playerData: {fileID: 0}
 --- !u!1 &1827201634
 GameObject:
   m_ObjectHideFlags: 0
@@ -2379,7 +2412,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1895386317
 GameObject:
@@ -2767,36 +2800,6 @@ Transform:
   m_Father: {fileID: 1091531822}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2091422757
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2091422758}
-  m_Layer: 0
-  m_Name: =====TakePictureThings=====
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2091422758
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2091422757}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.4754064, y: -1.1303144, z: -3.4986255}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2115575704
 GameObject:
   m_ObjectHideFlags: 0
@@ -2892,5 +2895,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

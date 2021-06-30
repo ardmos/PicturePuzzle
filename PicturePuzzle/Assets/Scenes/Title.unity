@@ -160,6 +160,15 @@ MonoBehaviour:
   - itemName: Wood
     polaroidIMG: {fileID: 21300000, guid: 7cac1600cc85c47c5bf7155e087648bc, type: 3}
     objectIMG: {fileID: 21300000, guid: 80d7d9584e7c44c3aa42c3a1b5730295, type: 3}
+  - itemName: Tennis
+    polaroidIMG: {fileID: 21300000, guid: 6ea3e41748a1e9d4cb6296ae4b28e9fa, type: 3}
+    objectIMG: {fileID: 21300000, guid: d9cfb73e74c770546980383db0528289, type: 3}
+  - itemName: Ski
+    polaroidIMG: {fileID: 21300000, guid: 4cb77766d3400e6458fc2aa2e256c856, type: 3}
+    objectIMG: {fileID: 21300000, guid: 28d12d4b19eabde44abd4f61012866bc, type: 3}
+  - itemName: Fish
+    polaroidIMG: {fileID: 21300000, guid: 634e54a3ad7f36f418c716f6a826b3f5, type: 3}
+    objectIMG: {fileID: 21300000, guid: cc22217a1892c8a4a9fd1abb0c3dbf32, type: 3}
 --- !u!4 &251601888
 Transform:
   m_ObjectHideFlags: 0
@@ -300,6 +309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemlist: []
+  filmCount: 8
 --- !u!4 &824354714
 Transform:
   m_ObjectHideFlags: 0
@@ -375,6 +385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSceneState: 0
+  playerPosState: 0
 --- !u!4 &1070239891
 Transform:
   m_ObjectHideFlags: 0

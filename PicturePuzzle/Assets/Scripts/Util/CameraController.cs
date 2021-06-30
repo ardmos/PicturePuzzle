@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// 카메라 전환과 메인카메라에서 폴라로이드카메라영역 이동 처리를 담당하는 카메라 컨트롤러.
@@ -12,10 +13,11 @@ using UnityEngine.EventSystems;
 /// 5. 확대된 상태에서도 움직일 수 있게 
 ///
 ///
-/// 카메라 촬영 기능 만들 차례임.  잠깐 이미지 넣고 옴!
-/// 6. 촬영 기능
+/// 카메라 촬영 기능 만들 차례임.  
+/// 6. 촬영 기능 (폴라로이드 카메라 확대 화면일 시 작동.)
 ///   1. 촬영 가능 오브젝트들은 중앙에 NoticePhotoAble 이미지를 띄운다.
-///   2. 
+///   2. 촬영버튼 클릭 시 처리.
+///   3. 확대축소 기능
 /// </summary>
 
 public class CameraController : MonoBehaviour
@@ -31,8 +33,36 @@ public class CameraController : MonoBehaviour
     public GameObject polaroidAimObj;
     //폴라로이드 확대 화면 이동을 위한 포지션변수
     Vector3 beforePos = Vector3.zero, currentPos;
+    //플레이어데이타
+    PlayerData playerData;
+
+
+    //촬영기능 
+
+    //NPA들. 하이어라키상 순서대로. [0]은 테니스,  [1]은 거북이.
+    //Turtle
+    public GameObject[] npa_Turtle;
+    //Stone
+    public GameObject[] npa_Stone;
+    //Wood
+    public GameObject[] npa_Wood;
+
+    //폴라로이드 필름 카운트는 PlayerData.cs에. 
+    //배경화면 변경이 필요한 경우를 위한. 배경화면 오브젝트.
+    public SpriteRenderer backGroundImage;
+
+    //배경화면 변경시 쓰일 스프라이트 이미지들. 
+    //Turtle
+    public Sprite nonTurtleImg;
+    //Stone
+
+    //Wood
+    public Sprite nonFishImg;
+    public Animator humanAnimator;
+
     void Start()
     {
+        playerData = FindObjectOfType<PlayerData>();
         MainCameraON();
     }
 
@@ -189,5 +219,97 @@ public class CameraController : MonoBehaviour
 
 
     }
+    #endregion
+
+    #region 카메라 촬영 기능 (폴라로이드 카메라 활성시 작동하는 부분.)
+    // 1. 촬영 가능 오브젝트들은 중앙에 NoticePhotoAble (이하 NPA) 이미지를 띄운다.
+    //   1. 유니티 인스펙터를 통해 등록받은 NPA 오브젝트들을 활용. SetActive. 
+    public void ActiveNPA()
+    {
+        npa_Turtle[0].SetActive(true);
+        npa_Turtle[1].SetActive(true);
+    }
+
+    // 2. 촬영버튼 클릭 시 처리.
+    public void OnButton_TakePictureClicked()
+    {
+        //폴라로이드 필름 카운트 1 차감. 차감에 성공 했다면 촬영버튼 처리 진행. 실패했다면 이미 남은 필름이 없는것. 촬영버튼 진행 안함.
+        if (playerData.MinusPlayerFilmCount())
+        {
+            //에임 중앙과 촬영 가능 오브젝트의 중앙이 일치했는가? . 월드좌표 Distance로 계산. 10.001 이하면 일치했다고 봄. 
+
+            //그림별로 따로 체크 
+
+            //Turtle
+            if (SceneManager.GetActiveScene().name.Contains("Turtle"))
+            {
+                IsPicSuccess(npa_Turtle);
+            }
+            //Stone
+            else if (SceneManager.GetActiveScene().name.Contains("Stone"))
+            {
+                IsPicSuccess(npa_Stone);
+            }
+            //Wood
+            else if (SceneManager.GetActiveScene().name.Contains("Wood"))
+            {
+                IsPicSuccess(npa_Wood);
+            }
+
+
+               
+        }
+    }
+
+    //촬영버튼 클릭시 사진이 제대로 찍혔나 확인하는 메서드. 
+    private void IsPicSuccess(GameObject[] npa_arr)
+    {
+        foreach (var item in npa_arr)
+        {
+            if (Vector3.Distance(polaroidCamera.gameObject.transform.position, item.transform.position) <= 10.001f)
+            {
+                //일치했다면 촬영 성공
+                Debug.Log("촬영 성공" + Vector3.Distance(polaroidCamera.gameObject.transform.position, item.transform.position));
+
+                //일단 NPA의 부모 오브젝트 비활성화 시켜주고
+                item.transform.parent.gameObject.SetActive(false);
+
+
+                //Turtle
+                if (SceneManager.GetActiveScene().name.Contains("Turtle"))
+                {
+                    //turtle(npa_Turtle[1])이라면 추가적으로 배경 이미지를 NonTurtle 이미지로 변경.
+                    if (npa_Turtle[1] == item) backGroundImage.sprite = nonTurtleImg;
+                }
+                //Stone
+                else if (SceneManager.GetActiveScene().name.Contains("Stone"))
+                {
+                    //Stone
+
+                }
+                //Wood
+                else if (SceneManager.GetActiveScene().name.Contains("Wood"))
+                {
+                    //Wood
+                    //Wood(npa_Wood[0])라면 쿵야 애니메이션 재생
+                    humanAnimator.SetBool("Fall", true);
+                    //fish(npa_Wood[1])라면 추가적으로 배경 이미지를 NonFish 이미지로 변경. 
+                    if (npa_Wood[1] == item) backGroundImage.sprite = nonFishImg;
+                }               
+
+                //PlayerData에 아이템 리스트 추가. npa의 부모 오브젝트 네임을 넣어주면 됨. 
+                playerData.AddItem(item.transform.parent.gameObject.name);
+            }
+            else
+            {
+                //일치하지 않았다면 촬영 실패
+                Debug.Log("촬영 실패 Dis:" + Vector3.Distance(polaroidCamera.gameObject.transform.position, item.transform.position) + ", camera:" + polaroidCamera.gameObject.transform.position + ", obj:" + item.transform.position);
+            }
+        }
+    }
+
+    // 3. 확대축소 기능
+    
+    
     #endregion
 }
