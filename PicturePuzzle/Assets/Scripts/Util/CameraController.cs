@@ -53,10 +53,13 @@ public class CameraController : MonoBehaviour
 
     //배경화면 변경시 쓰일 스프라이트 이미지들. 
     //Turtle
+    [Header("//Turtle")]
     public Sprite nonTurtleImg;
     //Stone
-
+    [Header("//Stone")]
+    public Sprite nonStoneImg;
     //Wood
+    [Header("//Wood")]
     public Sprite nonFishImg;
     public Animator humanAnimator;
 
@@ -106,6 +109,7 @@ public class CameraController : MonoBehaviour
         mainUI.SetActive(false);
         polaroidUI.SetActive(true);
         polaroidAimObj.SetActive(false);
+        ActivateNPA();
     }
     public void MainCameraON()
     {
@@ -117,6 +121,7 @@ public class CameraController : MonoBehaviour
         mainUI.SetActive(true);
         polaroidUI.SetActive(false);
         polaroidAimObj.SetActive(true);
+        DeactivateNPA();
     }
     #endregion
 
@@ -224,10 +229,18 @@ public class CameraController : MonoBehaviour
     #region 카메라 촬영 기능 (폴라로이드 카메라 활성시 작동하는 부분.)
     // 1. 촬영 가능 오브젝트들은 중앙에 NoticePhotoAble (이하 NPA) 이미지를 띄운다.
     //   1. 유니티 인스펙터를 통해 등록받은 NPA 오브젝트들을 활용. SetActive. 
-    public void ActiveNPA()
+
+    public void DeactivateNPA()
     {
-        npa_Turtle[0].SetActive(true);
-        npa_Turtle[1].SetActive(true);
+        foreach (var item in npa_Turtle) item.SetActive(false);
+        foreach (var item in npa_Stone) item.SetActive(false);
+        foreach (var item in npa_Wood) item.SetActive(false);
+    }
+    public void ActivateNPA()
+    {
+        foreach (var item in npa_Turtle) item.SetActive(true);
+        foreach (var item in npa_Stone) item.SetActive(true);
+        foreach (var item in npa_Wood) item.SetActive(true);
     }
 
     // 2. 촬영버튼 클릭 시 처리.
@@ -241,23 +254,13 @@ public class CameraController : MonoBehaviour
             //그림별로 따로 체크 
 
             //Turtle
-            if (SceneManager.GetActiveScene().name.Contains("Turtle"))
-            {
-                IsPicSuccess(npa_Turtle);
-            }
+            if (SceneManager.GetActiveScene().name.Contains("Turtle")) IsPicSuccess(npa_Turtle);
+
             //Stone
-            else if (SceneManager.GetActiveScene().name.Contains("Stone"))
-            {
-                IsPicSuccess(npa_Stone);
-            }
+            else if (SceneManager.GetActiveScene().name.Contains("Stone")) IsPicSuccess(npa_Stone);
+
             //Wood
-            else if (SceneManager.GetActiveScene().name.Contains("Wood"))
-            {
-                IsPicSuccess(npa_Wood);
-            }
-
-
-               
+            else if (SceneManager.GetActiveScene().name.Contains("Wood")) IsPicSuccess(npa_Wood);           
         }
     }
 
@@ -285,16 +288,17 @@ public class CameraController : MonoBehaviour
                 else if (SceneManager.GetActiveScene().name.Contains("Stone"))
                 {
                     //Stone
-
+                    //stone(npa_Stone[1])이라면 추가적으로 배경 이미지를 NonStone 이미지로 변경.
+                    if (npa_Turtle[1] == item) backGroundImage.sprite = nonStoneImg;
                 }
                 //Wood
                 else if (SceneManager.GetActiveScene().name.Contains("Wood"))
                 {
                     //Wood
                     //Wood(npa_Wood[0])라면 쿵야 애니메이션 재생
-                    humanAnimator.SetBool("Fall", true);
+                    if (npa_Wood[0] == item) humanAnimator.SetBool("Fall", true);
                     //fish(npa_Wood[1])라면 추가적으로 배경 이미지를 NonFish 이미지로 변경. 
-                    if (npa_Wood[1] == item) backGroundImage.sprite = nonFishImg;
+                    else if (npa_Wood[1] == item) backGroundImage.sprite = nonFishImg;
                 }               
 
                 //PlayerData에 아이템 리스트 추가. npa의 부모 오브젝트 네임을 넣어주면 됨. 
