@@ -239,7 +239,12 @@ public class CameraController : MonoBehaviour
     public void ActivateNPA()
     {
         foreach (var item in npa_Turtle) item.SetActive(true);
-        foreach (var item in npa_Stone) item.SetActive(true);
+        
+        //Stone 씬의 경우 조금 특별. 눈이 다 사라져야 돌이 드러난다. 
+        //처음엔 스키(npa_Stone[0])만 보임.  npa_Stone[1] 돌은 스톤씬매니저에서. 활성화시켜줌.
+        npa_Stone[0].SetActive(true);
+        
+        
         foreach (var item in npa_Wood) item.SetActive(true);
     }
 
@@ -288,8 +293,17 @@ public class CameraController : MonoBehaviour
                 else if (SceneManager.GetActiveScene().name.Contains("Stone"))
                 {
                     //Stone
-                    //stone(npa_Stone[1])이라면 추가적으로 배경 이미지를 NonStone 이미지로 변경.
-                    if (npa_Turtle[1] == item) backGroundImage.sprite = nonStoneImg;
+
+                    //스톤씬은 추가적으로 눈사람의 상태를 체크해주는 과정이 필요함. 
+                    if(FindObjectOfType<StoneSceneManager>().idxcount >=4)
+                    {
+                        //현재 눈사람이 다 부숴지고 돌이 드러난 상태. 
+
+                        //stone(npa_Stone[1])이라면 추가적으로 배경 이미지를 NonStone 이미지로 변경.
+                        if (npa_Stone[1] == item) backGroundImage.sprite = nonStoneImg;
+                    }
+
+                    
                 }
                 //Wood
                 else if (SceneManager.GetActiveScene().name.Contains("Wood"))
