@@ -193,6 +193,7 @@ GameObject:
   m_Component:
   - component: {fileID: 346576040}
   - component: {fileID: 346576041}
+  - component: {fileID: 346576042}
   m_Layer: 0
   m_Name: Photo
   m_TagString: Untagged
@@ -264,6 +265,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &346576042
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346576039}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 57d9d06ef60545b48a99ad6501444a95, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &678183910
 GameObject:
   m_ObjectHideFlags: 0
@@ -454,6 +474,12 @@ MonoBehaviour:
   npa_Wood_ActiveSelf: 
   isFallTrue: 0
   isrecorded_Wood: 0
+  stage0_firstInvenArrow: 0
+  guide1done: 0
+  eBoxSuccess: 0
+  didShoot: 0
+  didcorrectObj: 0
+  didStoneScene: 0
 --- !u!4 &824354714
 Transform:
   m_ObjectHideFlags: 0
@@ -610,6 +636,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1003489096}
   - component: {fileID: 1003489097}
+  - component: {fileID: 1003489098}
   m_Layer: 0
   m_Name: "Photo\uC6A9 \uC555\uC815"
   m_TagString: Untagged
@@ -681,6 +708,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1003489098
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003489095}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 414d99212f9231a48b091a3c7c061b80, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1070239889
 GameObject:
   m_ObjectHideFlags: 0

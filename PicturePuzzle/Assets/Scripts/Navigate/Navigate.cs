@@ -12,6 +12,6 @@ public class Navigate : MonoBehaviour
     private void Start()
     {
         //modeObj.SetActive(false);
-        correctObj.SetActive(false);
+        //correctObj.SetActive(false);
     }
 }
