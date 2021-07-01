@@ -8,6 +8,14 @@ public class ForTextAppear : MonoBehaviour
 
     public void ActiveTextObj()
     {
+        //Debug.Log("======");
+        //Debug.Log(textObj.activeSelf);
+        //Debug.Log("in");
+        //Debug.Log("======");
         textObj.SetActive(true);
+        //Debug.Log(textObj.activeSelf);
+
+
+       
     }
 }
