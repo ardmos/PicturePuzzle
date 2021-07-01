@@ -29,7 +29,11 @@ public class WoodSceneManager : MonoBehaviour
         }
 
         //쿵야 상태 기록
-        playerData.isFallTrue = humanAnimator.GetBool("Fall");
+        if (!playerData.isFallTrue)
+        {
+            playerData.isFallTrue = humanAnimator.GetBool("Fall");
+        }
+ 
     }
 
 
