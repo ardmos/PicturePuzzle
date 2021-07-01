@@ -57,6 +57,31 @@ public class PlayerData : DontDestroy<PlayerData>
 
 
 
+    //네비게이션을 위한 확인용 boolean들
+
+    //다람쥐
+    //스테이지0 인벤토리가이드용 화살표
+    public bool stage0_firstInvenArrow;
+    //스테이지0 인벤토리 가이드용 
+    public bool guide1done;
+    //Ebox에 배치 성공
+    public bool eBoxSuccess; // 탭 애니메이션.
+
+    //공통. 촬영이 처음?? //일단 여기서 처리. 
+    public bool didShoot; //모드를 바꿔보세요!!
+    public bool didcorrectObj; //올바른 오브젝트를...
+
+    //거북이
+
+
+    //돌
+    //돌 씬 처음 열렸을 때.
+    public bool didStoneScene;//눈사람을 두드려보세요!
+
+    //나무
+
+
+
 
     override protected void OnAwake()
     {
@@ -70,6 +95,8 @@ public class PlayerData : DontDestroy<PlayerData>
         //itemlist.Add("Turtle");
         //itemlist.Add("Stone");
         //itemlist.Add("Wood");
+
+        
     }
 
     #region 인스펙터에서 안보이는 PlayerData 내부의 정보 확인용. 디버깅용.

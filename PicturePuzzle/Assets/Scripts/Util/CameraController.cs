@@ -63,6 +63,10 @@ public class CameraController : MonoBehaviour
     public Sprite nonFishImg;
     public Animator humanAnimator;
 
+
+    //가이드용. 
+    public GameObject correctGuidObj;
+
     void Start()
     {
         playerData = FindObjectOfType<PlayerData>();
@@ -98,6 +102,26 @@ public class CameraController : MonoBehaviour
     }
     public void PolaroidCameraON()
     {
+        try
+        {
+            //올바른 오브젝트 가이드.
+            //가이드는 한 번만 나와야하니까 
+            if (FindObjectOfType<PlayerData>().didcorrectObj == true)
+            {
+                gameObject.SetActive(false);
+            }
+            else
+            {
+                gameObject.SetActive(true);
+                FindObjectOfType<PlayerData>().didcorrectObj = true;
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.Log(ex.Message);
+        }
+        
+
         //위치는 PolaroidAimObj의 위치. 단 z좌표는 -10 유지
         polaroidCamera.gameObject.transform.position = new Vector3(polaroidAimObj.transform.position.x, polaroidAimObj.transform.position.y, -10);
 

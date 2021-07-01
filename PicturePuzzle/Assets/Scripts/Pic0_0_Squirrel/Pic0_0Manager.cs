@@ -21,6 +21,26 @@ public class Pic0_0Manager : MonoBehaviour
     //다람쥐 프리팹
     public GameObject squirrelPref;
 
+    // 종료시킬 도움말 오브젝트 0번 가이드
+    public GameObject stage0_InventoryGuideObj;
+    // 1번 가이드
+    public GameObject stage0_InventoryGuideObj1;
+
+    //더블탭
+    public GameObject stage0_DoubleTabGuide;
+
+    //리트라이 버튼 애니메이터
+    public Animator retryBtnAnimator;
+
+    private void Start()
+    {
+        //처음엔 가이드 비활성화. 인벤토리 가이드들.
+        stage0_InventoryGuideObj.SetActive(false);
+        stage0_InventoryGuideObj1.SetActive(false);
+        //더블탭가이드
+        stage0_DoubleTabGuide.SetActive(false);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -139,6 +159,8 @@ public class Pic0_0Manager : MonoBehaviour
                     Debug.Log(curSquirrelPos + "번째 실패 애니메이션을 실행합니다. ");
                     //실패 애니메이션 재생
                     FindObjectOfType<Squirrel>().SquirrelToEBox0F();
+                    //리트라이 버튼 애님 시작
+                    retryBtnAnimator.SetBool("Move", true);
                 }
                 break;
             case 1:               
@@ -155,6 +177,8 @@ public class Pic0_0Manager : MonoBehaviour
                     Debug.Log(curSquirrelPos + "번째 실패 애니메이션을 실행합니다. ");
                     //실패 애니메이션 재생
                     FindObjectOfType<Squirrel>().SquirrelToEBox1F();
+                    //리트라이 버튼 애님 시작
+                    retryBtnAnimator.SetBool("Move", true);
                 }
                 break;
             case 2: 
@@ -165,12 +189,16 @@ public class Pic0_0Manager : MonoBehaviour
                     Debug.Log("다음 목표인 " + curSquirrelPos + "번째 EBox는 Full 입니다. " + curSquirrelPos + "번째 성공 애니메이션을 실행합니다.");
                     //성공
                     FindObjectOfType<Squirrel>().SquirrelToEBox2();
+                    //리트라이 버튼 애님 시작
+                    retryBtnAnimator.SetBool("Move", true);
                 }
                 else
                 {
                     Debug.Log(curSquirrelPos + "번째 실패 애니메이션을 실행합니다. ");
                     //실패 애니메이션 재생
                     FindObjectOfType<Squirrel>().SquirrelToEBox2F();
+                    //리트라이 버튼 애님 시작
+                    retryBtnAnimator.SetBool("Move", true);
                 }
                 break;
             case 3:
@@ -216,6 +244,9 @@ public class Pic0_0Manager : MonoBehaviour
 
         //인벤토리 초기화. (현재 씬 열릴 때 갖고있었던대로.)
         FindObjectOfType<InventoryController>().ResetInventory();
+
+        //리트라이 버튼 애님 종료
+        retryBtnAnimator.SetBool("Move", false);
     }
     #endregion
 }

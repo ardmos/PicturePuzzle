@@ -29,7 +29,9 @@ public class InventoryController : MonoBehaviour
     public void OpenInventory()
 	{
 		inventoryObj.SetActive(true);
-	}
+        inventoryObj.GetComponent<Stage0_InventoryGuide>().InventoryIsOpened();
+
+    }
     public void CloseInventory()
 	{
 		inventoryObj.SetActive(false);
@@ -66,7 +68,6 @@ public class InventoryController : MonoBehaviour
     /// </summary>
     public void MakeInventoryItems()
     {
-
         //플레이어가 보유중인 아이템 이름이 담긴 리스트를 받아와서
         playerData = FindObjectOfType<PlayerData>();
         List<string> itemNameList = playerData.GetItemList();

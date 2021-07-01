@@ -21,6 +21,9 @@ public class EBoxController : MonoBehaviour
     [SerializeField]
     int hlEBoxIndx = -1;
 
+    //더블탭 가이드를 위한 
+    public GameObject doubleTabGuidObj;
+
     void Start(){
         //Ebox들 초기화. 
         InitializeEBoxes();
@@ -189,6 +192,15 @@ public class EBoxController : MonoBehaviour
                     EBoxes[hlEBoxIndx].GetComponent<EBox>().SetFull(true);
                     //드래그아이템 삭제
                     Destroy(dragObject);
+
+                    //더블탭 튜토리얼
+                    //튜토리얼을 진행한적이 없는가?
+                    if(FindObjectOfType<PlayerData>().eBoxSuccess == false)
+                    {
+                        //더블탭 튜토리얼 진행. 
+                        doubleTabGuidObj.SetActive(true);
+                        FindObjectOfType<PlayerData>().eBoxSuccess = true;
+                    }
                 }
             }                      
         }
