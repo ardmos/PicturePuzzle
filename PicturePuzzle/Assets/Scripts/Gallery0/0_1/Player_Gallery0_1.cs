@@ -62,6 +62,7 @@ public class Player_Gallery0_1 : MonoBehaviour
     //앞모습 이미지 적용을 위한 spriteRenderer 컴포넌트.
     SpriteRenderer spriteRenderer;
     //MoveTowards를 위한
+    [SerializeField]
     string whereTo;
     //이동시에 이동 거리 계산을 위한 speed, step.
     float speed, step;
@@ -138,7 +139,8 @@ public class Player_Gallery0_1 : MonoBehaviour
                 //현 위치 대기
                 break;
             default:
-                Debug.Log("whereTo의 값이 " + whereTo + " 입니다. 확인이 필요합니다.");
+                whereTo = "Wait";
+                //Debug.Log("whereTo의 값이 " + whereTo + " 입니다. 확인이 필요합니다.");
                 break;
         }
     }

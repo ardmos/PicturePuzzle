@@ -386,6 +386,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 09d7e2f57935af94cb66d231cdb76f4d, type: 3}
   - {fileID: 21300000, guid: c946b550ce8123948932b008cb5c5fd0, type: 3}
   - {fileID: 21300000, guid: e05437cd6a54f85469842dbb118c7dc8, type: 3}
+  idxcount: 0
   bgsprite: {fileID: 1381021405}
   snowPopAnimator: {fileID: 1031459698}
 --- !u!4 &344516546
@@ -1076,6 +1077,7 @@ GameObject:
   m_Component:
   - component: {fileID: 894542157}
   - component: {fileID: 894542156}
+  - component: {fileID: 894542158}
   m_Layer: 0
   m_Name: NPA_Stone
   m_TagString: Untagged
@@ -1122,7 +1124,7 @@ SpriteRenderer:
   m_SortingLayerID: -1763680991
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f29ec8f631c254dcb8e9c7d0e0cb9f93, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6a7d31a8f94713d4998861d659b29ce1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1142,11 +1144,30 @@ Transform:
   m_GameObject: {fileID: 894542155}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 285575061}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &894542158
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894542155}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f2d30e91e71126e46b011378ce6f3927, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &909212006
 GameObject:
   m_ObjectHideFlags: 0
@@ -2230,6 +2251,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1579792248}
   - component: {fileID: 1579792249}
+  - component: {fileID: 1579792250}
   m_Layer: 0
   m_Name: NPA_Ski
   m_TagString: Untagged
@@ -2246,7 +2268,7 @@ Transform:
   m_GameObject: {fileID: 1579792247}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1568523783}
   m_RootOrder: 0
@@ -2290,7 +2312,7 @@ SpriteRenderer:
   m_SortingLayerID: -1763680991
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f29ec8f631c254dcb8e9c7d0e0cb9f93, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6a7d31a8f94713d4998861d659b29ce1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2301,6 +2323,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1579792250
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1579792247}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f2d30e91e71126e46b011378ce6f3927, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1586703536
 GameObject:
   m_ObjectHideFlags: 0

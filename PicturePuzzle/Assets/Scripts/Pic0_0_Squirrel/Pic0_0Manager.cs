@@ -94,6 +94,8 @@ public class Pic0_0Manager : MonoBehaviour
         /// 현재 위치를 저장할 num값 하나 필요. 
         /// 이 값을 기준으로 진행함.
         /// 
+        /// //일단 시도 시작하면 말풍선은 비활성화. 
+        /// 
         /// 현재 위치값에 따른 처리.
         /// 
         /// 1. 다음 이동할 EBox의 클리어상태 확인. (클리어상태는 EBox의 Full로 확인.)
@@ -103,6 +105,17 @@ public class Pic0_0Manager : MonoBehaviour
         /// 
         /// 5. 실행하면 EBox 점선, 핀들 모두 비활성화. 상태 LightsOut
         /// </summary> 
+
+        //말풍선 비활성화
+        try
+        {
+            FindObjectOfType<Squirrel>().transform.GetChild(0).gameObject.SetActive(false);
+        }
+        catch (System.Exception ex)
+        {
+            Debug.Log(ex.Message);
+        }
+        
 
         GameObject[] EBoxes = FindObjectOfType<EBoxController>().EBoxes;
 
@@ -175,7 +188,8 @@ public class Pic0_0Manager : MonoBehaviour
 
     #region 재시도
     public void ReTry()
-    {
+    {        
+
         //클리어시에는 재시도 버튼 비활성화.
         if (curSquirrelPos == 3)
         {

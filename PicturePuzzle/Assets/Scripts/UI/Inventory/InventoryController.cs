@@ -38,7 +38,7 @@ public class InventoryController : MonoBehaviour
     #region 인벤토리 초기화
     public void ResetInventory()
     {
-        // 인벤토리 초기화 메서드.
+        // 인벤토리 초기화 메서드. (재도전, 아이템 습득시 호출)
 
         //   1.인벤토리 아이템들 전부 삭제
         for(int n = inventoryGridLayoutObj.transform.childCount - 1; n>=0; n--)

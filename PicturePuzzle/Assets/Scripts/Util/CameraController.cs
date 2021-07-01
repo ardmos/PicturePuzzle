@@ -239,10 +239,11 @@ public class CameraController : MonoBehaviour
     public void ActivateNPA()
     {
         foreach (var item in npa_Turtle) item.SetActive(true);
-        
+
         //Stone 씬의 경우 조금 특별. 눈이 다 사라져야 돌이 드러난다. 
         //처음엔 스키(npa_Stone[0])만 보임.  npa_Stone[1] 돌은 스톤씬매니저에서. 활성화시켜줌.
-        npa_Stone[0].SetActive(true);
+        if (SceneManager.GetActiveScene().name.Contains("Stone"))
+            npa_Stone[0].SetActive(true);
         
         
         foreach (var item in npa_Wood) item.SetActive(true);
@@ -317,6 +318,8 @@ public class CameraController : MonoBehaviour
 
                 //PlayerData에 아이템 리스트 추가. npa의 부모 오브젝트 네임을 넣어주면 됨. 
                 playerData.AddItem(item.transform.parent.gameObject.name);
+                //그리고 인벤토리 갱신
+                FindObjectOfType<InventoryController>().ResetInventory();
             }
             else
             {

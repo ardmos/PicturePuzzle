@@ -966,6 +966,7 @@ GameObject:
   m_Component:
   - component: {fileID: 611126879}
   - component: {fileID: 611126880}
+  - component: {fileID: 611126881}
   m_Layer: 0
   m_Name: NPA_Wood
   m_TagString: Untagged
@@ -982,7 +983,7 @@ Transform:
   m_GameObject: {fileID: 611126878}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1354625032}
   m_RootOrder: 0
@@ -1026,7 +1027,7 @@ SpriteRenderer:
   m_SortingLayerID: -1763680991
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f29ec8f631c254dcb8e9c7d0e0cb9f93, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6a7d31a8f94713d4998861d659b29ce1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1037,6 +1038,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &611126881
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611126878}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f2d30e91e71126e46b011378ce6f3927, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &613771814
 GameObject:
   m_ObjectHideFlags: 0
@@ -1764,6 +1784,7 @@ MonoBehaviour:
   - {fileID: 1885523354}
   backGroundImage: {fileID: 2081462375}
   nonTurtleImg: {fileID: 0}
+  nonStoneImg: {fileID: 0}
   nonFishImg: {fileID: 21300000, guid: 443de35e7fe63a24b916ede849617aa7, type: 3}
   humanAnimator: {fileID: 339830923}
 --- !u!4 &1240696759
@@ -2671,6 +2692,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1885523355}
   - component: {fileID: 1885523356}
+  - component: {fileID: 1885523357}
   m_Layer: 0
   m_Name: NPA_Fish
   m_TagString: Untagged
@@ -2687,7 +2709,7 @@ Transform:
   m_GameObject: {fileID: 1885523354}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 2058725658}
   m_RootOrder: 0
@@ -2731,7 +2753,7 @@ SpriteRenderer:
   m_SortingLayerID: -1763680991
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f29ec8f631c254dcb8e9c7d0e0cb9f93, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6a7d31a8f94713d4998861d659b29ce1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2742,6 +2764,70 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1885523357
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885523354}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f2d30e91e71126e46b011378ce6f3927, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &1960854746
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1960854748}
+  - component: {fileID: 1960854747}
+  m_Layer: 0
+  m_Name: WoodSceneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1960854747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960854746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ff678801521de1439b39475b235dbae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgsprite: {fileID: 2081462375}
+  humanAnimator: {fileID: 339830923}
+--- !u!4 &1960854748
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960854746}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2058725657
 GameObject:
   m_ObjectHideFlags: 0

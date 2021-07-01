@@ -38,7 +38,14 @@ public class AndroidEscapeBtnController : MonoBehaviour
                     else
                     {
                         SceneManager.LoadScene("Gallery0_1");
-                    }                    
+
+                    //각 그림 상태 저장을 위한 메서드 호출. 
+                    if (curSceneName.Contains("Turtle")) FindObjectOfType<TurtleSceneManager>().SendDataToPlayerData();
+
+                    else if (curSceneName.Contains("Stone")) FindObjectOfType<StoneSceneManager>().SendDataToPlayerData();
+
+                    else if (curSceneName.Contains("Wood")) FindObjectOfType<WoodSceneManager>().SendDataToPlayerData();
+                }                    
                 }
             }
         //}
