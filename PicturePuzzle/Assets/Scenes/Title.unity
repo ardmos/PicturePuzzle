@@ -183,6 +183,71 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &300131079
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 300131080}
+  - component: {fileID: 300131082}
+  - component: {fileID: 300131081}
+  m_Layer: 0
+  m_Name: ForTextAppear
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &300131080
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300131079}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1214563289}
+  m_Father: {fileID: 1271587575}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &300131081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300131079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a52036f52d7726e4f83930cb5374e996, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textObj: {fileID: 1214563288}
+--- !u!95 &300131082
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300131079}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3023cd58eee681049a42c6a4c76c221a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &346576039
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,6 +259,7 @@ GameObject:
   - component: {fileID: 346576040}
   - component: {fileID: 346576041}
   - component: {fileID: 346576042}
+  - component: {fileID: 346576043}
   m_Layer: 0
   m_Name: Photo
   m_TagString: Untagged
@@ -284,6 +350,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &346576043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346576039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba261c9c3b2a3dd459b4f811c7b9d7cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  "photo\uC6A9\uC555\uC815": {fileID: 1003489095}
 --- !u!1 &678183910
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,6 +469,7 @@ GameObject:
   m_Component:
   - component: {fileID: 820422651}
   - component: {fileID: 820422652}
+  - component: {fileID: 820422653}
   m_Layer: 0
   m_Name: TwinkleL
   m_TagString: Untagged
@@ -432,6 +512,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &820422653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820422650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a6054fa227921e419ee78e7f5ed57f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  "\uAC8C\uC784\uC744\uC2DC\uC791\uD558\uB824\uBA74": {fileID: 879212196}
 --- !u!1 &824354712
 GameObject:
   m_ObjectHideFlags: 0
@@ -637,6 +730,7 @@ GameObject:
   - component: {fileID: 1003489096}
   - component: {fileID: 1003489097}
   - component: {fileID: 1003489098}
+  - component: {fileID: 1003489099}
   m_Layer: 0
   m_Name: "Photo\uC6A9 \uC555\uC815"
   m_TagString: Untagged
@@ -727,6 +821,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1003489099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003489095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ca87aee2d2e124499bd32eb82850bd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forTextAppear: {fileID: 300131079}
 --- !u!1 &1070239889
 GameObject:
   m_ObjectHideFlags: 0
@@ -849,6 +956,7 @@ GameObject:
   - component: {fileID: 1214563289}
   - component: {fileID: 1214563291}
   - component: {fileID: 1214563290}
+  - component: {fileID: 1214563292}
   m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
@@ -863,14 +971,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1214563288}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -3.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 820422651}
   - {fileID: 2099273200}
-  m_Father: {fileID: 1271587575}
-  m_RootOrder: 2
+  m_Father: {fileID: 300131080}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1214563290
 Animator:
@@ -941,6 +1049,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1214563292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214563288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b28604a0a16c0264db319197fdc98cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  twinkleL: {fileID: 820422650}
+  twinkleR: {fileID: 2099273199}
 --- !u!1 &1243535743
 GameObject:
   m_ObjectHideFlags: 0
@@ -1032,6 +1154,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1271587575}
   - component: {fileID: 1271587576}
+  - component: {fileID: 1271587577}
   m_Layer: 0
   m_Name: BackGround
   m_TagString: Untagged
@@ -1052,7 +1175,7 @@ Transform:
   m_Children:
   - {fileID: 346576040}
   - {fileID: 1003489096}
-  - {fileID: 1214563289}
+  - {fileID: 300131080}
   - {fileID: 879212197}
   m_Father: {fileID: 1971441155}
   m_RootOrder: 0
@@ -1107,6 +1230,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1271587577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271587574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2de74d6b5020df458749dceaa3fde74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  photo: {fileID: 346576039}
+  "photo\uC6A9\uC555\uC815": {fileID: 1003489095}
+  textAppear: {fileID: 300131079}
+  text: {fileID: 1214563288}
+  twinkleL: {fileID: 820422650}
+  twinkleR: {fileID: 2099273199}
+  "\uAC8C\uC784\uC744\uC2DC\uC791\uD558\uB824\uBA74": {fileID: 879212196}
 --- !u!1 &1449049889
 GameObject:
   m_ObjectHideFlags: 0
@@ -1251,7 +1393,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 23595e2c5591f6b4facc03fef68071d9, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.8281363, b: 0.6179246, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1588,8 +1730,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2099273199}
-  m_LocalRotation: {x: 0, y: 0, z: -0.29995665, w: 0.95395285}
-  m_LocalPosition: {x: 11.6, y: -0.4, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0.29995665, w: 0.95395285}
+  m_LocalPosition: {x: 11.6, y: -0.4000001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1214563289}
@@ -1654,7 +1796,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 23595e2c5591f6b4facc03fef68071d9, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.97830784, b: 0.5801887, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
