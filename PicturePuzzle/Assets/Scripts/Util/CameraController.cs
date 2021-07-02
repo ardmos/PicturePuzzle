@@ -67,6 +67,10 @@ public class CameraController : MonoBehaviour
     //가이드용. 
     public GameObject correctGuidObj;
 
+
+    //촬영가능 범위 dis
+    public float dis = 10.01f;
+
     void Start()
     {
         playerData = FindObjectOfType<PlayerData>();
@@ -283,7 +287,7 @@ public class CameraController : MonoBehaviour
     {
         foreach (var item in npa_arr)
         {
-            if (Vector3.Distance(polaroidCamera.gameObject.transform.position, item.transform.position) <= 10.001f)
+            if (Vector3.Distance(polaroidCamera.gameObject.transform.position, item.transform.position) <= dis)
             {
                 //일치했다면 촬영 성공
                 Debug.Log("촬영 성공" + Vector3.Distance(polaroidCamera.gameObject.transform.position, item.transform.position));
