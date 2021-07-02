@@ -54,3 +54,6 @@ TagManager:
   - name: PolaroidAim
     uniqueID: 2531286305
     locked: 0
+  - name: Effect
+    uniqueID: 2353602465
+    locked: 0

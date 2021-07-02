@@ -264,6 +264,9 @@ public class CameraController : MonoBehaviour
     // 2. 촬영버튼 클릭 시 처리.
     public void OnButton_TakePictureClicked()
     {
+        //Flash 이펙트. 
+        FindObjectOfType<CameraFlash>().ActiveCameraFlash();
+
         //폴라로이드 필름 카운트 1 차감. 차감에 성공 했다면 촬영버튼 처리 진행. 실패했다면 이미 남은 필름이 없는것. 촬영버튼 진행 안함.
         if (playerData.MinusPlayerFilmCount())
         {
