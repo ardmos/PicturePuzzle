@@ -45,7 +45,7 @@ public class AndroidEscapeBtnController : MonoBehaviour
                     else if (curSceneName.Contains("Stone")) FindObjectOfType<StoneSceneManager>().SendDataToPlayerData();
 
                     else if (curSceneName.Contains("Wood")) FindObjectOfType<WoodSceneManager>().SendDataToPlayerData();
-                }                    
+                    }                    
                 }
             }
         //}

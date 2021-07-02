@@ -11,6 +11,8 @@ public class DoubleTab : MonoBehaviour
     //까만화면 눌리면 종료. 
     public void OnScreenClicked()
     {
+        //더블탭 인식을 위해서 여기선 특별히 더블탭 기능을 실행해줌. 
+        FindObjectOfType<Pic0_0Manager>().Try();
         gameObject.SetActive(false);
     }
 
