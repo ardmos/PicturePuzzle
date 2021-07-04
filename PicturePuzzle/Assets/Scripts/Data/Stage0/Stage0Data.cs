@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 /// <summary>
@@ -46,7 +47,9 @@ public class Stage0Data : DontDestroy<Stage0Data>
                 m_Display = GameObject.Find("Cube").GetComponent<MeshRenderer>();
                 m_Display.material.mainTexture = texture;
             //}
-                
+
+
+            GameObject.Find("RawImage").GetComponent<RawImage>().texture = texture;
 
 
 
