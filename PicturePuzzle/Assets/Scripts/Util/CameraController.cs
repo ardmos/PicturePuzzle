@@ -295,6 +295,9 @@ public class CameraController : MonoBehaviour
                 //일치했다면 촬영 성공
                 Debug.Log("촬영 성공" + Vector3.Distance(polaroidCamera.gameObject.transform.position, item.transform.position));
 
+                //성공했으니까 성공 애니메이션 실행시켜주고 
+                FindObjectOfType<ObjMove>().StartMoveToInven();
+
                 //일단 NPA의 부모 오브젝트 비활성화 시켜주고
                 item.transform.parent.gameObject.SetActive(false);
 
