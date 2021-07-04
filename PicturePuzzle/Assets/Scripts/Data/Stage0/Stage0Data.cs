@@ -11,4 +11,11 @@ public class Stage0Data : DontDestroy<Stage0Data>
 {
     public Texture squirrel;
     public Sprite sprite;
+
+
+    public void SetSprite(Sprite img)
+    {
+        sprite = img;
+    }
+
 }

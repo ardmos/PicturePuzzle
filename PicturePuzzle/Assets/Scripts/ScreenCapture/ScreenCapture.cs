@@ -10,6 +10,7 @@ public class ScreenCapture : MonoBehaviour
     {
         //string path = Application.persistentDataPath + "\\squirrelCap.jpg";
         string path = "Assets/Resources/squirrelCap.jpg";
+        //string path =  "/squirrelCap.jpg";
         Debug.Log(path);
 
         StartCoroutine(SaveScreeJpg(path));
