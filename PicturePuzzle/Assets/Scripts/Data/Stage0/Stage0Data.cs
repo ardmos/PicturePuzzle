@@ -10,51 +10,35 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class Stage0Data : DontDestroy<Stage0Data>
 {
-    public SpriteRenderer squirrel;
-    public Sprite sprite;
+    //Textture를 통해 현재 그림의 상태를 갤러리에 띄운다.
+    public Texture texture0;
 
 
-    //Textture버전
-    public Texture texture;
-    public Renderer m_Display;
 
-    public void SetSprite(Sprite img)
-    {
-        sprite = img;
-    }
-
-
-    #region 인스펙터에서 안보이는 PlayerData 내부의 정보 확인용. 디버깅용.
+    #region 인스펙터에서 안보이는 내부의 정보 확인용. 디버깅용.
     void OnEnable()
     {
         // 씬 매니저의 sceneLoaded에 체인을 건다.
         SceneManager.sceneLoaded += OnSceneLoaded;
-
     }
 
     // 체인을 걸어서 이 함수는 매 씬마다 호출된다.
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        //Debug.Log(npa_Stone_ActiveSelf.Length);
-        //for (int i = 0; i < npa_Stone_ActiveSelf.Length; i++)
-        //{
-        //    Debug.Log(i+", "+npa_Stone_ActiveSelf[i]);
-        //}
         if (SceneManager.GetActiveScene().name.Contains("Gallery0_0"))
         {
-            //if (m_Display != null)
-            //{
-                m_Display = GameObject.Find("Cube").GetComponent<MeshRenderer>();
-                m_Display.material.mainTexture = texture;
-            //}
+            //그림씬으로부터 전달받은 텍스쳐가 있는 경우에만.
+            if (texture0 != null)
+            {
+                GameObject.Find("SquirrelPic").GetComponent<RawImage>().enabled = true;
+                GameObject.Find("SquirrelPic").GetComponent<RawImage>().texture = texture0;
+            }
+            //없으면 텍스쳐 끄기
+            else GameObject.Find("SquirrelPic").GetComponent<RawImage>().enabled = false;
+        }
+        else if (SceneManager.GetActiveScene().name.Contains("Gallery0_1"))
+        {
 
-
-            GameObject.Find("RawImage").GetComponent<RawImage>().texture = texture;
-
-
-
-            //squirrel = GameObject.Find("Test").GetComponent<SpriteRenderer>();
-            //squirrel.sprite = sprite;
         }
     }
 

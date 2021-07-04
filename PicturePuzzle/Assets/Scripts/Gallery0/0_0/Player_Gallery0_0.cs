@@ -59,6 +59,12 @@ public class Player_Gallery0_0 : MonoBehaviour
         animator.SetBool("EntryFrom0_1", true);
     }
 
+    public void StartToGallery0_1Anim()
+    {
+        //Gallery0_1로 이동.
+        animator.SetBool("ToGallery0_1", true);
+    }
+
     public void StartStandAnim()
     {
         //제자리에 세워두기. 그림보고 나오면 제자리에. 
@@ -67,14 +73,21 @@ public class Player_Gallery0_0 : MonoBehaviour
 
     public void StartExitAnim()
     {
-        //퇴장 애니메이션 실행
+        //퇴장 애니메이션 실행. Title로.
         //씬 이동 전에 캐릭터 애니메이션. 애니메이션이 끝나면 애니메이션 이벤트 컨트롤러로 씬 이동이 호출됨. 
         animator.SetBool("Exit", true);
     }
 
+
+
     public void SceneTransferTo0_1()
     {
-        //Exit애니메이션의 이벤트 컨트롤러로 호출됨.
+        //ToGallery0_1애니메이션의 이벤트 컨트롤러로 호출됨.
         FindObjectOfType<Galler0_0Manager>().To1From0();
+    }
+    public void SceneTransferToTitle()
+    {
+        //Exit애니메이션의 이벤트 컨트롤러로 호출됨.
+        FindObjectOfType<Galler0_0Manager>().ToTitleFrom0();
     }
 }

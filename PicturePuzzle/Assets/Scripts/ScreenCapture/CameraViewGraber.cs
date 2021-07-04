@@ -48,7 +48,7 @@ public class CameraViewGraber : MonoBehaviour
 
                 //Give your GameObject with the renderer this texture
                 //m_Display.material.mainTexture = texture;
-                FindObjectOfType<Stage0Data>().texture = texture;
+                FindObjectOfType<Stage0Data>().texture0 = texture;
                 //m_Display.sprite = Sprite.Create(texture, new Rect(0, 0, Screen.width/2, Screen.height/2), new Vector2(0.5f, 0.5f));
             //}
             //Reset the grab state
