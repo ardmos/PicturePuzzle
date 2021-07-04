@@ -13,7 +13,7 @@ public class CameraViewGraber : MonoBehaviour
 
     // The "m_Display" is the GameObject whose Texture will be set to the captured image.
     //public Renderer m_Display;
-    public SpriteRenderer m_Display;
+    public Renderer m_Display;    
 
     private void Update()
     {
@@ -33,10 +33,10 @@ public class CameraViewGraber : MonoBehaviour
             texture.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0, false);
             texture.Apply();
             //Check that the display field has been assigned in the Inspector
-            if (m_Display == null)
-            {
+            //if (m_Display != null)
+            //{
                 //byte[] bytes = texture.EncodeToPNG();
-                
+
                 //string path = "Assets/Resources/" + "cap2" + ".png";
                 //string path = Application.persistentDataPath + "/cap1" + ".png";
 
@@ -44,12 +44,13 @@ public class CameraViewGraber : MonoBehaviour
                 //알아서 만들고 쓰고 닫고.  이미 존재하면 덮어쓰고.
                 //System.IO.File.WriteAllBytes(path, bytes);
 
-                FindObjectOfType<Stage0Data>().SetSprite(Sprite.Create(texture, new Rect(0, 0, Screen.width / 2, Screen.height / 2), new Vector2(0.5f, 0.5f)));
-            }
-            //Give your GameObject with the renderer this texture
-            //m_Display.material.mainTexture = texture;
-            //m_Display.sprite = Sprite.Create(texture, new Rect(0, 0, Screen.width/2, Screen.height/2), new Vector2(0.5f, 0.5f));
+                //FindObjectOfType<Stage0Data>().SetSprite(Sprite.Create(texture, new Rect(0, 0, Screen.width / 2, Screen.height / 2), new Vector2(0.5f, 0.5f)));
 
+                //Give your GameObject with the renderer this texture
+                //m_Display.material.mainTexture = texture;
+                FindObjectOfType<Stage0Data>().texture = texture;
+                //m_Display.sprite = Sprite.Create(texture, new Rect(0, 0, Screen.width/2, Screen.height/2), new Vector2(0.5f, 0.5f));
+            //}
             //Reset the grab state
             grab = false;
         }

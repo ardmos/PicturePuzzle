@@ -12,6 +12,11 @@ public class Stage0Data : DontDestroy<Stage0Data>
     public SpriteRenderer squirrel;
     public Sprite sprite;
 
+
+    //Textture버전
+    public Texture texture;
+    public Renderer m_Display;
+
     public void SetSprite(Sprite img)
     {
         sprite = img;
@@ -36,8 +41,17 @@ public class Stage0Data : DontDestroy<Stage0Data>
         //}
         if (SceneManager.GetActiveScene().name.Contains("Gallery0_0"))
         {
-            squirrel = GameObject.Find("Test").GetComponent<SpriteRenderer>();
-            squirrel.sprite = sprite;
+            //if (m_Display != null)
+            //{
+                m_Display = GameObject.Find("Cube").GetComponent<MeshRenderer>();
+                m_Display.material.mainTexture = texture;
+            //}
+                
+
+
+
+            //squirrel = GameObject.Find("Test").GetComponent<SpriteRenderer>();
+            //squirrel.sprite = sprite;
         }
     }
 
