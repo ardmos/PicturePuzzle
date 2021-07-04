@@ -27,14 +27,30 @@ public class ObjMove : MonoBehaviour
     //부모가 되어줄 캔버스 오브젝트.
     public GameObject canvas;
 
+    //둘 중 어떤 애니메이션을 실행시킬지 결정하는 변수
+    public string str;
 
+    #region ToInven
     public void StartMoveToInven()
     {
+        str = "ToInven";
         StartCoroutine(GenerateThreeObj());
+        
     }
+    #endregion
 
-
-
+    #region ToEBox2
+    public void StartMoveToEBox2()
+    {
+        str = "ToEBox2";
+        StartCoroutine(GenerateThreeObj_ForDrag());
+       
+    }
+    public void StopMoveToEBox2()
+    {
+        StopAllCoroutines();
+    }
+    #endregion
 
     //Canvas 밑에 오브젝트를 만드는 부분
     private void MoveToInvenObjGenerator()
@@ -46,9 +62,9 @@ public class ObjMove : MonoBehaviour
     //이동을 시작하는 부분  2, 1, 0 순서. 
     private void StartMoveAnim(int layer)
     {
-        canvas.transform.GetChild(layer).gameObject.GetComponent<Animator>().SetBool("ToInven", true);
+        canvas.transform.GetChild(layer).gameObject.GetComponent<Animator>().SetBool(str, true);
     }
-
+    
 
     IEnumerator GenerateThreeObj()
     {
@@ -63,5 +79,23 @@ public class ObjMove : MonoBehaviour
         StartMoveAnim(0);
     }
 
+    IEnumerator GenerateThreeObj_ForDrag()
+    {
+        while (true)
+        {
+            MoveToInvenObjGenerator();
+            MoveToInvenObjGenerator();
+            MoveToInvenObjGenerator();
+
+            StartMoveAnim(2);
+            yield return new WaitForSeconds(0.03f);
+            StartMoveAnim(1);
+            yield return new WaitForSeconds(0.03f);
+            StartMoveAnim(0);
+
+            yield return new WaitForSeconds(0.5f);
+        }
+        
+    }
 
 }

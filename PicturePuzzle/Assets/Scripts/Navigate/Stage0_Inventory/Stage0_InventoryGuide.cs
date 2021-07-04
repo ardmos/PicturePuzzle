@@ -16,9 +16,9 @@ using UnityEngine;
 
 public class Stage0_InventoryGuide : MonoBehaviour
 {
-    // 종료시킬 도움말 오브젝트 0번 가이드
+    // 종료시킬 도움말 오브젝트 0번 가이드_TakePic
     public GameObject stage0_InventoryGuideObj;
-    // 1번 가이드
+    // 1번 가이드_드래그
     public GameObject stage0_InventoryGuideObj1;
 
     // 자식을 확인할 그리드 레이아웃
@@ -49,19 +49,30 @@ public class Stage0_InventoryGuide : MonoBehaviour
             {
                 //있으면 1번 가이드.
                 stage0_InventoryGuideObj1.SetActive(true);
+                //드래그 가이드 애니메이션. 
+                FindObjectOfType<ObjMove>().StartMoveToEBox2();
                 //근데 1번 가이드의 경우 한 번만 떠야하니까 
                 FindObjectOfType<PlayerData>().guide1done = true;
             }            
         }
     }
 
+
+    //TakePic 가이드 종료
     public void OnScreenClicked()
     {
         stage0_InventoryGuideObj.SetActive(false);
     }
+
+
+    //드래그 가이드 종료
     public void OnScreenClicked1()
     {
+        //애니메이션 종료.
+        FindObjectOfType<ObjMove>().StopMoveToEBox2();
+
         stage0_InventoryGuideObj1.SetActive(false);
+
     }
 
 }
