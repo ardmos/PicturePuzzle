@@ -37,15 +37,15 @@ public class Stage0Data : DontDestroy<Stage0Data>
         {
             if (sprite_Turtle != null)
             {
-                GameObject.Find("TurtlePic").GetComponent<SpriteRenderer>().sprite = sprite_Turtle;
+                //GameObject.Find("TurtlePic").GetComponent<SpriteRenderer>().sprite = sprite_Turtle;
             }
             if (sprite_Stone != null)
             {
-                GameObject.Find("StonePic").GetComponent<SpriteRenderer>().sprite = sprite_Stone;
+                //GameObject.Find("StonePic").GetComponent<SpriteRenderer>().sprite = sprite_Stone;
             }
             if (sprite_Wood != null)
             {
-                GameObject.Find("WoodPic").GetComponent<SpriteRenderer>().sprite = sprite_Wood;
+                //GameObject.Find("WoodPic").GetComponent<SpriteRenderer>().sprite = sprite_Wood;
             }
         }
     }
