@@ -121,6 +121,14 @@ public class EBox : MonoBehaviour
     }
     #endregion
 
+    #region 배치 성공 애니메이션. 샤라락~ 파칭!
+    public void StartSetSuccessAnim()
+    {
+
+    }
+    #endregion
+
+
 
     ///
     ///Stone인 경우 호출되는 부분.  시간 지나면 가라앉아요! 

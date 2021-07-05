@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// 움직이는 아이콘 이미지 컨트롤러. 
@@ -59,9 +60,26 @@ public class ObjMove : MonoBehaviour
         gameObject.transform.SetParent(canvas.transform);
     }
 
-    //이동을 시작하는 부분  2, 1, 0 순서. 
+    //이동을 시작하는 부분  2, 1, 0 순서. 투명도도 조절한다.
     private void StartMoveAnim(int layer)
     {
+        float transparency;
+        switch (layer)
+        {
+            case 0:
+                transparency = 0.3f;
+                break;
+            case 1:
+                transparency = 0.6f;
+                break;
+            case 2:
+                transparency = 1f;
+                break;
+            default:
+                transparency = 1f;
+                break;
+        }
+        canvas.transform.GetChild(layer).gameObject.GetComponent<Image>().color = new Color(1, 1, 1, transparency);
         canvas.transform.GetChild(layer).gameObject.GetComponent<Animator>().SetBool(str, true);
     }
     

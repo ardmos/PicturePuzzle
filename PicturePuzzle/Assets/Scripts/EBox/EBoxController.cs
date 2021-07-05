@@ -212,6 +212,7 @@ public class EBoxController : MonoBehaviour
 
     void SettingItem(GameObject mobject)
     {
+        //성공 애니메이션 실행. 샤라락~ 파칭!
         //새로운 오브젝트 생성
         GameObject newObject = new GameObject();
         //부모 설정
