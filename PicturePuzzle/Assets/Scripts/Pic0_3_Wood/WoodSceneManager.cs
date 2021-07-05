@@ -20,6 +20,8 @@ public class WoodSceneManager : MonoBehaviour
         //배경이미지 기록      
         playerData.curBGObj_Wood = bgsprite.sprite;
         playerData.isrecorded_Wood = true;
+        //스크린샷으로 저장. 갤러리에서 보여주기 위한 이미지.
+        FindObjectOfType<CameraViewGraber>().Snapshot();
 
         //NPA 기록 
         GameObject[] npaWoodArr = FindObjectOfType<CameraController>().npa_Wood;

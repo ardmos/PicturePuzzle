@@ -32,14 +32,14 @@ public class NPA : MonoBehaviour
         {
             // 근접 했으면
             animator.SetBool("StartAnim", true);
-            Debug.Log("근접!!");
+            //Debug.Log("근접!!");
         }
         else
         {
             // 근접 안했으면
             animator.SetBool("StartAnim", false);
-            Debug.Log("dis:"+ cameraController.dis);
-            Debug.Log("distance:" + Vector3.Distance(cameraController.polaroidCamera.gameObject.transform.position, transform.position));
+            //Debug.Log("dis:"+ cameraController.dis);
+            //Debug.Log("distance:" + Vector3.Distance(cameraController.polaroidCamera.gameObject.transform.position, transform.position));
         }
     }
 }

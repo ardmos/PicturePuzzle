@@ -18,6 +18,8 @@ public class ExitFromPicBtn : MonoBehaviour
             if (curSceneName == "Pic0_0_Squirrel")
             {
                 SceneManager.LoadScene("Gallery0_0");
+                //상태저장 해주자.
+                FindObjectOfType<Pic0_0Manager>().SendDataToPlayerData();
             }
             else
             {

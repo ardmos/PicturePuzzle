@@ -14,40 +14,48 @@ public class AndroidEscapeBtnController : MonoBehaviour
     {
         //if (Application.platform == RuntimePlatform.Android) 데스크탑에서도 해주기 위한 주석.
         //{
-            if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            string curSceneName = SceneManager.GetActiveScene().name;
+            //현재 씬에 따라 처리. 
+            if (curSceneName.Contains("Title"))
             {
-                string curSceneName = SceneManager.GetActiveScene().name;
-                //현재 씬에 따라 처리. 
-                if (curSceneName.Contains("Title"))
+                //타이틀인 경우
+                Application.Quit();
+            }
+            else if (curSceneName.Contains("Gallery"))
+            {
+                //갤러리인 경우
+                SceneManager.LoadScene("Title");
+            }
+            else if (curSceneName.Contains("Pic"))
+            {
+                //사진인경우 각각 맞는 갤러리로 이동해야함. 다람쥐는 0번갤러리. 다른애들은 1번갤러리.
+                if (curSceneName == "Pic0_0_Squirrel")
                 {
-                    //타이틀인 경우
-                    Application.Quit();
+                    SceneManager.LoadScene("Gallery0_0");
+                    //상태저장 해주자.
+                    FindObjectOfType<Pic0_0Manager>().SendDataToPlayerData();
                 }
-                else if (curSceneName.Contains("Gallery"))
+                else
                 {
-                    //갤러리인 경우
-                    SceneManager.LoadScene("Title");
-                }
-                else if (curSceneName.Contains("Pic"))
-                {
-                    //사진인경우 각각 맞는 갤러리로 이동해야함. 다람쥐는 0번갤러리. 다른애들은 1번갤러리.
-                    if(curSceneName == "Pic0_0_Squirrel")
+                    //폴라로이드상태면 메인카메라상태로 나간다.
+                    if (FindObjectOfType<CameraController>().polaroidUI.activeSelf)
                     {
-                        SceneManager.LoadScene("Gallery0_0");
+                        FindObjectOfType<CameraController>().MainCameraON();
                     }
                     else
                     {
                         SceneManager.LoadScene("Gallery0_1");
 
-                    //각 그림 상태 저장을 위한 메서드 호출. 
-                    if (curSceneName.Contains("Turtle")) FindObjectOfType<TurtleSceneManager>().SendDataToPlayerData();
-
-                    else if (curSceneName.Contains("Stone")) FindObjectOfType<StoneSceneManager>().SendDataToPlayerData();
-
-                    else if (curSceneName.Contains("Wood")) FindObjectOfType<WoodSceneManager>().SendDataToPlayerData();
+                        //각 그림 상태 저장을 위한 메서드 호출. 
+                        if (curSceneName.Contains("Turtle")) { FindObjectOfType<TurtleSceneManager>().SendDataToPlayerData(); }
+                        else if (curSceneName.Contains("Stone")) { FindObjectOfType<StoneSceneManager>().SendDataToPlayerData(); }
+                        else if (curSceneName.Contains("Wood")) { FindObjectOfType<WoodSceneManager>().SendDataToPlayerData(); }
                     }                    
                 }
             }
+        }
         //}
     }
 }

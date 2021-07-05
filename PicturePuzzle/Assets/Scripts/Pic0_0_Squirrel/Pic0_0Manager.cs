@@ -249,4 +249,24 @@ public class Pic0_0Manager : MonoBehaviour
         retryBtnAnimator.SetBool("Move", false);
     }
     #endregion
+
+    //씬이 끝날 때 호출되는 함수. esc키가 눌렸을 때 호출된다.
+    public void SendDataToPlayerData()
+    {
+        //배경이미지 기록      
+        //playerData.curBGObj_Turtle = bgsprite.sprite;
+        //playerData.isrecorded_Turtle = true;
+
+        //일단 스크린샷만 저장.
+        //스크린샷으로 저장. 갤러리에서 보여주기 위한 이미지.
+        FindObjectOfType<CameraViewGraber>().Snapshot();
+        //Debug.Log("SceneManager");
+
+        //NPA 기록 
+        //GameObject[] npaTurtleArr = FindObjectOfType<CameraController>().npa_Turtle;
+        //for (int i = 0; i < npaTurtleArr.Length; i++)
+        //{
+        //    playerData.npa_Turtle_ActiveSelf[i] = npaTurtleArr[i].transform.parent.gameObject.activeSelf;
+        //}
+    }
 }

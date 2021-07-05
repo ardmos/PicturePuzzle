@@ -28,6 +28,8 @@ public class StoneSceneManager : MonoBehaviour
         playerData.curBGObj_Stone = bgsprite.sprite;
         playerData.isrecorded_Stone = true;
         playerData.idxcount = idxcount;
+        //스크린샷으로 저장. 갤러리에서 보여주기 위한 이미지.
+        FindObjectOfType<CameraViewGraber>().Snapshot();
 
         //NPA 기록 
         GameObject[] npaStoneArr = FindObjectOfType<CameraController>().npa_Stone;

@@ -10,10 +10,11 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class Stage0Data : DontDestroy<Stage0Data>
 {
-    //Textture를 통해 현재 그림의 상태를 갤러리에 띄운다.
-    public Texture texture0;
-
-
+    //스프라이트ㄹ 통해 현재 그림의 상태를 갤러리에 띄운다.    
+    //Gallery0
+    public Sprite sprite_Squirrel; // 다람쥐
+    //Gallery1
+    public Sprite sprite_Turtle, sprite_Stone, sprite_Wood;
 
     #region 인스펙터에서 안보이는 내부의 정보 확인용. 디버깅용.
     void OnEnable()
@@ -27,18 +28,25 @@ public class Stage0Data : DontDestroy<Stage0Data>
     {
         if (SceneManager.GetActiveScene().name.Contains("Gallery0_0"))
         {
-            //그림씬으로부터 전달받은 텍스쳐가 있는 경우에만.
-            if (texture0 != null)
-            {
-                GameObject.Find("SquirrelPic").GetComponent<RawImage>().enabled = true;
-                GameObject.Find("SquirrelPic").GetComponent<RawImage>().texture = texture0;
+            if (sprite_Squirrel != null)
+            {                
+                GameObject.Find("SquirrelPic").GetComponent<SpriteRenderer>().sprite = sprite_Squirrel;
             }
-            //없으면 텍스쳐 끄기
-            else GameObject.Find("SquirrelPic").GetComponent<RawImage>().enabled = false;
         }
         else if (SceneManager.GetActiveScene().name.Contains("Gallery0_1"))
         {
-
+            if (sprite_Turtle != null)
+            {
+                GameObject.Find("TurtlePic").GetComponent<SpriteRenderer>().sprite = sprite_Turtle;
+            }
+            if (sprite_Stone != null)
+            {
+                GameObject.Find("StonePic").GetComponent<SpriteRenderer>().sprite = sprite_Stone;
+            }
+            if (sprite_Wood != null)
+            {
+                GameObject.Find("WoodPic").GetComponent<SpriteRenderer>().sprite = sprite_Wood;
+            }
         }
     }
 

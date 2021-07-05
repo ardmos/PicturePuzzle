@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // Attach this script to a Camera
 //Also attach a GameObject that has a Renderer (e.g. a cube) in the Display field
@@ -8,12 +9,13 @@ using UnityEngine;
 
 public class CameraViewGraber : MonoBehaviour
 {
+
+    /*
     // Grab the camera's view when this variable is true.
     bool grab;
 
     // The "m_Display" is the GameObject whose Texture will be set to the captured image.
-    //public Renderer m_Display;
-    public Renderer m_Display;    
+    //public Renderer m_Display;   
 
     private void Update()
     {
@@ -27,32 +29,49 @@ public class CameraViewGraber : MonoBehaviour
     {
         if (grab)
         {
+            //ScreenCapture.
             //Create a new texture with the width and height of the screen
             Texture2D texture = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
             //Read the pixels in the Rect starting at 0,0 and ending at the screen's width and height
             texture.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0, false);
             texture.Apply();
-            //Check that the display field has been assigned in the Inspector
-            //if (m_Display != null)
-            //{
-                //byte[] bytes = texture.EncodeToPNG();
 
-                //string path = "Assets/Resources/" + "cap2" + ".png";
-                //string path = Application.persistentDataPath + "/cap1" + ".png";
+            FindObjectOfType<Stage0Data>().sprite_Squirrel = Sprite.Create(texture, new Rect(0, 0, Screen.width, Screen.height), new Vector2(0.5f, 0.5f));
 
-                //Debug.Log(path);
-                //알아서 만들고 쓰고 닫고.  이미 존재하면 덮어쓰고.
-                //System.IO.File.WriteAllBytes(path, bytes);
-
-                //FindObjectOfType<Stage0Data>().SetSprite(Sprite.Create(texture, new Rect(0, 0, Screen.width / 2, Screen.height / 2), new Vector2(0.5f, 0.5f)));
-
-                //Give your GameObject with the renderer this texture
-                //m_Display.material.mainTexture = texture;
-                FindObjectOfType<Stage0Data>().texture0 = texture;
-                //m_Display.sprite = Sprite.Create(texture, new Rect(0, 0, Screen.width/2, Screen.height/2), new Vector2(0.5f, 0.5f));
-            //}
-            //Reset the grab state
             grab = false;
         }
+    }    
+    */
+
+    IEnumerator Capturing()
+    {
+        yield return new WaitForEndOfFrame();
+        Texture2D img = ScreenCapture.CaptureScreenshotAsTexture();
+        Rect rect = new Rect(0, 0, img.width, img.height);
+
+        if (SceneManager.GetActiveScene().name.Contains("Squirrel"))
+        {
+            FindObjectOfType<Stage0Data>().sprite_Squirrel = Sprite.Create(img, rect, Vector2.one * .5f);
+        }
+        else if (SceneManager.GetActiveScene().name.Contains("Turtle"))
+        {
+            FindObjectOfType<Stage0Data>().sprite_Turtle = Sprite.Create(img, rect, Vector2.one * .5f);
+        }
+        else if (SceneManager.GetActiveScene().name.Contains("Stone"))
+        {
+            FindObjectOfType<Stage0Data>().sprite_Stone = Sprite.Create(img, rect, Vector2.one * .5f);
+        }
+        else if (SceneManager.GetActiveScene().name.Contains("Wood"))
+        {
+            FindObjectOfType<Stage0Data>().sprite_Wood = Sprite.Create(img, rect, Vector2.one * .5f);
+        }
+
+        //Debug.Log("Capturing");
+    }
+
+    public void Snapshot()
+    {
+        //Debug.Log("SnapShot");
+        StartCoroutine(Capturing());
     }
 }
