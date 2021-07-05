@@ -69,6 +69,9 @@ public class Pic0_0Manager : MonoBehaviour
                     {
                         //시도 기능 발동
                         //Debug.Log("시도 발동!! currentTouchTime:" + currentTouchTime + ", lastTouchTime:" + lastTouchTime + ", Interver:" + (currentTouchTime - lastTouchTime) + ", touchInterval:" + touchInterval);
+                        //혹시 더블탭가이드중이면 가이드를 끈다.
+                        //Debug.Log(stage0_DoubleTabGuide.activeSelf);
+                        if (stage0_DoubleTabGuide.activeSelf) stage0_DoubleTabGuide.SetActive(false);
                         Try();
                     }
                     //else Debug.Log("더블터치가 아닙니다!! currentTouchTime:" + currentTouchTime + ", lastTouchTime:" + lastTouchTime + ", Interver:" + (currentTouchTime - lastTouchTime) + ", touchInterval:" + touchInterval);
@@ -90,6 +93,9 @@ public class Pic0_0Manager : MonoBehaviour
                     {
                         //시도 기능 발동
                         //Debug.Log("시도 발동!! currentTouchTime:" + currentTouchTime + ", lastTouchTime:" + lastTouchTime + ", Interver:" + (currentTouchTime - lastTouchTime) + ", touchInterval:" + touchInterval);
+                        //혹시 더블탭가이드중이면 가이드를 끈다.
+                        //Debug.Log(stage0_DoubleTabGuide.activeSelf);
+                        if (stage0_DoubleTabGuide.activeSelf) stage0_DoubleTabGuide.SetActive(false);
                         Try();
                     }
                     //else Debug.Log("더블터치가 아닙니다!! currentTouchTime:" + currentTouchTime + ", lastTouchTime:" + lastTouchTime + ", Interver:" + (currentTouchTime - lastTouchTime) + ", touchInterval:" + touchInterval);
@@ -217,7 +223,6 @@ public class Pic0_0Manager : MonoBehaviour
     #region 재시도
     public void ReTry()
     {        
-
         //클리어시에는 재시도 버튼 비활성화.
         if (curSquirrelPos == 3)
         {
