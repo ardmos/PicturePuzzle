@@ -31,6 +31,10 @@ public class EBox : MonoBehaviour
     [SerializeField]
     string itemName;
 
+    //올바른 아이템을 배치 성공시 애니메이션 프리팹.
+    [SerializeField]
+    GameObject sucAnimPref;
+
     #region Get-Set
     public void SetFull(bool boolean)
     {
@@ -122,9 +126,14 @@ public class EBox : MonoBehaviour
     #endregion
 
     #region 배치 성공 애니메이션. 샤라락~ 파칭!
-    public void StartSetSuccessAnim()
+    public void StartSetSuccessAnim(Item dragobjItemData)
     {
-
+        //미리 만들어둔 프리팹을 생성해주기만 하면 됨.  애니메이션은 생성시 자동 실행. 
+        //애니메이션의 끝에 SelfDestroy  하면서 EBoxController의 오브젝트 생성 및 배치.
+        GameObject gameObject = Instantiate(sucAnimPref) as GameObject;
+        gameObject.transform.SetParent(transform);
+        gameObject.transform.localPosition = Vector2.zero;
+        gameObject.GetComponent<EBoxSucAnimObj>().dragItemData = dragobjItemData;
     }
     #endregion
 

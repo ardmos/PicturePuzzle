@@ -49,6 +49,7 @@ public class ObjMove : MonoBehaviour
     }
     public void StopMoveToEBox2()
     {
+        Debug.Log("StopMoveToEBox2");
         StopAllCoroutines();
     }
     #endregion

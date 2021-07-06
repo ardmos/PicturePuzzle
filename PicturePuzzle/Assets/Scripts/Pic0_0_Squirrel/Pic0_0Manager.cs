@@ -22,9 +22,9 @@ public class Pic0_0Manager : MonoBehaviour
     public GameObject squirrelPref;
 
     // 종료시킬 도움말 오브젝트 0번 가이드
-    public GameObject stage0_InventoryGuideObj;
-    // 1번 가이드
-    public GameObject stage0_InventoryGuideObj1;
+    public GameObject stage0_InventoryGuideObj_TakePic;
+    // 1번 가이드_드래그
+    public GameObject stage0_InventoryGuideObj_Drag;
 
     //더블탭
     public GameObject stage0_DoubleTabGuide;
@@ -35,8 +35,8 @@ public class Pic0_0Manager : MonoBehaviour
     private void Start()
     {
         //처음엔 가이드 비활성화. 인벤토리 가이드들.
-        stage0_InventoryGuideObj.SetActive(false);
-        stage0_InventoryGuideObj1.SetActive(false);
+        stage0_InventoryGuideObj_TakePic.SetActive(false);
+        stage0_InventoryGuideObj_Drag.SetActive(false);
         //더블탭가이드
         stage0_DoubleTabGuide.SetActive(false);
     }

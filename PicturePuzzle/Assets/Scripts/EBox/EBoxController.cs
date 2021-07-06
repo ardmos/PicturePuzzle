@@ -180,27 +180,23 @@ public class EBoxController : MonoBehaviour
                     //오답용 퐁당Anim 진행. 
                     //
                     //일단 배치 후 
-                    SettingItem(dragObject);
+                    SettingItem(dragObject.GetComponent<ItemObj>().GetItemObjInfo());
                     //해당 EBox에 있는 배치 실패 애니메이션 실행
                     EBoxes[hlEBoxIndx].GetComponent<EBox>().StartSetFailAnim();
                 }
                 else
                 {
-                    //정답인 경우 배치 진행
-                    SettingItem(dragObject);
+                    //정답인 경우
+                    //정답 애니메이션 실행 (애니메이션 끝단에 배치 메서드 SettingItem() 호출. )
+                    EBoxes[hlEBoxIndx].GetComponent<EBox>().StartSetSuccessAnim(dragObject.GetComponent<ItemObj>().GetItemObjInfo());
+                    //SettingItem(dragObject);
                     //해당 EBox 배치 완료 표시
                     EBoxes[hlEBoxIndx].GetComponent<EBox>().SetFull(true);
                     //드래그아이템 삭제
                     Destroy(dragObject);
 
-                    //더블탭 튜토리얼
-                    //튜토리얼을 진행한적이 없는가?
-                    if(FindObjectOfType<PlayerData>().eBoxSuccess == false)
-                    {
-                        //더블탭 튜토리얼 진행. 
-                        doubleTabGuidObj.SetActive(true);
-                        FindObjectOfType<PlayerData>().eBoxSuccess = true;
-                    }
+                    //더블탭 튜토리얼 SettingItem에서 확인 및 진행
+
                 }
             }                      
         }
@@ -210,9 +206,9 @@ public class EBoxController : MonoBehaviour
         }
     }
 
-    void SettingItem(GameObject mobject)
+    public void SettingItem(Item mobjectItemData)
     {
-        //성공 애니메이션 실행. 샤라락~ 파칭!
+        //성공 애니메이션 실행. 샤라락~ 파칭! EBox.cs에서...  이 SettingItem은 EBoxSucAnim의 끝에 호출되어야함. 
         //새로운 오브젝트 생성
         GameObject newObject = new GameObject();
         //부모 설정
@@ -221,7 +217,16 @@ public class EBoxController : MonoBehaviour
         newObject.transform.position = EBoxes[hlEBoxIndx].transform.position;
         //Item 정보 유지를 위한 전달. 
         newObject.AddComponent<ItemObj>();
-        newObject.GetComponent<ItemObj>().SetItem(mobject.GetComponent<ItemObj>().GetItemObjInfo());        
+        newObject.GetComponent<ItemObj>().SetItem(mobjectItemData);
+
+        //더블탭 튜토리얼
+        //튜토리얼을 진행한적이 없는가?
+        if (FindObjectOfType<PlayerData>().eBoxSuccess == false)
+        {
+            //더블탭 튜토리얼 진행. 
+            doubleTabGuidObj.SetActive(true);
+            FindObjectOfType<PlayerData>().eBoxSuccess = true;
+        }
     }
     #endregion
 
