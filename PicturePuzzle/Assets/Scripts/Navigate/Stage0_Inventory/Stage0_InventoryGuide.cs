@@ -45,14 +45,14 @@ public class Stage0_InventoryGuide : MonoBehaviour
         }
         else
         {
-            if (FindObjectOfType<PlayerData>().guide1done == false)
+            if (FindObjectOfType<PlayerData>().guide_DragItemFromInventory == false)
             {
                 //있으면 드래그 가이드.
                 stage0_InventoryGuideObj_Drag.SetActive(true);
                 //드래그 가이드 애니메이션. 
                 FindObjectOfType<ObjMove>().StartMoveToEBox2();
                 //근데 드래그 가이드의 경우 한 번만 떠야하니까 
-                FindObjectOfType<PlayerData>().guide1done = true;
+                FindObjectOfType<PlayerData>().guide_DragItemFromInventory = true;
             }            
         }
     }

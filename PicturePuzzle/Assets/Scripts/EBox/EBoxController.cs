@@ -221,11 +221,11 @@ public class EBoxController : MonoBehaviour
 
         //더블탭 튜토리얼
         //튜토리얼을 진행한적이 없는가?
-        if (FindObjectOfType<PlayerData>().eBoxSuccess == false)
+        if (FindObjectOfType<PlayerData>().guide_eBoxSuccessDoubleTap == false)
         {
             //더블탭 튜토리얼 진행. 
             doubleTabGuidObj.SetActive(true);
-            FindObjectOfType<PlayerData>().eBoxSuccess = true;
+            FindObjectOfType<PlayerData>().guide_eBoxSuccessDoubleTap = true;
         }
     }
     #endregion

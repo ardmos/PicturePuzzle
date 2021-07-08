@@ -16,14 +16,14 @@ public class CorrectObjGuide : MonoBehaviour
         {
             //올바른 오브젝트 가이드.
             //가이드는 한 번만 나와야하니까 
-            if (FindObjectOfType<PlayerData>().didcorrectObj == true)
+            if (FindObjectOfType<PlayerData>().guide_didPicturedCorrectObj == true)
             {
                 gameObject.SetActive(false);
             }
             else
             {
                 gameObject.SetActive(true);
-                FindObjectOfType<PlayerData>().didcorrectObj = true;
+                FindObjectOfType<PlayerData>().guide_didPicturedCorrectObj = true;
             }
         }
         catch (System.Exception ex)

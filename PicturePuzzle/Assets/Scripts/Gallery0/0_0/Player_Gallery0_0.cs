@@ -69,6 +69,8 @@ public class Player_Gallery0_0 : MonoBehaviour
     {
         //제자리에 세워두기. 그림보고 나오면 제자리에. 
         animator.SetBool("Stand", true);
+        //Entry 끝난 시점이기도 하기 때문에. 네비게이션 확인 한 번 해줌.
+        FindObjectOfType<Gallery0_0NavigationManager>().CheckWhenPlayerEntryIsEnd();
     }
 
     public void StartExitAnim()

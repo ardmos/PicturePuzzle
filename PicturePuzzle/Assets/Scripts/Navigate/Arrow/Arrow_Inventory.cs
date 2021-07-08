@@ -14,14 +14,14 @@ public class Arrow_Inventory : MonoBehaviour
     public void Start()
     {
         //가이드는 한 번만 나와야하니까 
-        if (FindObjectOfType<PlayerData>().stage0_firstInvenArrow == true)
+        if (FindObjectOfType<PlayerData>().guide_OpenInventory == true)
         {
             gameObject.SetActive(false);
         }
         else
         {
             gameObject.SetActive(true);
-            FindObjectOfType<PlayerData>().stage0_firstInvenArrow = true;
+            FindObjectOfType<PlayerData>().guide_OpenInventory = true;
         }
 
     }

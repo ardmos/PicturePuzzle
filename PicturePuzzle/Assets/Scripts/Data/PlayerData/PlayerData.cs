@@ -59,26 +59,35 @@ public class PlayerData : DontDestroy<PlayerData>
 
     //네비게이션을 위한 확인용 boolean들
 
-    //다람쥐
-    //스테이지0 인벤토리가이드용 화살표
-    public bool stage0_firstInvenArrow;
-    //스테이지0 인벤토리 가이드용 
-    public bool guide1done;
+    ///갤러리0_0
+    //다람쥐: 잠깐만!!
+    public bool guide_HeyFromSquirrel;
+
+    ///다람쥐
+    //왼->오 카메라 이동. 설명 문구 출력. 이게 끝나면 다람쥐 말풍선 뿅 생김.
+    public bool guide_ExplainSquirrelMisson;
+    //인벤토리를 열어보세요! 
+    public bool guide_OpenInventory;
+    //인벤을 열었을 때 템 개수가 0이면 TakePic가이드. 아니면서 guide1done false면 Drag가이드.
+    public bool guide_DragItemFromInventory;
     //Ebox에 배치 성공
-    public bool eBoxSuccess; // 탭 애니메이션.
+    public bool guide_eBoxSuccessDoubleTap; // 탭 애니메이션.
+    //Ebox에 오답 배치시. 실패 설명 문구 출력
+    public bool guide_whyFailed;
 
-    //공통. 촬영이 처음?? //일단 여기서 처리. 
-    public bool didShoot; //모드를 바꿔보세요!!
-    public bool didcorrectObj; //올바른 오브젝트를...
+    ///공통. 촬영이 처음?? //일단 여기서 처리. 
+    public bool guide_ChangeCameraMode; //모드를 바꿔보세요!!
+    public bool guide_didPicturedCorrectObj; //올바른 오브젝트를...
 
-    //거북이
+    ///거북이
+    //카메라 모드를 켰을 경우, 공통가이드 끝난 경우.  어! 저기 바구니가 수상해요!
+    public bool guide_BallBasketIsWeird;
 
-
-    //돌
+    ///돌
     //돌 씬 처음 열렸을 때.
-    public bool didStoneScene;//눈사람을 두드려보세요!
+    public bool guide_isStoneSceneFirst;//눈사람을 두드려보세요!
 
-    //나무
+    ///나무
 
 
 
