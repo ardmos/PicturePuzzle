@@ -22,12 +22,12 @@ public class Pic0_0Manager : MonoBehaviour
     public GameObject squirrelPref;
 
     // 종료시킬 도움말 오브젝트 0번 가이드
-    public GameObject stage0_InventoryGuideObj_TakePic;
+    //public GameObject stage0_InventoryGuideObj_TakePic;
     // 1번 가이드_드래그
-    public GameObject stage0_InventoryGuideObj_Drag;
+    //public GameObject stage0_InventoryGuideObj_Drag;
 
     //더블탭
-    public GameObject stage0_DoubleTabGuide;
+    //public GameObject stage0_DoubleTabGuide;
 
     //리트라이 버튼 애니메이터
     public Animator retryBtnAnimator;
@@ -35,10 +35,10 @@ public class Pic0_0Manager : MonoBehaviour
     private void Start()
     {
         //처음엔 가이드 비활성화. 인벤토리 가이드들.
-        stage0_InventoryGuideObj_TakePic.SetActive(false);
-        stage0_InventoryGuideObj_Drag.SetActive(false);
+        //stage0_InventoryGuideObj_TakePic.SetActive(false);
+        //stage0_InventoryGuideObj_Drag.SetActive(false);
         //더블탭가이드
-        stage0_DoubleTabGuide.SetActive(false);
+        //stage0_DoubleTabGuide.SetActive(false);
     }
 
     // Update is called once per frame
@@ -71,7 +71,7 @@ public class Pic0_0Manager : MonoBehaviour
                         //Debug.Log("시도 발동!! currentTouchTime:" + currentTouchTime + ", lastTouchTime:" + lastTouchTime + ", Interver:" + (currentTouchTime - lastTouchTime) + ", touchInterval:" + touchInterval);
                         //혹시 더블탭가이드중이면 가이드를 끈다.
                         //Debug.Log(stage0_DoubleTabGuide.activeSelf);
-                        if (stage0_DoubleTabGuide.activeSelf) stage0_DoubleTabGuide.SetActive(false);
+                        //if (stage0_DoubleTabGuide.activeSelf) stage0_DoubleTabGuide.SetActive(false);
                         Try();
                     }
                     //else Debug.Log("더블터치가 아닙니다!! currentTouchTime:" + currentTouchTime + ", lastTouchTime:" + lastTouchTime + ", Interver:" + (currentTouchTime - lastTouchTime) + ", touchInterval:" + touchInterval);
@@ -95,7 +95,7 @@ public class Pic0_0Manager : MonoBehaviour
                         //Debug.Log("시도 발동!! currentTouchTime:" + currentTouchTime + ", lastTouchTime:" + lastTouchTime + ", Interver:" + (currentTouchTime - lastTouchTime) + ", touchInterval:" + touchInterval);
                         //혹시 더블탭가이드중이면 가이드를 끈다.
                         //Debug.Log(stage0_DoubleTabGuide.activeSelf);
-                        if (stage0_DoubleTabGuide.activeSelf) stage0_DoubleTabGuide.SetActive(false);
+                        //if (stage0_DoubleTabGuide.activeSelf) stage0_DoubleTabGuide.SetActive(false);
                         Try();
                     }
                     //else Debug.Log("더블터치가 아닙니다!! currentTouchTime:" + currentTouchTime + ", lastTouchTime:" + lastTouchTime + ", Interver:" + (currentTouchTime - lastTouchTime) + ", touchInterval:" + touchInterval);
@@ -167,6 +167,8 @@ public class Pic0_0Manager : MonoBehaviour
                     FindObjectOfType<Squirrel>().SquirrelToEBox0F();
                     //리트라이 버튼 애님 시작
                     retryBtnAnimator.SetBool("Move", true);
+                    //가이드를 위한 가이드 여부 확인 메서드.
+                    FindObjectOfType<PicSquirrelNaviagtionManager>().CallWhenTryFail();
                 }
                 break;
             case 1:               
@@ -185,6 +187,8 @@ public class Pic0_0Manager : MonoBehaviour
                     FindObjectOfType<Squirrel>().SquirrelToEBox1F();
                     //리트라이 버튼 애님 시작
                     retryBtnAnimator.SetBool("Move", true);
+                    //가이드를 위한 가이드 여부 확인 메서드.
+                    FindObjectOfType<PicSquirrelNaviagtionManager>().CallWhenTryFail();
                 }
                 break;
             case 2: 
@@ -205,6 +209,8 @@ public class Pic0_0Manager : MonoBehaviour
                     FindObjectOfType<Squirrel>().SquirrelToEBox2F();
                     //리트라이 버튼 애님 시작
                     retryBtnAnimator.SetBool("Move", true);
+                    //가이드를 위한 가이드 여부 확인 메서드.
+                    FindObjectOfType<PicSquirrelNaviagtionManager>().CallWhenTryFail();
                 }
                 break;
             case 3:
@@ -222,13 +228,22 @@ public class Pic0_0Manager : MonoBehaviour
 
     #region 재시도
     public void ReTry()
-    {        
+    {
         //클리어시에는 재시도 버튼 비활성화.
-        if (curSquirrelPos == 3)
+        //if (curSquirrelPos == 3)
+        //{
+        //비활성화.
+        //    return;
+        //}
+
+        //가이드 버튼 활성화시 가이드 버튼 비활성화. 
+        if (FindObjectOfType<PicSquirrelNaviagtionManager>().arrowObj_Retry.activeSelf)
         {
-            //비활성화.
-            return;
+            FindObjectOfType<PicSquirrelNaviagtionManager>().arrowObj_Retry.SetActive(false);
         }
+        //구해주면 고맙다 대사.
+        //FindObjectOfType<PicSquirrelNaviagtionManager>().CallWhenRetry();
+
 
         //curSquirrelPos 초기화.
         curSquirrelPos = 0;

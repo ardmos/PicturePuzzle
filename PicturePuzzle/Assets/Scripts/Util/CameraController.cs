@@ -106,8 +106,12 @@ public class CameraController : MonoBehaviour
     }
     public void PolaroidCameraON()
     {
-        //올바른 오브젝트 가이드.
-        correctGuidObj.GetComponent<CorrectObjGuide>().GuidDo();
+        //Turtle 가이드.  가이드 화살표들 꺼주기. 
+        if (SceneManager.GetActiveScene().name.Contains("Turtle"))
+        {
+            FindObjectOfType<PicTurtleNavigationManager>().CallWhenPolaroidCameraOn();
+        }
+
 
 
         //위치는 PolaroidAimObj의 위치. 단 z좌표는 -10 유지
@@ -306,7 +310,13 @@ public class CameraController : MonoBehaviour
                 if (SceneManager.GetActiveScene().name.Contains("Turtle"))
                 {
                     //turtle(npa_Turtle[1])이라면 추가적으로 배경 이미지를 NonTurtle 이미지로 변경.
-                    if (npa_Turtle[1] == item) backGroundImage.sprite = nonTurtleImg;
+                    if (npa_Turtle[1] == item)
+                    {
+                        backGroundImage.sprite = nonTurtleImg;
+
+                        //가이드가 필요하면 가이드 시작. 알아서 하는 메서드 호출
+                        FindObjectOfType<PicTurtleNavigationManager>().CallWhenTurtlePicTaken();
+                    }
                 }
                 //Stone
                 else if (SceneManager.GetActiveScene().name.Contains("Stone"))

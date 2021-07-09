@@ -40,16 +40,16 @@ public class ObjMove : MonoBehaviour
     }
     #endregion
 
-    #region ToEBox2
-    public void StartMoveToEBox2()
+    #region ToEBox1
+    public void StartMoveToEBox1()
     {
-        str = "ToEBox2";
+        str = "ToEBox1";
         StartCoroutine(GenerateThreeObj_ForDrag());
        
     }
-    public void StopMoveToEBox2()
+    public void StopMoveToEBox1()
     {
-        Debug.Log("StopMoveToEBox2");
+        Debug.Log("StopMoveToEBox1");
         StopAllCoroutines();
     }
     #endregion

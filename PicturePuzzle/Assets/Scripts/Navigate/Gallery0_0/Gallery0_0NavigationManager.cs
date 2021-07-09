@@ -19,6 +19,8 @@ using UnityEngine.UI;
 /// (fingetObj 활성화)
 /// 
 /// 
+/// 2. 길안내용. 
+/// 우측 버튼 활성화. 
 /// 
 /// 
 /// </summary>
@@ -26,8 +28,9 @@ using UnityEngine.UI;
 public class Gallery0_0NavigationManager : MonoBehaviour
 {
 
-    public GameObject navTextObj, arrowObj, fingerObj, moveToGallery0_1Btn;
+    public GameObject navTextObj, arrowObj, fingerObj, moveToGallery0_1Btn, arrowObj_RightBtn;
     string[] sentences = new string[5];
+    
     public int curSentenceNum;
 
 
@@ -37,13 +40,27 @@ public class Gallery0_0NavigationManager : MonoBehaviour
         navTextObj.SetActive(false);
         arrowObj.SetActive(false);
         fingerObj.SetActive(false);
+        //오른쪽 버튼도 숨겨두기. 
 
         
         sentences[0] = "잠깐만!";
         sentences[1] = "여기야 여기!";
         sentences[2] = "휴, 역시 넌 내 목소리가 들리는구나?";
         sentences[3] = "나좀 도와줄래?";
-        sentences[4] = "여기야!";
+        sentences[4] = "그림을 터치해봐";
+
+
+        //다람쥐 미션 받은 경우. 오른쪽 버튼 활성화. 
+        if(FindObjectOfType<PlayerData>().guide_isNotFirstSquirrel == true &&
+            FindObjectOfType<PlayerData>().guide_Gallery0_0RightBtn_isDone == false)
+        {
+            FindObjectOfType<PlayerData>().guide_Gallery0_0RightBtn_isDone = true;
+            arrowObj_RightBtn.SetActive(true);            
+        }
+        else {
+            arrowObj_RightBtn.SetActive(false); 
+        }
+        
     }
 
     // Update is called once per frame

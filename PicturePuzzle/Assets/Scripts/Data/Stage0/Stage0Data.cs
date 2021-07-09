@@ -30,7 +30,7 @@ public class Stage0Data : DontDestroy<Stage0Data>
         {
             if (sprite_Squirrel != null)
             {                
-                GameObject.Find("SquirrelPic").GetComponent<SpriteRenderer>().sprite = sprite_Squirrel;
+                //GameObject.Find("SquirrelPic").GetComponent<SpriteRenderer>().sprite = sprite_Squirrel;
             }
         }
         else if (SceneManager.GetActiveScene().name.Contains("Gallery0_1"))

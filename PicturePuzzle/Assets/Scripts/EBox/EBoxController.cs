@@ -21,8 +21,8 @@ public class EBoxController : MonoBehaviour
     [SerializeField]
     int hlEBoxIndx = -1;
 
-    //더블탭 가이드를 위한 
-    public GameObject doubleTabGuidObj;
+    //드래그 애니메이션. 가이드용. 
+    public GameObject dragEffect_forGuide;
 
     void Start(){
         //Ebox들 초기화. 
@@ -170,7 +170,6 @@ public class EBoxController : MonoBehaviour
             {
                 //이미 배치가 끝난 EBox가 아니라면
                 //배치되려는것이 옳은 아이템인가?
-
                 if (EBoxes[hlEBoxIndx].GetComponent<EBox>().GetItemName() != dragObject.GetComponent<ItemObj>().itemName)
                 {
                     //옳은 아이템이 아닌 경우 다시 인벤토리로
@@ -195,7 +194,12 @@ public class EBoxController : MonoBehaviour
                     //드래그아이템 삭제
                     Destroy(dragObject);
 
-                    //더블탭 튜토리얼 SettingItem에서 확인 및 진행
+                    //가이드중일경우. 드래그 애니메이션 여기서 중지시켜줘야 자연스러움.
+                    if (dragEffect_forGuide.activeSelf)
+                    {
+                        dragEffect_forGuide.GetComponent<ObjMove>().StopMoveToEBox1();
+                        dragEffect_forGuide.SetActive(false);
+                    }
 
                 }
             }                      
@@ -207,7 +211,19 @@ public class EBoxController : MonoBehaviour
     }
 
     public void SettingItem(Item mobjectItemData)
-    {
+    {        
+        if (EBoxes[hlEBoxIndx].GetComponent<EBox>().GetItemName() != mobjectItemData.itemName)
+        {
+            //가이드를 위한 가이드 여부 확인 메서드.
+            FindObjectOfType<PicSquirrelNaviagtionManager>().CallWhenEBoxFail();
+        }
+        else
+        {
+            //가이드를 위한 가이드 여부 확인 메서드.
+            FindObjectOfType<PicSquirrelNaviagtionManager>().CallWhenEBoxSuccess();
+        }
+
+
         //성공 애니메이션 실행. 샤라락~ 파칭! EBox.cs에서...  이 SettingItem은 EBoxSucAnim의 끝에 호출되어야함. 
         //새로운 오브젝트 생성
         GameObject newObject = new GameObject();
@@ -218,15 +234,6 @@ public class EBoxController : MonoBehaviour
         //Item 정보 유지를 위한 전달. 
         newObject.AddComponent<ItemObj>();
         newObject.GetComponent<ItemObj>().SetItem(mobjectItemData);
-
-        //더블탭 튜토리얼
-        //튜토리얼을 진행한적이 없는가?
-        if (FindObjectOfType<PlayerData>().guide_eBoxSuccessDoubleTap == false)
-        {
-            //더블탭 튜토리얼 진행. 
-            doubleTabGuidObj.SetActive(true);
-            FindObjectOfType<PlayerData>().guide_eBoxSuccessDoubleTap = true;
-        }
     }
     #endregion
 

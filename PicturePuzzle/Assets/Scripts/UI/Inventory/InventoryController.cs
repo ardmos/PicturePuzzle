@@ -29,8 +29,7 @@ public class InventoryController : MonoBehaviour
     public void OpenInventory()
 	{
 		inventoryObj.SetActive(true);
-        inventoryObj.GetComponent<Stage0_InventoryGuide>().InventoryIsOpened();
-
+        FindObjectOfType<PicSquirrelNaviagtionManager>().CallWhenInventoryOpened();
     }
     public void CloseInventory()
 	{

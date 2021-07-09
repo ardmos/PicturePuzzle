@@ -17,6 +17,10 @@ public class Squirrel : MonoBehaviour
     [SerializeField]
     Animator animator, sFamilyAnimator;
 
+    private void Start()
+    {
+        sFamilyAnimator = GameObject.Find("SquirrelFamily").GetComponent<Animator>();
+    }
 
     public void SquirrelTry()
     {
