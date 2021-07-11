@@ -26,7 +26,7 @@ public class BookController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cylinder_Page[0].SetBool("Flip", true);
+        
     }
 
     // Update is called once per frame
@@ -34,6 +34,14 @@ public class BookController : MonoBehaviour
     {
         
     }
+
+
+    //다음 페이지로 넘기기.
+    public void ToNextPage()
+    {
+        cylinder_Page[0].SetBool("Flip", true);
+    }
+
 
 
     //예시용 자동Flip 구현을 위한 부분.
