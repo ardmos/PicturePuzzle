@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Stage0/Pic0_3_Wood.unity
     guid: a3740fa878d69cb4da0f1f9b37ecdcec
+  - enabled: 1
+    path: Assets/Scenes/StageList.unity
+    guid: dcc8451966e2c4c469235fe38b3579a8
   m_configObjects: {}

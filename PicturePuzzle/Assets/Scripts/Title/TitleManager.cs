@@ -15,6 +15,6 @@ public class TitleManager : MonoBehaviour
 
     public void ButtonToGallery0_0()
     {
-        SceneManager.LoadScene("Gallery0_0");
+        SceneManager.LoadScene("StageList");
     }
 }
