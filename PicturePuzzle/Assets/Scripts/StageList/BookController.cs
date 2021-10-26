@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 풉 컨트롤러.
+/// 북 컨트롤러.
 /// 페이지 넘기는것을 관장.
 ///
 /// 
