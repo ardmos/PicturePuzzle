@@ -4,42 +4,32 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-/// <summary>
-/// 카메라 전환과 메인카메라에서 폴라로이드카메라영역 이동 처리를 담당하는 카메라 컨트롤러.
-/// 1. 메인 카메라와 폴라로이드 카메라 화면 전환 기능
-/// 2. 화면 전환시 오디오 리스너도 전환.
-/// 3. 화면 전환시 UI세트도 전환.
-/// 4. 메인카메라일 시 화면 터치되는 위치로 폴라로이드카메라 영역 이동. ispolaroidCamera를 이용해 판단. 드래그로도 이동 가능하도록 수정 0619
-/// 5. 확대된 상태에서도 움직일 수 있게 
 ///
+/// 유저가 카메라로 오브젝트를 촬영하면 해당 오브젝트가 아이템이 되는 게임에서 카메라의 기능을 구현한 소스 코드 입니다. 
+/// 
+/// ChangeCamera 메서드에서 MainCameraON 메서드와 PolaroidCameraON 메서드를 번갈아 호출하며 유저가 일반(메인카메라) 모드와 촬영용(폴라로이드) 카메라 모드를 오갈 수 있도록 만들었고 
+/// MovePolaroidAim_mainCameraState 와 MovePolaroidAim_polaroidCameraState 메서드를 사용해서 유저가 화면 에임을 이동시킬 수 있도록 만들었습니다.
+/// ActivateNPA와 DeactivateNPA 메서드를 통해 유저에게 촬영 가능한 오브젝트에 대한 힌트를 제공하게끔 만들었습니다.(NPA는 'NoticePhotoAble'의 약자로, 촬영 가능한 오브젝트들을 뜻의 제가 임의로 정한 약자 입니다^^;)
+/// 마지막으로 OnButton_TakePictureClicked 메서드를 통해 촬영 기능을 구현했습니다.
+/// 
 ///
-/// 카메라 촬영 기능 만들 차례임.  
-/// 6. 촬영 기능 (폴라로이드 카메라 확대 화면일 시 작동.)
-///   1. 촬영 가능 오브젝트들은 중앙에 NoticePhotoAble 이미지를 띄운다.
-///   2. 촬영버튼 클릭 시 처리.
-///   3. 확대축소 기능
-/// </summary>
 
 public class CameraController : MonoBehaviour
 {
-    //카메라들
-    public Camera mainCamera, polaroidCamera;
-    //오디오리스너들
+    #region 변수들 입니다.
+
+    public Camera mainCamera, polaroidCamera;    
     public AudioListener mainListener, polaroidListener;
-    public bool ispolaroidCamera;
-    //UI세트들
+    public bool isPolaroidCamera;
+    //카메라 모드가 변할 때 모드에 맞춰 UI를 변경할 때 쓰일 변수들 입니다. 
     public GameObject mainUI, polaroidUI;
-    //폴라로이드 에임 이미지 오브젝
+    //폴라로이드 카메라 에임 이미지 오브젝트 입니다.
     public GameObject polaroidAimObj;
-    //폴라로이드 확대 화면 이동을 위한 포지션변수
+    //폴라로이드 카메라 확대 화면 이동을 위한 포지션변수 입니다.
     Vector3 beforePos = Vector3.zero, currentPos;
-    //플레이어데이타
     PlayerData playerData;
 
-
-    //촬영기능 
-
-    //NPA들. 하이어라키상 순서대로. [0]은 테니스,  [1]은 거북이.
+    //촬영 가능한 아이템들을 알려주는 힌트 이미지 오브젝트를 저장하는 변수들 입니다.
     //Turtle
     public GameObject[] npa_Turtle;
     //Stone
@@ -47,55 +37,52 @@ public class CameraController : MonoBehaviour
     //Wood
     public GameObject[] npa_Wood;
 
-    //폴라로이드 필름 카운트는 PlayerData.cs에. 
-    //배경화면 변경이 필요한 경우를 위한. 배경화면 오브젝트.
+    //촬영으로 특정 오브젝트가 유저의 인벤토리로 사라지게 되면, 해당 오브젝트가 없는 형태의 이미지로 배경 이미지를 바꿔주게끔 구현했습니다. 
+    //그 때 쓰이는 배경화면 오브젝트와 이미지들입니다.    
     public SpriteRenderer backGroundImage;
-
-    //배경화면 변경시 쓰일 스프라이트 이미지들. 
-    //Turtle
     [Header("//Turtle")]
     public Sprite nonTurtleImg;
-    //Stone
     [Header("//Stone")]
     public Sprite nonStoneImg;
-    //Wood
     [Header("//Wood")]
-    public Sprite nonFishImg;
+    public Sprite nonFishImg;   
     public Animator humanAnimator;
 
-
-    //가이드용. 
+    //유저가 게임을 처음 플레이할 시 동작할 튜토리얼용 오브젝트 입니다. 
     public GameObject correctGuidObj;
 
-
-    //촬영가능 범위 dis
+    //촬영가능 범위 변수 입니다. 촬영 가능한 오브젝트와 카메라 에임의 중심의 거리가 해당 변수보다 가까우면 촬영이 가능한것으로 간주합니다. 이 때 촬영하기 버튼이 클릭되면 촬영에 성공하도록 만들었습니다.
     public float dis = 10.01f;
+    #endregion
 
     void Start()
     {
+        //카메라의 필름 개수등을 가지고 있는 플레이어의 정보를 얻어오는 부분입니다.
         playerData = FindObjectOfType<PlayerData>();
+        //메인 카메라 모드를 시작합니다.
         MainCameraON();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (!ispolaroidCamera)
+        //isPolaroidCamera 변수로 현재 카메라의 상태를 확인하도록 만들었습니다.
+        if (!isPolaroidCamera)
         {
-            //main카메라일때만.
-            MovePolaroidAim();
+            //Main카메라 상태일 때
+            MovePolaroidAim_mainCameraState();
         }
         else
         {
-            //Polaroid카메라일때. 화면 움직이기
-            MoveBigPolaroidAim();
+            //Polaroid카메라 상태일 때
+            MovePolaroidAim_polaroidCameraState();
         }
     }
 
-    #region 메인-폴라로이드 카메라 전환
+    #region 메인-폴라로이드 카메라 전환 기능을 구현한 부분입니다.
+    //카메라 변경 버튼이 클릭되었을 때 실행되는 메서드 입니다.
     public void ChangeCamera()
     {
-        if (ispolaroidCamera)
+        if (isPolaroidCamera)
         {
             MainCameraON();
         }
@@ -106,25 +93,24 @@ public class CameraController : MonoBehaviour
     }
     public void PolaroidCameraON()
     {
-        //Turtle 가이드.  가이드 화살표들 꺼주기. 
+        //튜토리얼 가이드 관련 내용 입니다.
         if (SceneManager.GetActiveScene().name.Contains("Turtle"))
         {
             FindObjectOfType<PicTurtleNavigationManager>().CallWhenPolaroidCameraOn();
         }
 
-
-
-        //위치는 PolaroidAimObj의 위치. 단 z좌표는 -10 유지
+        //Main카메라 모드에서의 PolaroidAimObj의 위치를 Polaroid카메라의 중심 위치로 설정해주는 부분입니다.
         polaroidCamera.gameObject.transform.position = new Vector3(polaroidAimObj.transform.position.x, polaroidAimObj.transform.position.y, -10);
 
         polaroidListener.enabled = true;
         polaroidCamera.enabled = true;
         mainListener.enabled = false;
         mainCamera.enabled = false;
-        ispolaroidCamera = true;
+        isPolaroidCamera = true;
         mainUI.SetActive(false);
         polaroidUI.SetActive(true);
         polaroidAimObj.SetActive(false);
+        //촬영 가능 아이템 힌트를 활성화하는 부분입니다. 
         ActivateNPA();
     }
     public void MainCameraON()
@@ -133,28 +119,29 @@ public class CameraController : MonoBehaviour
         polaroidCamera.enabled = false;
         mainListener.enabled = true;
         mainCamera.enabled = true;
-        ispolaroidCamera = false;
+        isPolaroidCamera = false;
         mainUI.SetActive(true);
         polaroidUI.SetActive(false);
         polaroidAimObj.SetActive(true);
+        //촬영 가능 아이템 힌트를 비활성화하는 부분입니다.
         DeactivateNPA();
     }
     #endregion
 
-    #region 조그만 폴라로이드 에임 움직이기    
-    public void MovePolaroidAim()
+    #region 메인카메라 상태에서 폴라로이드 카메라 에임 움직이는 기능을 구현한 부분입니다.
+    public void MovePolaroidAim_mainCameraState()
     {
-        //폴라로이드 에임 이동. 
-
-        //if (Input.GetMouseButtonDown(0))  드래그시에도 따라 움직이게 하기 위해서 아래처럼 처리. 0619
+        //폴라로이드카메라 에임 이동. 
         if (Input.GetMouseButton(0))
         {
-            //안드로이드인 경우에는 EventSystem.curren.IsPointerOverGameObject 이것의 처리를 다르게 해주자!
-            if(Application.platform == RuntimePlatform.Android)
+            //EventSystem.curren.IsPointerOverGameObject를 이용해서 UI가 터치되었는지를 확인하도록 했습니다.
+
+            //안드로이드 플랫폼일 때
+            if (Application.platform == RuntimePlatform.Android)
             {
                 if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
                 {
-                    //Debug.Log("UI를 만났어요!~ 폴라로이드 에임은 이동하지 않아요");
+                    //UI를 터치했기 때문에 에임은 이동하지 않습니다.
                 }
                 else
                 {
@@ -162,11 +149,12 @@ public class CameraController : MonoBehaviour
                     polaroidAimObj.transform.position = new Vector3(worldMousePos.x, worldMousePos.y);
                 }
             }
+            //안드로이드 플랫폼이 아닐 때
             else
             {
                 if (EventSystem.current.IsPointerOverGameObject())
                 {
-                    //Debug.Log("UI를 만났어요!~ 폴라로이드 에임은 이동하지 않아요");
+                    //UI를 클릭했기 때문에 에임은 이동하지 않습니다.
                 }
                 else
                 {
@@ -178,19 +166,18 @@ public class CameraController : MonoBehaviour
     }
     #endregion
 
-    #region 확대된 폴라로이드 에임 움직이기
-    public void MoveBigPolaroidAim()
-    {
-        //Before-Current 만큼 이동시키기 
-        //작은폴라로이드에임도 실시간으로 변하는 위치 반영시켜주기
-
+    #region 폴라로이드 카메라 상태에서 카메라 에임 움직이는 기능을 구현한 부분입니다.
+    public void MovePolaroidAim_polaroidCameraState()
+    {                
+        //마찬가지로 EventSystem.curren.IsPointerOverGameObject를 이용해서 UI가 터치되었는지를 확인하도록 했습니다.
         if (Input.GetMouseButton(0))
         {
+            //안드로이드 플랫폼일 때
             if (Application.platform == RuntimePlatform.Android)
             {
                 if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
                 {
-                    //Debug.Log("UI를 만났어요!~ 폴라로이드 에임은 이동하지 않아요");
+                    //UI를 터치했기 때문에 에임은 이동하지 않습니다.
                 }
                 else
                 {
@@ -199,20 +186,19 @@ public class CameraController : MonoBehaviour
                         currentPos = polaroidCamera.ScreenToWorldPoint(Input.mousePosition);
                         Vector3 polaroidCamPos = polaroidCamera.transform.position;
                         Vector3 movedis = (beforePos - currentPos);
-                        //큰 화면 이동
                         polaroidCamera.transform.position = new Vector3(polaroidCamPos.x + movedis.x, polaroidCamPos.y + movedis.y, -10f);
-                        //조그만 에임도 변하는 위치 반영
+                        //메인카메라 상태에서 보여지는 작은폴라로이드 카메라의 에임의 위치를 폴라로이드 카메라의 에임 위치와 일치하도록 지속적으로 업데이트 해줍니다.
                         polaroidAimObj.transform.position = new Vector2(polaroidCamera.transform.position.x, polaroidCamera.transform.position.y);
-                        //Debug.Log("beforePos:" + beforePos + ", currentPos:" + currentPos + ", movedis:" + movedis);
                     }
                     beforePos = polaroidCamera.ScreenToWorldPoint(Input.mousePosition);
                 }
             }
+            //안드로이드 플랫폼이 아닐 때
             else
             {
                 if (EventSystem.current.IsPointerOverGameObject())
                 {
-                    //Debug.Log("UI를 만났어요!~ 폴라로이드 에임은 이동하지 않아요");
+                    //UI를 클릭했기 때문에 에임은 이동하지 않습니다.
                 }
                 else
                 {
@@ -222,30 +208,25 @@ public class CameraController : MonoBehaviour
                         Vector3 polaroidCamPos = polaroidCamera.transform.position;
                         Vector3 movedis = (beforePos - currentPos);
                         polaroidCamera.transform.position = new Vector3(polaroidCamPos.x + movedis.x, polaroidCamPos.y + movedis.y, -10f);
+                        //메인카메라 상태에서 보여지는 작은폴라로이드 카메라의 에임의 위치를 폴라로이드 카메라의 에임 위치와 일치하도록 지속적으로 업데이트 해줍니다.
                         polaroidAimObj.transform.position = new Vector2(polaroidCamera.transform.position.x, polaroidCamera.transform.position.y);
-                        //Debug.Log("beforePos:" + beforePos + ", currentPos:" + currentPos + ", movedis:" + movedis);
                     }
                     beforePos = polaroidCamera.ScreenToWorldPoint(Input.mousePosition);
                 }
             }                       
         }
-
         if (Input.GetMouseButtonUp(0))
         {
-            //한 번 손이 떼지고, 드래그가 끝나면 다음 드래그를 새롭게 시작할 때
-            //이전 드래그의 위치값이 관여하는일이 없도록 초기화 시켜준다. 
-            beforePos = Vector3.zero;
-            
+            //한 번 손이 떼어지고, 드래그가 끝나면 다음 드래그를 새롭게 시작할 때 
+            //이전 드래그의 위치값이 관여하는일이 없도록 값을 초기화 시켜주었습니다. 
+            beforePos = Vector3.zero;            
         }
-
-
     }
     #endregion
 
-    #region 카메라 촬영 기능 (폴라로이드 카메라 활성시 작동하는 부분.)
-    // 1. 촬영 가능 오브젝트들은 중앙에 NoticePhotoAble (이하 NPA) 이미지를 띄운다.
-    //   1. 유니티 인스펙터를 통해 등록받은 NPA 오브젝트들을 활용. SetActive. 
+    #region 카메라 촬영 관련 기능을 구현한 부분입니다. (폴라로이드 카메라 활성화시 작동하는 부분입니다.)
 
+    //1. 아직 촬영되지 않은 촬영 가능 오브젝트들은 유저들에게 힌트가 될 수 있도록 중앙에 '촬영 가능 이미지(npa)'를 띄우도록 했습니다.
     public void DeactivateNPA()
     {
         foreach (var item in npa_Turtle) item.SetActive(false);
@@ -255,110 +236,84 @@ public class CameraController : MonoBehaviour
     public void ActivateNPA()
     {
         foreach (var item in npa_Turtle) item.SetActive(true);
-
-        //Stone 씬의 경우 조금 특별. 눈이 다 사라져야 돌이 드러난다. 
-        //처음엔 스키(npa_Stone[0])만 보임.  npa_Stone[1] 돌은 스톤씬매니저에서. 활성화시켜줌.
         if (SceneManager.GetActiveScene().name.Contains("Stone"))
-            npa_Stone[0].SetActive(true);
-        
-        
+            npa_Stone[0].SetActive(true);              
         foreach (var item in npa_Wood) item.SetActive(true);
     }
 
-    // 2. 촬영버튼 클릭 시 처리.
+    //2. 촬영버튼 클릭 시 촬영 기능을 구현한 부분입니다.
     public void OnButton_TakePictureClicked()
     {
-        //Flash 이펙트. 
+        //화면이 번쩍 하는 Flash 이펙트를 줬습니다.
         FindObjectOfType<CameraFlash>().ActiveCameraFlash();
 
-        //폴라로이드 필름 카운트 1 차감. 차감에 성공 했다면 촬영버튼 처리 진행. 실패했다면 이미 남은 필름이 없는것. 촬영버튼 진행 안함.
+        //MinusPlayerFilmCount()를 호출해서 playerData에 있는 폴라로이드 카메라의 필름 카운트를 1 차감해줬습니다. 
+        //차감에 성공 했다면 촬영버튼 처리를 진행했고, 실패했다면 이미 남은 필름이 없으니 촬영을 진행하지 않도록 했습니다.
         if (playerData.MinusPlayerFilmCount())
-        {
-            //에임 중앙과 촬영 가능 오브젝트의 중앙이 일치했는가? . 월드좌표 Distance로 계산. 10.001 이하면 일치했다고 봄. 
-
-            //그림별로 따로 체크 
-
+        {           
             //Turtle
             if (SceneManager.GetActiveScene().name.Contains("Turtle")) IsPicSuccess(npa_Turtle);
-
             //Stone
             else if (SceneManager.GetActiveScene().name.Contains("Stone")) IsPicSuccess(npa_Stone);
-
             //Wood
             else if (SceneManager.GetActiveScene().name.Contains("Wood")) IsPicSuccess(npa_Wood);           
         }
     }
 
-    //촬영버튼 클릭시 사진이 제대로 찍혔나 확인하는 메서드. 
+    //촬영버튼 클릭시 사진이 제대로 찍혔나 확인하는 메서드 입니다.
     private void IsPicSuccess(GameObject[] npa_arr)
     {
         foreach (var item in npa_arr)
         {
             if (Vector3.Distance(polaroidCamera.gameObject.transform.position, item.transform.position) <= dis)
             {
-                //일치했다면 촬영 성공
-                Debug.Log("촬영 성공" + Vector3.Distance(polaroidCamera.gameObject.transform.position, item.transform.position));
-
-                //성공했으니까 성공 애니메이션 실행시켜주고 
+                //성공 애니메이션을 실행시켜주는 부분입니다.
                 FindObjectOfType<ObjMove>().StartMoveToInven();
 
-                //일단 NPA의 부모 오브젝트 비활성화 시켜주고
+                //촬영된 오브젝트의 힌트를 꺼주는 부분입니다.
                 item.transform.parent.gameObject.SetActive(false);
 
+                //각 씬별로 특정 아이템이 촬영되었을 때 배경 이미지를 해당 아이템이 존재하지 않는 버젼의 배경 이미지로 변경해주는 부분 입니다. 
+                SettingBGImage_WhenSuccess(item);
 
-                //Turtle
-                if (SceneManager.GetActiveScene().name.Contains("Turtle"))
-                {
-                    //turtle(npa_Turtle[1])이라면 추가적으로 배경 이미지를 NonTurtle 이미지로 변경.
-                    if (npa_Turtle[1] == item)
-                    {
-                        backGroundImage.sprite = nonTurtleImg;
-
-                        //가이드가 필요하면 가이드 시작. 알아서 하는 메서드 호출
-                        FindObjectOfType<PicTurtleNavigationManager>().CallWhenTurtlePicTaken();
-                    }
-                }
-                //Stone
-                else if (SceneManager.GetActiveScene().name.Contains("Stone"))
-                {
-                    //Stone
-
-                    //스톤씬은 추가적으로 눈사람의 상태를 체크해주는 과정이 필요함.  눈사람 상태 체크는 StoneSceneManager에서 해줌. 거기다 물어보기.
-                    if(FindObjectOfType<StoneSceneManager>().idxcount >=4)
-                    {
-                        //현재 눈사람이 다 부숴지고 돌이 드러난 상태. 
-
-                        //stone(npa_Stone[1])이라면 추가적으로 배경 이미지를 NonStone 이미지로 변경.
-                        if (npa_Stone[1] == item) backGroundImage.sprite = nonStoneImg;
-                    }
-
-                    
-                }
-                //Wood
-                else if (SceneManager.GetActiveScene().name.Contains("Wood"))
-                {
-                    //Wood
-                    //Wood(npa_Wood[0])라면 쿵야 애니메이션 재생
-                    if (npa_Wood[0] == item) humanAnimator.SetBool("Fall", true);
-                    //fish(npa_Wood[1])라면 추가적으로 배경 이미지를 NonFish 이미지로 변경. 
-                    else if (npa_Wood[1] == item) backGroundImage.sprite = nonFishImg;
-                }               
-
-                //PlayerData에 아이템 리스트 추가. npa의 부모 오브젝트 네임을 넣어주면 됨. 
+                //촬영에 성공한 아이템을 PlayerData의 아이템 리스트에 추가해주는 부분입니다.
                 playerData.AddItem(item.transform.parent.gameObject.name);
-                //그리고 인벤토리 갱신
+                //플레이어의 인벤토리를 갱신해주는 부분입니다.
                 FindObjectOfType<InventoryController>().ResetInventory();
             }
             else
-            {
-                //일치하지 않았다면 촬영 실패
+            {                
                 Debug.Log("촬영 실패 Dis:" + Vector3.Distance(polaroidCamera.gameObject.transform.position, item.transform.position) + ", camera:" + polaroidCamera.gameObject.transform.position + ", obj:" + item.transform.position);
             }
         }
     }
 
-    // 3. 확대축소 기능
-    
+    //각 씬별로 특정 아이템이 촬영되었을 때 배경 이미지를 해당 아이템이 존재하지 않는 버젼의 배경 이미지로 변경해주는 부분 입니다. 
+    void SettingBGImage_WhenSuccess(GameObject item) {
+        //Turtle
+        if (SceneManager.GetActiveScene().name.Contains("Turtle"))
+        {
+            if (npa_Turtle[1] == item)
+            {
+                backGroundImage.sprite = nonTurtleImg;
+                FindObjectOfType<PicTurtleNavigationManager>().CallWhenTurtlePicTaken();
+            }
+        }
+        //Stone
+        else if (SceneManager.GetActiveScene().name.Contains("Stone"))
+        {
+            if (FindObjectOfType<StoneSceneManager>().idxcount >= 4)
+            {
+                if (npa_Stone[1] == item) backGroundImage.sprite = nonStoneImg;
+            }
+        }
+        //Wood
+        else if (SceneManager.GetActiveScene().name.Contains("Wood"))
+        {
+            if (npa_Wood[0] == item) humanAnimator.SetBool("Fall", true);
+            else if (npa_Wood[1] == item) backGroundImage.sprite = nonFishImg;
+        }
+    }    
     
     #endregion
 }

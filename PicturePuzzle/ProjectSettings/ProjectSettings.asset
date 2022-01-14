@@ -247,8 +247,8 @@ PlayerSettings:
   AndroidTargetArchitectures: 3
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: "C:/Users/summerya/Desktop/\uD504\uB85C\uC81D\uD2B8 \uD53D\uCCD0\uD37C\uC990/\uD0A4\uC2A4\uD1A0\uC5B4/\uC5F4\uC1E0\uAFB8\uB7EC\uBBF8.keystore"
-  AndroidKeyaliasName: photophotographer
+  AndroidKeystoreName: '{dedicated}: projectkey.keystore'
+  AndroidKeyaliasName: secondkey
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
   AndroidIsGame: 1
